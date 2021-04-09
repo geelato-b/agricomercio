@@ -47,15 +47,16 @@ if(isset($_POST['login'])){
     include_once ('db_conn.php');
     include_once ('function.inc.php');
   
-  $username = htmlentities($_POST['username']);
-  $password = htmlentities($_POST['password']);
+  $p_username = htmlentities($_POST['username']);
+  $p_password = htmlentities($_POST['password']);
 
 
-  if(uidExists($conn, $username, $password)!==false){?>
- <h1><?php echo "You are log in";?></h1>
+  if(uidExists($conn, $p_username, $p_password)!==false){
+    ?>
+     
+     $user_info = uidExists($conn, $p_username, $p_password);
 
- <a href="../index.php"><button class="btttn">Shop Now</button></a>
-
+    
 
  <?php
 }
