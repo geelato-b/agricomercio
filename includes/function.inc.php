@@ -1,7 +1,7 @@
 <?php
 function createUser($conn, $username, $password, $usertype){
     $err;
-    $sql ="INSET INTO `users` (`user_name`, `Password`, `user_type`);
+    $sql ="INSERT INTO `users` (`user_name`, `Password`, `user_type`);
     VALUES (?,?,?)";
 
     $stmt = mysqli_stmt_init($conn);
