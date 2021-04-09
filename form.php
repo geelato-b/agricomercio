@@ -45,11 +45,11 @@
                
             
             </div>
-            <div class="gender-deatils">
+            <div class="gender-details">
                 <span class="gender-title">Gender</span>
                 <div class="category">
                 <label for="gender">Gender:</label>
-                    <select id="age" name="gender">
+                    <select class="form-select" id="age" name="gender">
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                     <option value="L">LGBTQ+</option>
@@ -62,7 +62,7 @@
                 <span class="usertype-details">User Type</span>
                 <div class="category_two">
                 <label for="usertype">usertype:</label>
-                <select id="age" name="usertype">
+                <select id="age" name="usertype"  class="form-select">
                 <option value="Customer">Customer</option>
                 <option value="Seller">Seller</option>
                 </select>

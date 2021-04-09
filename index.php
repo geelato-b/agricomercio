@@ -1,3 +1,19 @@
+<?php
+session_start();
+if(isset($_SESSION['usertype']) && isset($_SESSION['user_id'])){
+      switch($_SESSION['usertype'])
+     {
+         case 'Seller':
+             header("location: seller_page.php");
+             break;
+          case 'Customer':
+             header("location: customer_page.php");
+             break;
+      }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,6 +69,7 @@
                         <h2>Reap Fresh, Eat Fresh</h2>
                 
                              <a href="sign_in.php"><button class="btn">Sign In &#8594;</button></a>
+                             <a href="form.php"><button class="btn">Register &#8594;</button></a>
                     </div>
                 </div>
                 <div class="col-2">
