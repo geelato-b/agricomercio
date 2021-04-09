@@ -2,16 +2,13 @@
 session_start();
 include_once "includes/db_conn.php";
 include_once "includes/function.inc.php";
-if(isset($_SESSION['user_type'])){
-    if($_SESSION['user_type'] == 'Seller'){
+if(isset($_SESSION['usertype'])){
+    if($_SESSION['usertype'] == 'Seller'){
     
-    $USER_ID = $_SESSION['user_id'];
+    $USER_ID = $_SESSION['userid'];
     
     echo $USER_ID;   
         $user_info = GetUserDetails($conn, $USER_ID );
-        
-        
-        
         
         echo $user_info['user_fullname'];
         echo $user_info['contact_details'];

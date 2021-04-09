@@ -46,3 +46,55 @@ $stmt=mysqli_stmt_init($conn);
         }
         mysql_stmt_close($stmt);
 }
+
+
+
+function GetUserDetails($conn, $userid ){
+    $err;
+    $sql="SELECT * FROM `user_info` 
+    WHERE  user_id = ?;
+    ";
+
+$stmt=mysqli_stmt_init($conn);
+
+        if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: index.php?error=stmtfailed");
+        exit();
+    }
+
+        mysqli_stmt_bind_param($stmt, "s" , $userid);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+        
+        if($row = mysqli_fetch_assoc($resultData)){
+            return $row;
+        }
+        else{
+            $err=  false;
+            return $err;   
+        }
+        mysql_stmt_close($stmt);
+}
+
+
+
+function AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_price){
+    $err;
+    $sql ="INSERT INTO `items` (`item_name`, `item_desc`, `item_price`,`seller_id`)
+    VALUES (?,?,?,?) ; ";
+
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+      return false;
+        exit();
+    }
+
+    mysqli_stmt_bind_param($stmt, "ssss", $p_item_name,$p_item_desc,$p_item_price, $USER_ID);
+    mysqli_stmt_execute($stmt);
+
+    mysqli_stmt_close($stmt);
+    return true;
+
+}
