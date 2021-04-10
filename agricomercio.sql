@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2021 at 05:48 AM
+-- Generation Time: Apr 10, 2021 at 03:00 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -90,54 +90,6 @@ INSERT INTO `category` (`cat_id`, `item_id`, `item_name`, `cat_desc`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `customer`
---
-
-CREATE TABLE `customer` (
-  `cust_id` int(11) NOT NULL,
-  `cust_name` varchar(128) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `contact_details` varchar(50) NOT NULL,
-  `house no, street, brgy` varchar(50) NOT NULL,
-  `city` varchar(128) NOT NULL,
-  `province` varchar(128) NOT NULL,
-  `postal_code` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`cust_id`, `cust_name`, `user_id`, `contact_details`, `house no, street, brgy`, `city`, `province`, `postal_code`) VALUES
-(1, 'Jen', 11, '92947640774', 'P-3 P-1 Basud', 'Tabaco', 'Albay', 4511),
-(2, 'Brad', 12, '22112405995', 'P-1 Basud', 'Tabaco', 'Albay', 4511),
-(3, 'Lara', 13, '56353995419', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511),
-(4, 'Sara', 14, '27371977632', 'P-2 Basud', 'Tabaco', 'Albay', 4511),
-(5, 'Jack', 15, '36290109489', 'P-6 Panal', 'Tabaco', 'Albay', 4511),
-(6, 'Olivia', 17, '60951700020', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511),
-(7, 'Oliver', 18, '42111229987', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511),
-(8, 'Amelia', 19, '74046972428', 'P-3 San Roque', 'Tabaco', 'Albay', 4511),
-(9, 'George', 20, '42479281399', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511),
-(10, 'Isla', 21, '56103485572', 'P-1 Mayao', 'Oas', 'Albay', 4505),
-(11, 'Harry', 22, '33747066742', 'P-2 Ilaor', 'Oas', 'Albay', 4505),
-(12, 'Ava', 23, '40450184925', 'P-3 Mayao', 'Oas', 'Albay', 4505),
-(13, 'Noah', 24, '41411667623', 'P-3, Palapas', 'Ligao', 'Albay', 4504),
-(14, 'Emily', 25, '76693447324', 'P-1 Tula-tula', 'Ligao', 'Albay', 4504),
-(15, 'Sophia', 26, '48056217781', 'P-4 Malama', 'Ligao', 'Albay', 4504),
-(16, 'Charlie', 27, '25579167774', 'P-1 Allang', 'Ligao', 'Albay', 4504),
-(17, 'Grace', 28, '62720281345', 'P-5 Tandarura', 'Ligao', 'Albay', 4504),
-(18, 'Leo', 29, '43321973579', 'P-6 Lanigay', 'Polangui', 'Albay', 4506),
-(19, 'Mia', 30, '99361440898', 'P-3 Basud', 'Polangui', 'Albay', 4506),
-(20, 'Jacob', 31, '86451775620', 'P-1, Sugcad', 'Polangui', 'Albay', 4506),
-(21, 'Poppy', 32, '68880323799', 'P-2, Centro Occidental (Pob.)', 'Polangui', 'Albay', 4506),
-(22, 'Freddie', 33, '89622543094', 'P-2, Agos', 'Polangui', 'Albay', 4506),
-(23, 'Ella', 34, '42735703377', 'P-2, Alnay', 'Polangui', 'Albay', 4506),
-(24, 'Alfie', 35, '72144041066', 'P-1 Apad', 'Polangui', 'Albay', 4506),
-(25, 'Angelica', 36, '92030971107', 'P-3 Cepres', 'Polangui', 'Albay', 4506);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `items`
 --
 
@@ -200,7 +152,9 @@ INSERT INTO `items` (`item_id`, `item_name`, `item_desc`, `item_price`, `seller_
 (44, 'rambutan', '1 kg per pack', 50, 45),
 (45, 'santol', '1 kg per pack', 50, 46),
 (46, 'sayote', '1 kg per pack', 50, 47),
-(47, 'atis', '1 kg per pack', 50, 50);
+(47, 'atis', '1 kg per pack', 50, 50),
+(60, 'test', 'test', 0, 1),
+(61, 'test2', 'test2', 123123, 1);
 
 -- --------------------------------------------------------
 
@@ -225,54 +179,6 @@ INSERT INTO `orders` (`order_id`, `cust_id`, `item_id`, `seller_id`, `item_qty`,
 (1, 1, 2, 1, 2, 1170),
 (2, 2, 2, 2, 1, 585),
 (3, 3, 3, 3, 1, 95);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `seller`
---
-
-CREATE TABLE `seller` (
-  `seller_id` int(11) NOT NULL,
-  `seller_name` varchar(128) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `contact_details` varchar(128) NOT NULL,
-  `house no, street, brgy` varchar(50) NOT NULL,
-  `city` varchar(128) NOT NULL,
-  `province` varchar(128) NOT NULL,
-  `postal_code` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `seller`
---
-
-INSERT INTO `seller` (`seller_id`, `seller_name`, `user_id`, `contact_details`, `house no, street, brgy`, `city`, `province`, `postal_code`) VALUES
-(1, 'Joy', 1, '2147483647', 'Purok 3, Paulba', 'Ligao', 'Albay', 4504),
-(2, 'Ron', 2, '95183532372', 'Purok 1, Allang', 'Ligao', 'Albay', 4504),
-(3, 'Lary', 3, '59314199248', 'Purok 2, Culliat', 'Ligao', 'Albay', 4504),
-(4, 'May', 4, '31045747086', 'Purok 5', 'Ligao', 'Albay', 4504),
-(5, 'Sam', 5, '42752644109', 'Purok 4, Bacong', 'Ligao', 'Albay', 4504),
-(6, 'Liam', 37, '80835557199', 'Cabañgan', 'Legazpi', 'Albay', 4500),
-(7, 'Elijah', 38, '72026844907', 'Oro Site – Magallanes St.', 'Legazpi', 'Albay', 4500),
-(8, 'Benjamin', 39, '57943054014', 'Pinaric', 'Legazpi', 'Albay', 4500),
-(9, 'Lucas', 40, '91165709158', 'Binanuahan (East)', 'Legazpi', 'Albay', 4500),
-(10, 'Mason', 41, '84506974749', 'Bagumbayan', 'Legazpi', 'Albay', 4500),
-(11, 'Ethan', 42, '86777715729', 'Maoyod', 'Legazpi', 'Albay', 4500),
-(12, 'Alexander', 43, '74903417301', 'Bañag', 'Daraga', 'Albay', 4501),
-(13, 'Abigail', 44, '81588153513', 'Anislag', 'Daraga', 'Albay', 4501),
-(14, 'Adia', 45, '90650238810', 'Malabog', 'Daraga', 'Albay', 4501),
-(15, 'Alyssa', 46, '65795371151', 'Villahermosa', 'Daraga', 'Albay', 4501),
-(16, 'Dora', 47, '84865417413', 'Barangay 1', 'Camalig', 'Albay', 4502),
-(17, 'Felicity', 48, '42270029191', 'Anoling', 'Camalig', 'Albay', 4502),
-(18, 'Ivy', 49, '28529581719', 'Salvacion', 'Daraga', 'Albay', 4501),
-(19, 'Kylie', 50, '25659903988', 'Em\'s Barrio', 'Legazpi', 'Albay', 4500),
-(20, 'Megan', 51, '48307337874', 'Imperial Court', 'Legazpi', 'Albay', 4500),
-(21, 'Rose', 52, '58276815255', 'Bantonan', 'Camalig', 'Albay', 4502),
-(22, 'violet', 53, '36518651207', 'Batbat', 'Guinobatan', 'Albay', 4503),
-(23, 'Roxanne', 54, '28317768292', 'Calzada', 'Guinobatan', 'Albay', 4503),
-(24, 'Myla', 55, '21920456599', 'Mahaba', 'Ligao', 'Albay', 4504),
-(25, 'Taylor', 56, '34849747794', 'Malobago', 'Guinobatan', 'Albay', 4503);
 
 -- --------------------------------------------------------
 
@@ -375,6 +281,81 @@ INSERT INTO `users` (`user_id`, `user_type`, `user_name`, `password`, `status`) 
 (55, 'Seller', 'Myla', '3472', 'Blocked'),
 (56, 'Seller', 'Taylor', '9649', 'Active');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_info`
+--
+
+CREATE TABLE `user_info` (
+  `user_info_id` int(11) NOT NULL,
+  `user_fullname` varchar(128) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `gender` varchar(20) NOT NULL,
+  `contact_details` varchar(128) NOT NULL,
+  `house_no_street_brgy` varchar(128) NOT NULL,
+  `city` varchar(128) NOT NULL,
+  `province` varchar(128) NOT NULL,
+  `postal_code` int(11) NOT NULL,
+  `user_type` varchar(55) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_info`
+--
+
+INSERT INTO `user_info` (`user_info_id`, `user_fullname`, `user_id`, `gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) VALUES
+(1, 'Jen', 11, 'F', '92947640774', 'P-3 P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
+(2, 'Brad', 12, 'M', '22112405995', 'P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
+(3, 'Lara', 13, 'F', '56353995419', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
+(4, 'Sara', 14, 'F', '27371977632', 'P-2 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
+(5, 'Jack', 15, 'M', '36290109489', 'P-6 Panal', 'Tabaco', 'Albay', 4511, 'Customer'),
+(6, 'Olivia', 17, 'F', '60951700020', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
+(7, 'Oliver', 18, 'M', '42111229987', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
+(8, 'Amelia', 19, 'F', '74046972428', 'P-3 San Roque', 'Tabaco', 'Albay', 4511, 'Customer'),
+(9, 'George', 20, 'M', '42479281399', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
+(10, 'Isla', 21, 'F', '56103485572', 'P-1 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
+(11, 'Harry', 22, 'M', '33747066742', 'P-2 Ilaor', 'Oas', 'Albay', 4505, 'Customer'),
+(12, 'Ava', 23, 'F', '40450184925', 'P-3 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
+(13, 'Noah', 24, 'M', '41411667623', 'P-3, Palapas', 'Ligao', 'Albay', 4504, 'Customer'),
+(14, 'Emily', 25, 'F', '76693447324', 'P-1 Tula-tula', 'Ligao', 'Albay', 4504, 'Customer'),
+(15, 'Sophia', 26, 'F', '48056217781', 'P-4 Malama', 'Ligao', 'Albay', 4504, 'Customer'),
+(16, 'Charlie', 27, 'M', '25579167774', 'P-1 Allang', 'Ligao', 'Albay', 4504, 'Customer'),
+(17, 'Grace', 28, 'F', '62720281345', 'P-5 Tandarura', 'Ligao', 'Albay', 4504, 'Customer'),
+(18, 'Leo', 29, 'M', '43321973579', 'P-6 Lanigay', 'Polangui', 'Albay', 4506, 'Customer'),
+(19, 'Mia', 30, 'F', '99361440898', 'P-3 Basud', 'Polangui', 'Albay', 4506, 'Customer'),
+(20, 'Jacob', 31, 'M', '86451775620', 'P-1, Sugcad', 'Polangui', 'Albay', 4506, 'Customer'),
+(21, 'Poppy', 32, 'F', '68880323799', 'P-2, Centro Occidental (Pob.)', 'Polangui', 'Albay', 4506, 'Customer'),
+(22, 'Freddie', 33, 'M', '89622543094', 'P-2, Agos', 'Polangui', 'Albay', 4506, 'Customer'),
+(23, 'Ella', 34, 'F', '42735703377', 'P-2, Alnay', 'Polangui', 'Albay', 4506, 'Customer'),
+(24, 'Alfie', 35, 'M', '72144041066', 'P-1 Apad', 'Polangui', 'Albay', 4506, 'Customer'),
+(25, 'Angelica', 36, 'F', '92030971107', 'P-3 Cepres', 'Polangui', 'Albay', 4506, 'Customer'),
+(32, 'Joy', 1, 'F', '2147483647', 'Purok 3, Paulba', 'Ligao', 'Albay', 4504, 'Seller'),
+(33, 'Ron', 2, 'M', '95183532372', 'Purok 1, Allang', 'Ligao', 'Albay', 4504, 'Seller'),
+(34, 'Lary', 3, 'M', '59314199248', 'Purok 2, Culliat', 'Ligao', 'Albay', 4504, 'Seller'),
+(35, 'May', 4, 'F', '31045747086', 'Purok 5', 'Ligao', 'Albay', 4504, 'Seller'),
+(36, 'Sam', 5, 'F', '42752644109', 'Purok 4, Bacong', 'Ligao', 'Albay', 4504, 'Seller'),
+(37, 'Liam', 37, 'M', '80835557199', 'Cabañgan', 'Legazpi', 'Albay', 4500, 'Seller'),
+(38, 'Elijah', 38, 'M', '72026844907', 'Oro Site – Magallanes St.', 'Legazpi', 'Albay', 4500, 'Seller'),
+(39, 'Benjamin', 39, 'M', '57943054014', 'Pinaric', 'Legazpi', 'Albay', 4500, 'Seller'),
+(40, 'Lucas', 40, 'M', '91165709158', 'Binanuahan (East)', 'Legazpi', 'Albay', 4500, 'Seller'),
+(41, 'Mason', 41, 'M', '84506974749', 'Bagumbayan', 'Legazpi', 'Albay', 4500, 'Seller'),
+(42, 'Ethan', 42, 'M', '86777715729', 'Maoyod', 'Legazpi', 'Albay', 4500, 'Seller'),
+(43, 'Alexander', 43, 'M', '74903417301', 'Bañag', 'Daraga', 'Albay', 4501, 'Seller'),
+(44, 'Abigail', 44, 'F', '81588153513', 'Anislag', 'Daraga', 'Albay', 4501, 'Seller'),
+(45, 'Adia', 45, 'F', '90650238810', 'Malabog', 'Daraga', 'Albay', 4501, 'Seller'),
+(46, 'Alyssa', 46, 'F', '65795371151', 'Villahermosa', 'Daraga', 'Albay', 4501, 'Seller'),
+(47, 'Dora', 47, 'F', '84865417413', 'Barangay 1', 'Camalig', 'Albay', 4502, 'Seller'),
+(48, 'Felicity', 48, 'F', '42270029191', 'Anoling', 'Camalig', 'Albay', 4502, 'Seller'),
+(49, 'Ivy', 49, 'F', '28529581719', 'Salvacion', 'Daraga', 'Albay', 4501, 'Seller'),
+(50, 'Kylie', 50, 'F', '25659903988', 'Em\'s Barrio', 'Legazpi', 'Albay', 4500, 'Seller'),
+(51, 'Megan', 51, 'F', '48307337874', 'Imperial Court', 'Legazpi', 'Albay', 4500, 'Seller'),
+(52, 'Rose', 52, 'F', '58276815255', 'Bantonan', 'Camalig', 'Albay', 4502, 'Seller'),
+(53, 'violet', 53, 'F', '36518651207', 'Batbat', 'Guinobatan', 'Albay', 4503, 'Seller'),
+(54, 'Roxanne', 54, 'F', '28317768292', 'Calzada', 'Guinobatan', 'Albay', 4503, 'Seller'),
+(55, 'Myla', 55, 'F', '21920456599', 'Mahaba', 'Ligao', 'Albay', 4504, 'Seller'),
+(56, 'Taylor', 56, 'F', '34849747794', 'Malobago', 'Guinobatan', 'Albay', 4503, 'Seller');
+
 --
 -- Indexes for dumped tables
 --
@@ -384,12 +365,6 @@ INSERT INTO `users` (`user_id`, `user_type`, `user_name`, `password`, `status`) 
 --
 ALTER TABLE `category`
   ADD PRIMARY KEY (`item_id`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`cust_id`);
 
 --
 -- Indexes for table `items`
@@ -404,12 +379,6 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
--- Indexes for table `seller`
---
-ALTER TABLE `seller`
-  ADD PRIMARY KEY (`seller_id`);
-
---
 -- Indexes for table `track_order`
 --
 ALTER TABLE `track_order`
@@ -422,6 +391,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`);
 
 --
+-- Indexes for table `user_info`
+--
+ALTER TABLE `user_info`
+  ADD PRIMARY KEY (`user_info_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -432,28 +407,16 @@ ALTER TABLE `category`
   MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `cust_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
-
---
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `seller`
---
-ALTER TABLE `seller`
-  MODIFY `seller_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `track_order`
@@ -466,6 +429,12 @@ ALTER TABLE `track_order`
 --
 ALTER TABLE `users`
   MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+
+--
+-- AUTO_INCREMENT for table `user_info`
+--
+ALTER TABLE `user_info`
+  MODIFY `user_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
