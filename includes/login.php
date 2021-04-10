@@ -13,33 +13,31 @@ if(isset($_POST['login'])){
      $user_info = uidExists($conn, $p_username, $p_password);
      switch($user_info['user_type'])
      {
-         case 'Seller':
+        case 'Seller':
              $_SESSION['usertype'] = 'Seller';
              $_SESSION['userid'] = $user_info['user_id'];
              header("location: ../seller_page.php");
              break;
+
+        case 'Customer':
+            $_SESSION['usertype'] = 'Customer';
+            $_SESSION['userid'] = $user_info['user_id'];
+            header("location: ../customer_page.php");
+            break;   
      }
          
-     
+  }
+else{
+
+
+   
+   header("location: ../sign_in.php");
+
+   
+
 
  
-  }
-else{?>
-    
-    <h1><?php echo "Sign Up to log in";?></h1>
-    <a href="../form.php"><button class="btttn">Register</button></a>
-
-
-    <?php
 
 }
 }
 ?>
-
-
-
-
-
-
-
-
