@@ -22,13 +22,7 @@
     </div>
 
     <div class="left">
-        <div class="search-container">
-            <label for="search" class="fas fa-search"></label>
-            <input type="search" placeholder="" id="search">
-            
-
         
-        </div>
 
             <a href="profile.php"><div class="fas fa-user"></div></a>
             <a href="cart.php"><div class="fas fa-shopping-cart"></div></a>

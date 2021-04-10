@@ -1,3 +1,19 @@
+<?php
+session_start();
+if(isset($_SESSION['usertype']) && isset($_SESSION['user_id'])){
+      switch($_SESSION['usertype'])
+     {
+         case 'Seller':
+             header("location: seller_page.php");
+             break;
+          case 'Customer':
+             header("location: customer_page.php");
+             break;
+      }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,11 +38,7 @@
         </div>
         
         <div class="left">
-            <div class="search-container">
-                <label for="search" class="fas fa-search"></label>
-                <input type="search" placeholder="" id="search">
-            </div>
-
+           
                 <a href="profile.php"><div class="fas fa-user"></div></a>
                 <a href="cart.php"><div class="fas fa-shopping-cart"></div></a>
 
@@ -57,6 +69,7 @@
                         <h2>Reap Fresh, Eat Fresh</h2>
                 
                              <a href="sign_in.php"><button class="btn">Sign In &#8594;</button></a>
+                             <a href="form.php"><button class="btn">Register &#8594;</button></a>
                     </div>
                 </div>
                 <div class="col-2">
@@ -85,7 +98,7 @@
                     <img src="img/c1.jpg" alt="">
                 </div>
                 <div class="content-cat">
-                <a href="fruits.php">Fruits</a>
+                <a href="category/fruits.php">Fruits</a>
                 </div>
                 
             </div>
@@ -94,7 +107,7 @@
                     <img src="img/c2.jpg" alt="">
                 </div>
                 <div class="content-cat">
-                <a href="vegetable.php">Vegetables</a>
+                <a href="category/vegetable.php">Vegetables</a>
                 </div>
             </div>
             <div class="category-card">
@@ -102,7 +115,7 @@
                     <img src="img/c3.jpg" alt="">
                 </div>
                 <div class="content-cat">
-                <a href="plants.php">Plants</a>
+                <a href="category/plants.php">Plants</a>
                 </div>
             </div>
             <div class="category-card">
@@ -110,7 +123,7 @@
                     <img src="img/c4.jpg" alt="">
                 </div>
                 <div class="content-cat">
-                <a href="crops.php">Crops</a>
+                <a href="category/crops.php">Crops</a>
                 </div>
             </div>
             <div class="category-card">
@@ -118,7 +131,7 @@
                     <img src="img/c5.jpg" alt="">
                 </div>
                 <div class="content-cat">
-                <a href="ferti.php">Fertilizers</a>
+                <a href="category/ferti.php">Fertilizers</a>
                 </div>
             </div>
         </div>
@@ -343,7 +356,7 @@
                </div>
                <div class="col-2">
                <h1>The best grain, the finest roast, the most powerful flavor.</h1>
-               <a href="product.php"><button class="btttn">Shop Now</button></a>
+               <a href="product.php"><button class="bttn">Shop Now</button></a>
 
                </div>
            </div>
