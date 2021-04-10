@@ -30,26 +30,35 @@
                     <input type="text"  name ="usrname" placeholder="Enter Your Username" required>
                 </div>
                 <div class="input-box">
-                    <span class="details">Email</span>
-                    <input type="text"  name ="email" placeholder="Enter Your Email" required>
-                </div>
-                <div class="input-box">
                     <span class="details">Contact Number</span>
-                    <input type="text" placeholder="Enter Your Number" required>
+                    <input type="text" name="contact_no" placeholder="Enter Your Number" required>
                 </div>
 
                 <div class="input-box">
                 <span class="details">Password</span>
                     <input type="password" id="psword" name ="psword" placeholder="Enter Your password" required>
                 </div>
+
+                <div class="input-box">
+                <span class="details">Address</span>
+                      <input type="text" class="form-control" name ="hnsb" placeholder = "House Number, Street, Barangay" value = "" >
+                       
+                        <input type="text" class="form-control" name="city" placeholder = "City" value = "" >
+                        
+                        <input type="text" class="form-control" name = "prv" placeholder = "Province" value = "">
+                        
+                        <input type="text" class="form-control" name ="pc" placeholder = "Postal Code" value = "" >
+                        
+                </div>
+                
+                      
                
             
             </div>
-            <div class="gender-details">
-                <span class="gender-title">Gender</span>
+            <div class="gender-deatils">
                 <div class="category">
                 <label for="gender">Gender:</label>
-                    <select class="form-select" id="age" name="gender">
+                    <select id="age" name="gender">
                     <option value="M">Male</option>
                     <option value="F">Female</option>
                     <option value="L">LGBTQ+</option>
@@ -59,12 +68,11 @@
             </div>
 
             <div class="usertype">
-                <span class="usertype-details">User Type</span>
                 <div class="category_two">
-                <label for="usertype">usertype:</label>
-                <select id="age" name="usertype"  class="form-select">
-                <option value="Customer">Customer</option>
-                <option value="Seller">Seller</option>
+                <label for="usertype">Do you want to sell?</label>
+                <select id="age" name="usertype">
+                <option value="Customer">No</option>
+                <option value="Seller">Yes</option>
                 </select>
                 </div>
             </div>
