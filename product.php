@@ -1,307 +1,121 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
     <title>AgriComercio</title>
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/fontawesome.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 </head>
 <body>
+    
+<header id="header">
 
-    <header id="header">
+<div class="right">
+    
+    <div class="fas fa-bars" id="bars"></div>
+</div>
 
-        <div class="right">
-            <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">
-            
-        </div>
+<div class="left">
 
-        <div class="nav-bar">
-            <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="product.php">Product</a></li>
-            <li><a href="services.php">Services</a></li>
-            <li><a href="about.php">About</a></li>
-            </ul>
-        </div>
+<div class="dropdown">
+
+  <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+  <div class="fas fa-user"></div>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <a href="seller_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+    <a href="../form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
+    <a href="../sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
+    <a href="../logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+  </ul>
+</div>
+   
+
+</div>
+
+<nav class="navbar">
+<ul>
+<img clas ="logo" src="../img/logo1.png" alt="" width="70px" height="70px">
+<h1>AgriComercio</h1>
+<br>
+<br>
+
+<li><a href="product.php">Product</a></li>
+<li><a href="order.php">Orders' Approval</a></li>
+<li><a href="order.php">Sales Report</a></li>
+
+</ul>
+</nav>
+
+</header>
+   
+<section id="review">
+  
+<?php
+session_start();
+include_once "../includes/db_conn.php";
+include_once "../includes/function.inc.php";
+
+if(isset($_SESSION['usertype'])){
+    if($_SESSION['usertype'] == 'Seller'){
+    
+    $USER_ID = $_SESSION['userid'];
+    
+      
+        $user_info = GetUserDetails($conn, $USER_ID );
+    
+      
+      if(isset($_POST['item_name'])){
+          $p_item_name = htmlentities($_POST['item_name']);
+          $p_item_desc = htmlentities($_POST['item_desc']);
+          $p_item_status = htmlentities($_POST['item_status']);
+          $p_item_price = htmlentities($_POST['item_price']);
+          
+         if( AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_status,$p_item_price) !== false) {
+             
+             echo "Item has been added.";
+         }
+          else{
+              echo "Oops!Something's wrong.";
+          }
+      }
+           ?>
+        <form action="seller_page.php" method="post">
+            Item name :  <input type="text" name="item_name">
+            <br>
+            Item Desc :  <input type="text" name="item_desc">
+            <br>
+            Item Status :  <input type="text" name="item_status">
+            <br>
+            Item Price :  <input type="text" name="item_price">
+            <br>
+            <input type="submit">
+        </form>
         
-        <div class="left">
-        <div class="dropdown">
-            <a href="cart.php"><div class="fas fa-shopping-cart"></div></a>
-                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="fas fa-user"></div>
-                </button>
-                
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
-                    <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
-                    <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
-                    <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
-                </ul>
-        </div>
+    
+    <?php }
+}
+else{
+    header("location: index.php");
+    
+}
+    
+?>
 
-
-        </div>
-
-        
-
-    </header>
-
-
-    <section id="product-category">
-    <div class="heading-two">Category</div>
-    <div class="category-cont">
-        <div class="category-slider">
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="img/c1.jpg" alt="">
-                </div>
-                <div class="content-cat">
-                <a href="category/fruits.php">Fruits</a>
-                </div>
-                
-            </div>
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="img/c2.jpg" alt="">
-                </div>
-                <div class="content-cat">
-                <a href="category/vegetable.php">Vegetables</a>
-                </div>
-            </div>
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="img/c3.jpg" alt="">
-                </div>
-                <div class="content-cat">
-                <a href="category/plants.php">Plants</a>
-                </div>
-            </div>
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="img/c4.jpg" alt="">
-                </div>
-                <div class="content-cat">
-                <a href="category/crops.php">Crops</a>
-                </div>
-            </div>
-            <div class="category-card">
-                <div class="category-img">
-                    <img src="img/c5.jpg" alt="">
-                </div>
-                <div class="content-cat">
-                <a href="category/ferti.php">Fertilizers</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </section>
+   
 
-    
-    <section id="product">
-
-        <h1 class="heading">Feature Products</h1>
-        <div class="product-container">
-        <div class="product-slider">
-            <div class="product-card item">
-                <div class="image">
-                    <img src="img/1.jpg" alt="">
-                </div>
-        
-                <div class="content">
-                    <h3>Fruit Bundle</h3>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                    </div>
-                    <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                    </div>
-                    <button >add to cart</button>
-                    
-                </div>
-        
-            </div>
-        
-            <div class="product-card item">
-                <div class="image">
-                    <img src="img/2.jpg" alt="">
-                </div>
-        
-                <div class="content">
-                    <h3>lettuce</h3>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                    </div>
-                    <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                    </div>
-                    <button>add to cart</button>
-                </div>
-        
-        
-            </div>
-        
-            <div class="product-card item">
-                <div class="image">
-                    <img src="img/3.jpg" alt="">
-                </div>
-        
-                <div class="content">
-                    <h3>Rice/Sack</h3>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                    </div>
-                    <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                    </div>
-                    <button>add to cart</button>
-                </div>
-        
-            </div>
-        
-            <div class="product-card item">
-                <div class="image">
-                    <img src="img/4.jpg" alt="">
-                </div>
-        
-                <div class="content">
-                    <h3>Sweet Potato</h3>
-                    <div class="rating">
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                        <i class="fa fa-star" ></i>
-                    </div>
-                    <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                    </div>
-                    <button>add to cart</button>
-                </div>
-        
-            </div>
-        
-        </div>
-        </div>
-        
-        
-        
-        <div class="product-container">
-            <div class="product-slider">
-                <div class="product-card item">
-                    <div class="image">
-                        <img src="img/5.jpg" alt="">
-                    </div>
-            
-                    <div class="content">
-                        <h3>Pineapple</h3>
-                        <div class="rating">
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                        </div>
-                        <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                        </div>
-                        <button >add to cart</button>
-                        
-                    </div>
-            
-                </div>
-            
-                <div class="product-card item">
-                    <div class="image">
-                        <img src="img/6.jpg" alt="">
-                    </div>
-            
-                    <div class="content">
-                        <h3>Spinach</h3>
-                        <div class="rating">
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                        </div>
-                        <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                        </div>
-                        <button>add to cart</button>
-                    </div>
-            
-            
-                </div>
-            
-                <div class="product-card item">
-                    <div class="image">
-                        <img src="img/7.jpg" alt="">
-                    </div>
-            
-                    <div class="content">
-                        <h3>Coffee Beans</h3>
-                        <div class="rating">
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                        </div>
-                        <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                        </div>
-                        <button>add to cart</button>
-                    </div>
-            
-                </div>
-            
-                <div class="product-card item">
-                    <div class="image">
-                        <img src="img/8.jpg" alt="">
-                    </div>
-            
-                    <div class="content">
-                        <h3>Coconut</h3>
-                        <div class="rating">
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                            <i class="fa fa-star" ></i>
-                        </div>
-                        <div class="price"><p><strike>₱299</strike> - ₱267</p>
-                        </div>
-                        <button>add to cart</button>
-                    </div>
-            
-                </div>
-            
-            </div>
-            </div>
-        
-            </section>
-
-
-            
-        
-
-            
-    
-        
-            <section id="footer">
+<section id="footer">
    <div class="footer-content">
-   <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">
+   <img clas ="logo" src="../img/logo1.png" alt="" width="70px" height="70px">
        <h3>AgriComercio</h3>
        <p>Change The Way You Trade</p>
        <ul class="socials">
@@ -316,18 +130,8 @@
 
         
         
-        
-        
-         
-            
-        
-        
-        
-        
-        
-        
-            <script src="js/bootstrap.bundle.js"></script>
-            <script src="js/jquery.js"></script> 
-            <script src="js/main.js"></script>
+            <script src="../js/bootstrap.bundle.js"></script>
+            <script src="../js/jquery.js"></script> 
+            <script src="../js/main.js"></script>
 </body>
 </html>
