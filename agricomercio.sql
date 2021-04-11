@@ -3,6 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+-- Generation Time: Apr 11, 2021 at 01:13 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -95,65 +96,66 @@ INSERT INTO `category` (`cat_id`, `item_id`, `item_name`, `cat_desc`) VALUES
 CREATE TABLE `items` (
   `item_id` int(11) NOT NULL,
   `item_name` varchar(128) NOT NULL,
+  `cat_id` int(11) NOT NULL,
   `item_desc` varchar(255) NOT NULL,
+  `item_status` varchar(20) NOT NULL,
   `item_price` int(11) NOT NULL,
-  `seller_id` int(11) NOT NULL
+  `seller_id` int(11) NOT NULL,
+  `item_img` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `item_desc`, `item_price`, `seller_id`) VALUES
-(1, 'Plantmate', 'Fertilizer for plants', 585, 1),
-(2, 'Potatoes', '1kg per Pack', 180, 2),
-(3, 'Tomatoes', '1kg per Pack', 95, 3),
-(4, 'Lakatan Banana', '1kg per Pack', 55, 4),
-(5, 'Carrots', '1kg per Pack', 60, 5),
-(6, 'Fruit Bundle', 'Assorted', 50, 6),
-(7, 'Lettuce', '1kg per Pack', 50, 7),
-(8, 'Rice', '50kg per Sack', 50, 8),
-(9, 'Sweet Potato', '1kg per Pack', 50, 9),
-(10, 'Pineapple', '1kg per Pack', 50, 10),
-(11, 'Spinach', '1kg per Pack', 50, 11),
-(12, 'Coffee Beans', '1kg per Pack', 30, 12),
-(13, 'Coconut', '1 whole per Pack', 35, 13),
-(14, 'Alugbati', '1 bundle per Pack', 10, 14),
-(15, 'Ampalaya', '1kg per Pack', 45, 15),
-(16, 'Aratiles', '1kg per Pack', 15, 16),
-(17, 'Balimbing', '1kg per Pack', 25, 17),
-(18, 'Calamansi', '1kg per Pack', 40, 18),
-(19, 'Chico', '1kg per Pack', 25, 19),
-(20, 'Durian', '1kg per Pack', 55, 20),
-(21, 'Gabi', '1kg per Pack', 20, 21),
-(22, 'Guyabano', '1kg per Pack', 35, 22),
-(23, 'Singkamas', '1kg per Pack', 45, 23),
-(24, 'Garlic', '1kg per Pack', 30, 24),
-(25, 'Onions', '1kg per Pack', 35, 25),
-(26, 'Cauli Flower', '1kg per Pack', 25, 26),
-(27, 'Sili', '1kg per Pack', 60, 27),
-(28, 'white angel', '1 plant per pot', 200, 28),
-(29, 'daisy', '1 plant per pot', 200, 29),
-(30, 'upo', '1 kg per pack', 50, 30),
-(31, 'sitaw', '1 bundle per pack', 45, 31),
-(32, 'sigarilyas', '1 kg per pack', 50, 32),
-(33, 'kalabasa', '1 kg per pack', 50, 33),
-(34, 'talong', '1 kg per pack', 50, 34),
-(35, 'repolyo', '1 kg per pack', 50, 35),
-(36, 'lanzones', '1 kg per pack', 50, 37),
-(37, 'kangkong', '1 bundle per pack', 50, 38),
-(38, 'malunggay', '1 bundle per pack', 50, 39),
-(39, 'mango', '1 kg per pack', 50, 40),
-(40, 'munggo', '1 kg per pack', 50, 41),
-(41, 'mustasa', '1 bundle per pack', 50, 42),
-(42, 'pechay', '1 bundle per pack', 50, 43),
-(43, 'banana blossom', '1 kg per pack', 50, 44),
-(44, 'rambutan', '1 kg per pack', 50, 45),
-(45, 'santol', '1 kg per pack', 50, 46),
-(46, 'sayote', '1 kg per pack', 50, 47),
-(47, 'atis', '1 kg per pack', 50, 50),
-(60, 'test', 'test', 0, 1),
-(61, 'test2', 'test2', 123123, 1);
+INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status`, `item_price`, `seller_id`, `item_img`) VALUES
+(1, 'Plantmate', 5, 'Fertilizer for plants', 'A', 585, 1, '35.png'),
+(2, 'Potatoes', 4, '1kg per Pack', 'A', 180, 2, '23.png'),
+(3, 'Tomatoes', 1, '1kg per Pack', 'A', 95, 2, '9.jpg'),
+(4, 'Banana', 1, '1kg per Pack', 'A', 55, 4, '10.jpg'),
+(5, 'Carrots', 2, '1kg per Pack', 'A', 60, 3, ''),
+(6, 'Fruit Bundle', 1, 'Assorted', 'A', 50, 5, '1.jpg'),
+(7, 'Lettuce', 2, '1kg per Pack', 'NA', 50, 6, '2.jpg'),
+(8, 'Rice', 4, '50kg per Sack', 'A', 50, 7, '3.jpg'),
+(9, 'Sweet Potato', 4, '1kg per Pack', 'A', 50, 2, '4.jpg'),
+(10, 'Pineapple', 1, '1kg per Pack', 'A', 50, 10, '5.jpg'),
+(11, 'Spinach', 2, '1kg per Pack', 'NA', 50, 6, '6.jpg'),
+(12, 'Coffee Beans', 4, '1kg per Pack', 'NA', 30, 8, '7.jpg'),
+(13, 'Coconut', 1, '1 whole per Pack', 'A', 35, 9, '8.jpg'),
+(14, 'Alugbati', 2, '1 bundle per Pack', 'A', 10, 10, '33.png'),
+(15, 'Ampalaya', 2, '1kg per Pack', 'A', 45, 11, '34.png'),
+(16, 'Aratiles', 1, '1kg per Pack', 'A', 15, 12, ''),
+(17, 'Balimbing', 1, '1kg per Pack', 'A', 25, 13, '31.png'),
+(18, 'Calamansi', 1, '1kg per Pack', 'A', 40, 14, '12.jpg'),
+(19, 'Chico', 1, '1kg per Pack', 'A', 25, 15, '29.png'),
+(20, 'Durian', 1, '1kg per Pack', 'NA', 55, 16, '15.jpg'),
+(21, 'Gabi', 4, '1kg per Pack', 'A', 20, 2, '28.png'),
+(22, 'Guyabano', 1, '1kg per Pack', 'A', 35, 16, '14.jpg'),
+(23, 'Singkamas', 4, '1kg per Pack', 'A', 45, 17, '4.png'),
+(24, 'Garlic', 4, '1kg per Pack', 'A', 30, 18, '24.png'),
+(25, 'Onions', 4, '1kg per Pack', 'A', 35, 18, '25.png'),
+(26, 'Cauli Flower', 2, '1kg per Pack', 'A', 25, 19, '22.png'),
+(27, 'Sili', 2, '1kg per Pack', 'A', 60, 20, '21.png'),
+(28, 'white angel', 3, '1 plant per pot', 'A', 200, 21, '36.png'),
+(29, 'daisy', 3, '1 plant per pot', 'A', 200, 21, '37.png'),
+(30, 'upo', 2, '1 kg per pack', 'A', 50, 22, '1.png'),
+(31, 'sitaw', 2, '1 bundle per pack', 'A', 45, 23, '3.png'),
+(32, 'sigarilyas', 2, '1 kg per pack', 'NA', 50, 24, '5.png'),
+(33, 'kalabasa', 2, '1 kg per pack', 'A', 50, 22, '20.png'),
+(34, 'talong', 2, '1 kg per pack', 'A', 50, 22, '19.png'),
+(35, 'repolyo', 2, '1 kg per pack', 'A', 50, 25, '15.png'),
+(36, 'lanzones', 1, '1 kg per pack', 'A', 50, 26, '17.png'),
+(37, 'kangkong', 2, '1 bundle per pack', 'A', 50, 25, '15.png'),
+(38, 'malunggay', 2, '1 bundle per pack', 'A', 50, 27, '14.png'),
+(39, 'mango', 1, '1 kg per pack', 'A', 50, 26, '13.png'),
+(40, 'munggo', 2, '1 kg per pack', 'A', 50, 28, '12.png'),
+(41, 'mustasa', 2, '1 bundle per pack', 'NA', 50, 28, '11.png'),
+(42, 'pechay', 2, '1 bundle per pack', 'A', 50, 28, '10.png'),
+(43, 'banana blossom', 2, '1 kg per pack', 'NA', 50, 4, '9.png'),
+(44, 'rambutan', 1, '1 kg per pack', 'NA', 50, 26, '8.png'),
+(45, 'santol', 1, '1 kg per pack', 'A', 50, 29, '7.png'),
+(46, 'sayote', 2, '1 kg per pack', 'A', 50, 30, '6.png'),
+(47, 'atis', 1, '1 kg per pack', 'NA', 50, 29, '2.png');
 
 -- --------------------------------------------------------
 
@@ -278,7 +280,11 @@ INSERT INTO `users` (`user_id`, `user_type`, `user_name`, `password`, `status`) 
 (53, 'Seller', 'Violet', '1612', 'Inactive'),
 (54, 'Seller', 'Roxanne', '4668', 'Active'),
 (55, 'Seller', 'Myla', '3472', 'Blocked'),
-(56, 'Seller', 'Taylor', '9649', 'Active');
+(56, 'Seller', 'Taylor', '9649', 'Active'),
+(57, 'Seller', 'christine joyce', '1010', ''),
+(58, 'Seller', 'nat', '1212', ''),
+(59, 'Seller', 'asdf', 'password', ''),
+(60, 'Seller', 'asdf', 'asdf', '');
 
 -- --------------------------------------------------------
 
@@ -290,10 +296,8 @@ CREATE TABLE `user_info` (
   `user_info_id` int(11) NOT NULL,
   `user_fullname` varchar(128) NOT NULL,
   `user_id` int(11) NOT NULL,
-
   `gender` varchar(20) NOT NULL,
-
-  `contact_details` varchar(128) NOT NULL,
+  `contact_details` int(20) NOT NULL,
   `house_no_street_brgy` varchar(128) NOT NULL,
   `city` varchar(128) NOT NULL,
   `province` varchar(128) NOT NULL,
@@ -305,111 +309,58 @@ CREATE TABLE `user_info` (
 -- Dumping data for table `user_info`
 --
 
-
 INSERT INTO `user_info` (`user_info_id`, `user_fullname`, `user_id`, `gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) VALUES
-(1, 'Jen', 11, 'F', '92947640774', 'P-3 P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(2, 'Brad', 12, 'M', '22112405995', 'P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(3, 'Lara', 13, 'F', '56353995419', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
-(4, 'Sara', 14, 'F', '27371977632', 'P-2 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(5, 'Jack', 15, 'M', '36290109489', 'P-6 Panal', 'Tabaco', 'Albay', 4511, 'Customer'),
-(6, 'Olivia', 17, 'F', '60951700020', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
-(7, 'Oliver', 18, 'M', '42111229987', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
-(8, 'Amelia', 19, 'F', '74046972428', 'P-3 San Roque', 'Tabaco', 'Albay', 4511, 'Customer'),
-(9, 'George', 20, 'M', '42479281399', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
-(10, 'Isla', 21, 'F', '56103485572', 'P-1 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
-(11, 'Harry', 22, 'M', '33747066742', 'P-2 Ilaor', 'Oas', 'Albay', 4505, 'Customer'),
-(12, 'Ava', 23, 'F', '40450184925', 'P-3 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
-(13, 'Noah', 24, 'M', '41411667623', 'P-3, Palapas', 'Ligao', 'Albay', 4504, 'Customer'),
-(14, 'Emily', 25, 'F', '76693447324', 'P-1 Tula-tula', 'Ligao', 'Albay', 4504, 'Customer'),
-(15, 'Sophia', 26, 'F', '48056217781', 'P-4 Malama', 'Ligao', 'Albay', 4504, 'Customer'),
-(16, 'Charlie', 27, 'M', '25579167774', 'P-1 Allang', 'Ligao', 'Albay', 4504, 'Customer'),
-(17, 'Grace', 28, 'F', '62720281345', 'P-5 Tandarura', 'Ligao', 'Albay', 4504, 'Customer'),
-(18, 'Leo', 29, 'M', '43321973579', 'P-6 Lanigay', 'Polangui', 'Albay', 4506, 'Customer'),
-(19, 'Mia', 30, 'F', '99361440898', 'P-3 Basud', 'Polangui', 'Albay', 4506, 'Customer'),
-(20, 'Jacob', 31, 'M', '86451775620', 'P-1, Sugcad', 'Polangui', 'Albay', 4506, 'Customer'),
-(21, 'Poppy', 32, 'F', '68880323799', 'P-2, Centro Occidental (Pob.)', 'Polangui', 'Albay', 4506, 'Customer'),
-(22, 'Freddie', 33, 'M', '89622543094', 'P-2, Agos', 'Polangui', 'Albay', 4506, 'Customer'),
-(23, 'Ella', 34, 'F', '42735703377', 'P-2, Alnay', 'Polangui', 'Albay', 4506, 'Customer'),
-(24, 'Alfie', 35, 'M', '72144041066', 'P-1 Apad', 'Polangui', 'Albay', 4506, 'Customer'),
-(25, 'Angelica', 36, 'F', '92030971107', 'P-3 Cepres', 'Polangui', 'Albay', 4506, 'Customer'),
-(32, 'Joy', 1, 'F', '2147483647', 'Purok 3, Paulba', 'Ligao', 'Albay', 4504, 'Seller'),
-(33, 'Ron', 2, 'M', '95183532372', 'Purok 1, Allang', 'Ligao', 'Albay', 4504, 'Seller'),
-(34, 'Lary', 3, 'M', '59314199248', 'Purok 2, Culliat', 'Ligao', 'Albay', 4504, 'Seller'),
-(35, 'May', 4, 'F', '31045747086', 'Purok 5', 'Ligao', 'Albay', 4504, 'Seller'),
-(36, 'Sam', 5, 'F', '42752644109', 'Purok 4, Bacong', 'Ligao', 'Albay', 4504, 'Seller'),
-(37, 'Liam', 37, 'M', '80835557199', 'Cabañgan', 'Legazpi', 'Albay', 4500, 'Seller'),
-(38, 'Elijah', 38, 'M', '72026844907', 'Oro Site – Magallanes St.', 'Legazpi', 'Albay', 4500, 'Seller'),
-(39, 'Benjamin', 39, 'M', '57943054014', 'Pinaric', 'Legazpi', 'Albay', 4500, 'Seller'),
-(40, 'Lucas', 40, 'M', '91165709158', 'Binanuahan (East)', 'Legazpi', 'Albay', 4500, 'Seller'),
-(41, 'Mason', 41, 'M', '84506974749', 'Bagumbayan', 'Legazpi', 'Albay', 4500, 'Seller'),
-(42, 'Ethan', 42, 'M', '86777715729', 'Maoyod', 'Legazpi', 'Albay', 4500, 'Seller'),
-(43, 'Alexander', 43, 'M', '74903417301', 'Bañag', 'Daraga', 'Albay', 4501, 'Seller'),
-(44, 'Abigail', 44, 'F', '81588153513', 'Anislag', 'Daraga', 'Albay', 4501, 'Seller'),
-(45, 'Adia', 45, 'F', '90650238810', 'Malabog', 'Daraga', 'Albay', 4501, 'Seller'),
-(46, 'Alyssa', 46, 'F', '65795371151', 'Villahermosa', 'Daraga', 'Albay', 4501, 'Seller'),
-(47, 'Dora', 47, 'F', '84865417413', 'Barangay 1', 'Camalig', 'Albay', 4502, 'Seller'),
-(48, 'Felicity', 48, 'F', '42270029191', 'Anoling', 'Camalig', 'Albay', 4502, 'Seller'),
-(49, 'Ivy', 49, 'F', '28529581719', 'Salvacion', 'Daraga', 'Albay', 4501, 'Seller'),
-(50, 'Kylie', 50, 'F', '25659903988', 'Em\'s Barrio', 'Legazpi', 'Albay', 4500, 'Seller'),
-(51, 'Megan', 51, 'F', '48307337874', 'Imperial Court', 'Legazpi', 'Albay', 4500, 'Seller'),
-(52, 'Rose', 52, 'F', '58276815255', 'Bantonan', 'Camalig', 'Albay', 4502, 'Seller'),
-(53, 'violet', 53, 'F', '36518651207', 'Batbat', 'Guinobatan', 'Albay', 4503, 'Seller'),
-(54, 'Roxanne', 54, 'F', '28317768292', 'Calzada', 'Guinobatan', 'Albay', 4503, 'Seller'),
-(55, 'Myla', 55, 'F', '21920456599', 'Mahaba', 'Ligao', 'Albay', 4504, 'Seller'),
-(56, 'Taylor', 56, 'F', '34849747794', 'Malobago', 'Guinobatan', 'Albay', 4503, 'Seller');
-=======
-INSERT INTO `user_info` (`user_info_id`, `user_fullname`, `user_id`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) VALUES
-(1, 'Jen', 11, '92947640774', 'P-3 P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(2, 'Brad', 12, '22112405995', 'P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(3, 'Lara', 13, '56353995419', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
-(4, 'Sara', 14, '27371977632', 'P-2 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(5, 'Jack', 15, '36290109489', 'P-6 Panal', 'Tabaco', 'Albay', 4511, 'Customer'),
-(6, 'Olivia', 17, '60951700020', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
-(7, 'Oliver', 18, '42111229987', 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
-(8, 'Amelia', 19, '74046972428', 'P-3 San Roque', 'Tabaco', 'Albay', 4511, 'Customer'),
-(9, 'George', 20, '42479281399', 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
-(10, 'Isla', 21, '56103485572', 'P-1 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
-(11, 'Harry', 22, '33747066742', 'P-2 Ilaor', 'Oas', 'Albay', 4505, 'Customer'),
-(12, 'Ava', 23, '40450184925', 'P-3 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
-(13, 'Noah', 24, '41411667623', 'P-3, Palapas', 'Ligao', 'Albay', 4504, 'Customer'),
-(14, 'Emily', 25, '76693447324', 'P-1 Tula-tula', 'Ligao', 'Albay', 4504, 'Customer'),
-(15, 'Sophia', 26, '48056217781', 'P-4 Malama', 'Ligao', 'Albay', 4504, 'Customer'),
-(16, 'Charlie', 27, '25579167774', 'P-1 Allang', 'Ligao', 'Albay', 4504, 'Customer'),
-(17, 'Grace', 28, '62720281345', 'P-5 Tandarura', 'Ligao', 'Albay', 4504, 'Customer'),
-(18, 'Leo', 29, '43321973579', 'P-6 Lanigay', 'Polangui', 'Albay', 4506, 'Customer'),
-(19, 'Mia', 30, '99361440898', 'P-3 Basud', 'Polangui', 'Albay', 4506, 'Customer'),
-(20, 'Jacob', 31, '86451775620', 'P-1, Sugcad', 'Polangui', 'Albay', 4506, 'Customer'),
-(21, 'Poppy', 32, '68880323799', 'P-2, Centro Occidental (Pob.)', 'Polangui', 'Albay', 4506, 'Customer'),
-(22, 'Freddie', 33, '89622543094', 'P-2, Agos', 'Polangui', 'Albay', 4506, 'Customer'),
-(23, 'Ella', 34, '42735703377', 'P-2, Alnay', 'Polangui', 'Albay', 4506, 'Customer'),
-(24, 'Alfie', 35, '72144041066', 'P-1 Apad', 'Polangui', 'Albay', 4506, 'Customer'),
-(25, 'Angelica', 36, '92030971107', 'P-3 Cepres', 'Polangui', 'Albay', 4506, 'Customer'),
-(32, 'Joy', 1, '2147483647', 'Purok 3, Paulba', 'Ligao', 'Albay', 4504, 'Seller'),
-(33, 'Ron', 2, '95183532372', 'Purok 1, Allang', 'Ligao', 'Albay', 4504, 'Seller'),
-(34, 'Lary', 3, '59314199248', 'Purok 2, Culliat', 'Ligao', 'Albay', 4504, 'Seller'),
-(35, 'May', 4, '31045747086', 'Purok 5', 'Ligao', 'Albay', 4504, 'Seller'),
-(36, 'Sam', 5, '42752644109', 'Purok 4, Bacong', 'Ligao', 'Albay', 4504, 'Seller'),
-(37, 'Liam', 37, '80835557199', 'Cabañgan', 'Legazpi', 'Albay', 4500, 'Seller'),
-(38, 'Elijah', 38, '72026844907', 'Oro Site – Magallanes St.', 'Legazpi', 'Albay', 4500, 'Seller'),
-(39, 'Benjamin', 39, '57943054014', 'Pinaric', 'Legazpi', 'Albay', 4500, 'Seller'),
-(40, 'Lucas', 40, '91165709158', 'Binanuahan (East)', 'Legazpi', 'Albay', 4500, 'Seller'),
-(41, 'Mason', 41, '84506974749', 'Bagumbayan', 'Legazpi', 'Albay', 4500, 'Seller'),
-(42, 'Ethan', 42, '86777715729', 'Maoyod', 'Legazpi', 'Albay', 4500, 'Seller'),
-(43, 'Alexander', 43, '74903417301', 'Bañag', 'Daraga', 'Albay', 4501, 'Seller'),
-(44, 'Abigail', 44, '81588153513', 'Anislag', 'Daraga', 'Albay', 4501, 'Seller'),
-(45, 'Adia', 45, '90650238810', 'Malabog', 'Daraga', 'Albay', 4501, 'Seller'),
-(46, 'Alyssa', 46, '65795371151', 'Villahermosa', 'Daraga', 'Albay', 4501, 'Seller'),
-(47, 'Dora', 47, '84865417413', 'Barangay 1', 'Camalig', 'Albay', 4502, 'Seller'),
-(48, 'Felicity', 48, '42270029191', 'Anoling', 'Camalig', 'Albay', 4502, 'Seller'),
-(49, 'Ivy', 49, '28529581719', 'Salvacion', 'Daraga', 'Albay', 4501, 'Seller'),
-(50, 'Kylie', 50, '25659903988', 'Em\'s Barrio', 'Legazpi', 'Albay', 4500, 'Seller'),
-(51, 'Megan', 51, '48307337874', 'Imperial Court', 'Legazpi', 'Albay', 4500, 'Seller'),
-(52, 'Rose', 52, '58276815255', 'Bantonan', 'Camalig', 'Albay', 4502, 'Seller'),
-(53, 'violet', 53, '36518651207', 'Batbat', 'Guinobatan', 'Albay', 4503, 'Seller'),
-(54, 'Roxanne', 54, '28317768292', 'Calzada', 'Guinobatan', 'Albay', 4503, 'Seller'),
-(55, 'Myla', 55, '21920456599', 'Mahaba', 'Ligao', 'Albay', 4504, 'Seller'),
-(56, 'Taylor', 56, '34849747794', 'Malobago', 'Guinobatan', 'Albay', 4503, 'Seller');
-
+(1, 'Jen', 11, 'F', 2147483647, 'P-3 P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
+(2, 'Brad', 12, 'M', 2147483647, 'P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
+(3, 'Lara', 13, 'F', 2147483647, 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
+(4, 'Sara', 14, 'F', 2147483647, 'P-2 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
+(5, 'Jack', 15, 'M', 2147483647, 'P-6 Panal', 'Tabaco', 'Albay', 4511, 'Customer'),
+(6, 'Olivia', 17, 'F', 2147483647, 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
+(7, 'Oliver', 18, 'M', 2147483647, 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
+(8, 'Amelia', 19, 'F', 2147483647, 'P-3 San Roque', 'Tabaco', 'Albay', 4511, 'Customer'),
+(9, 'George', 20, 'M', 2147483647, 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
+(10, 'Isla', 21, 'F', 2147483647, 'P-1 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
+(11, 'Harry', 22, 'M', 2147483647, 'P-2 Ilaor', 'Oas', 'Albay', 4505, 'Customer'),
+(12, 'Ava', 23, 'F', 2147483647, 'P-3 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
+(13, 'Noah', 24, 'M', 2147483647, 'P-3, Palapas', 'Ligao', 'Albay', 4504, 'Customer'),
+(14, 'Emily', 25, 'F', 2147483647, 'P-1 Tula-tula', 'Ligao', 'Albay', 4504, 'Customer'),
+(15, 'Sophia', 26, 'F', 2147483647, 'P-4 Malama', 'Ligao', 'Albay', 4504, 'Customer'),
+(16, 'Charlie', 27, 'M', 2147483647, 'P-1 Allang', 'Ligao', 'Albay', 4504, 'Customer'),
+(17, 'Grace', 28, 'F', 2147483647, 'P-5 Tandarura', 'Ligao', 'Albay', 4504, 'Customer'),
+(18, 'Leo', 29, 'M', 2147483647, 'P-6 Lanigay', 'Polangui', 'Albay', 4506, 'Customer'),
+(19, 'Mia', 30, 'F', 2147483647, 'P-3 Basud', 'Polangui', 'Albay', 4506, 'Customer'),
+(20, 'Jacob', 31, 'M', 2147483647, 'P-1, Sugcad', 'Polangui', 'Albay', 4506, 'Customer'),
+(21, 'Poppy', 32, 'F', 2147483647, 'P-2, Centro Occidental (Pob.)', 'Polangui', 'Albay', 4506, 'Customer'),
+(22, 'Freddie', 33, 'M', 2147483647, 'P-2, Agos', 'Polangui', 'Albay', 4506, 'Customer'),
+(23, 'Ella', 34, 'F', 2147483647, 'P-2, Alnay', 'Polangui', 'Albay', 4506, 'Customer'),
+(24, 'Alfie', 35, 'M', 2147483647, 'P-1 Apad', 'Polangui', 'Albay', 4506, 'Customer'),
+(25, 'Angelica', 36, 'F', 2147483647, 'P-3 Cepres', 'Polangui', 'Albay', 4506, 'Customer'),
+(32, 'Joy', 1, 'F', 2147483647, 'Purok 3, Paulba', 'Ligao', 'Albay', 4504, 'Seller'),
+(33, 'Ron', 2, 'M', 2147483647, 'Purok 1, Allang', 'Ligao', 'Albay', 4504, 'Seller'),
+(34, 'Lary', 3, 'M', 2147483647, 'Purok 2, Culliat', 'Ligao', 'Albay', 4504, 'Seller'),
+(35, 'May', 4, 'F', 2147483647, 'Purok 5', 'Ligao', 'Albay', 4504, 'Seller'),
+(36, 'Sam', 5, 'F', 2147483647, 'Purok 4, Bacong', 'Ligao', 'Albay', 4504, 'Seller'),
+(37, 'Liam', 37, 'M', 2147483647, 'Cabañgan', 'Legazpi', 'Albay', 4500, 'Seller'),
+(38, 'Elijah', 38, 'M', 2147483647, 'Oro Site – Magallanes St.', 'Legazpi', 'Albay', 4500, 'Seller'),
+(39, 'Benjamin', 39, 'M', 2147483647, 'Pinaric', 'Legazpi', 'Albay', 4500, 'Seller'),
+(40, 'Lucas', 40, 'M', 2147483647, 'Binanuahan (East)', 'Legazpi', 'Albay', 4500, 'Seller'),
+(41, 'Mason', 41, 'M', 2147483647, 'Bagumbayan', 'Legazpi', 'Albay', 4500, 'Seller'),
+(42, 'Ethan', 42, 'M', 2147483647, 'Maoyod', 'Legazpi', 'Albay', 4500, 'Seller'),
+(43, 'Alexander', 43, 'M', 2147483647, 'Bañag', 'Daraga', 'Albay', 4501, 'Seller'),
+(44, 'Abigail', 44, 'F', 2147483647, 'Anislag', 'Daraga', 'Albay', 4501, 'Seller'),
+(45, 'Adia', 45, 'F', 2147483647, 'Malabog', 'Daraga', 'Albay', 4501, 'Seller'),
+(46, 'Alyssa', 46, 'F', 2147483647, 'Villahermosa', 'Daraga', 'Albay', 4501, 'Seller'),
+(47, 'Dora', 47, 'F', 2147483647, 'Barangay 1', 'Camalig', 'Albay', 4502, 'Seller'),
+(48, 'Felicity', 48, 'F', 2147483647, 'Anoling', 'Camalig', 'Albay', 4502, 'Seller'),
+(49, 'Ivy', 49, 'F', 2147483647, 'Salvacion', 'Daraga', 'Albay', 4501, 'Seller'),
+(50, 'Kylie', 50, 'F', 2147483647, 'Em\'s Barrio', 'Legazpi', 'Albay', 4500, 'Seller'),
+(51, 'Megan', 51, 'F', 2147483647, 'Imperial Court', 'Legazpi', 'Albay', 4500, 'Seller'),
+(52, 'Rose', 52, 'F', 2147483647, 'Bantonan', 'Camalig', 'Albay', 4502, 'Seller'),
+(53, 'violet', 53, 'F', 2147483647, 'Batbat', 'Guinobatan', 'Albay', 4503, 'Seller'),
+(54, 'Roxanne', 54, 'F', 2147483647, 'Calzada', 'Guinobatan', 'Albay', 4503, 'Seller'),
+(55, 'Myla', 55, 'F', 2147483647, 'Mahaba', 'Ligao', 'Albay', 4504, 'Seller'),
+(56, 'Taylor', 56, 'F', 2147483647, 'Malobago', 'Guinobatan', 'Albay', 4503, 'Seller'),
+(66, 'asdf', 0, 'F', 2147483647, 'Purok Earth', 'POLANGUI', 'ALBAY', 4506, 'Seller');
 
 --
 -- Indexes for dumped tables
@@ -465,7 +416,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -483,13 +434,13 @@ ALTER TABLE `track_order`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `user_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
