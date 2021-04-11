@@ -20,15 +20,17 @@ body{
 }
 
 .container{
-    max-width: 700px;
-    width: 100%;
+    max-width: 500px;
+    width: 80%;
     background: #fff;
     padding: 25px 30px;
     border-radius: 5px;
+    height: 90%;
+
 }
 
 .container .title{
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bolder;
     position: relative;
     margin-bottom: 1rem;
@@ -55,16 +57,29 @@ form .user-details .input-box{
 }
 
 .user-details .input-box input{
-    height: 45px;
+    height: 20px;
     width: 100%;
     outline: none;
     border-radius: 5px;
     border: 1px solid lightpink;
-    padding: 15px;
-    font-size: 14px;
+    padding: 10px;
+    font-size: 12px;
     border-bottom-width: 2px;
     transition: all 0.3s ease;
 
+}
+
+.user-details .input-box .form-control{
+    height: 20px;
+    width: 200%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid lightpink;
+    padding: 5px;
+    font-size: 12px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
 }
 
 
@@ -77,12 +92,11 @@ form .user-details .input-box{
 form .gender-deatils .gender-title{
     font-size: 20px;
     font-weight: 500;
-   
 }
 
 .usertype{
 
-    margin-top: .5rem;
+    margin-top: .2rem;
 }
 
 .usertype .usertype-details{
@@ -92,12 +106,12 @@ form .gender-deatils .gender-title{
 
 .button input{
     margin-top: 1rem;
-    height: 40px;
+    height: 30px;
     width: 100%;
     outline: none;
     border-radius: 5px;
     border: 1px solid white;
-    font-size: 20px;
+    font-size: 18px;
     background: linear-gradient(#99ffcc,#ccffe6);
     transition: all 0.3s ease;
 
@@ -111,7 +125,7 @@ form .gender-deatils .gender-title{
 }
 
 .sign_in a{
- font-size: 16px;
+ font-size: 14px;
  color: #999;
  text-decoration: none;
 }

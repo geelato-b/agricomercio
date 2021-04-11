@@ -16,13 +16,13 @@ if(isset($_POST['login'])){
         case 'Seller':
              $_SESSION['usertype'] = 'Seller';
              $_SESSION['userid'] = $user_info['user_id'];
-             header("location: ../seller_page.php");
+             header("location: ../seller/index.php");
              break;
 
         case 'Customer':
             $_SESSION['usertype'] = 'Customer';
             $_SESSION['userid'] = $user_info['user_id'];
-            header("location: ../customer_page.php");
+            header("location: ../index.php");
             break;   
      }
          
@@ -41,3 +41,17 @@ else{
 }
 }
 ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

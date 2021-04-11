@@ -27,13 +27,22 @@
             <li><a href="../product.php">Product</a></li>
             <li><a href="../services.php">Services</a></li>
             <li><a href="../about.php">About</a></li>
-            <li><a href="../sign_in.php">Sign in</a></li>
             </ul>
         </div>
         
         <div class="left">
-                <a href="../profile.php"><div class="fas fa-user"></div></a>
-                <a href="../cart.php"><div class="fas fa-shopping-cart"></div></a>
+        <div class="dropdown">
+            <a href="../cart.php"><div class="fas fa-shopping-cart"></div></a>
+                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="fas fa-user"></div>
+                </button>
+                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a href="../customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                    <a href="../form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
+                    <a href="../sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
+                    <a href="../logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                </ul>
 
         </div>
 

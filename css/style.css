@@ -62,7 +62,9 @@ body{
     font-size: 2rem;
     cursor: pointer;
     color: #000000;
-}
+  
+   
+}    
 
 
 
@@ -1092,8 +1094,6 @@ width: 100%;
     border-radius: 5px;
     
 }
-.form-group{
-}
 .form-group label{
  font-size: 1.5rem;
 }
@@ -1137,4 +1137,32 @@ width: 100%;
     text-align-last: center;
     justify-content: center;
     align-items: center;
+}
+
+.form-group button {
+    justify-content: center;
+}
+
+.dropdown #dropdownMenu2  {
+ background: none;
+ border: none;
+ outline: none;
+ color: black;
+ width: 5.5rem;
+}
+
+.dropdown .dropdown-item {
+    font-size: 14px;
+    text-decoration: none;
+    
+
+}
+
+.dropdown .dropdown-item:hover{
+    border: none;
+    outline: none;
+    text-decoration: none;
+    border-radius: 0;
+    font-weight: bold;
+   
 }

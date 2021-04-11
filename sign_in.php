@@ -24,26 +24,25 @@ include_once ('includes/function.inc.php');
     <header id="header">
     <div class="right">
         <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">
-        <div class="fas fa-bars" id="bars"></div>
         
     </div>
 
     <div class="left">
 
-            <a href="profile.php"><div class="fas fa-user"></div></a>
-            <a href="cart.php"><div class="fas fa-shopping-cart"></div></a>
+    <div class="dropdown">
+                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="fas fa-user"></div>
+                </button>
+                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                    <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                </ul>
+        </div>
+
 
     </div>
 
-    <nav class="navbar">
-        <ul>
-
-        <li><a href="index.php">Home</a></li>
-        <li><a href="product.php">Product</a></li>
-        <li><a href="services.php">Services</a></li>
-        <li><a href="about.php">About</a></li>
-        </ul>
-    </nav>
 
 </header>
 

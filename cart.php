@@ -23,10 +23,19 @@
 
     <div class="left">
         
-
-            <a href="profile.php"><div class="fas fa-user"></div></a>
+        <div class="dropdown">
             <a href="cart.php"><div class="fas fa-shopping-cart"></div></a>
-
+                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="fas fa-user"></div>
+                </button>
+                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                    <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
+                    <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
+                    <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                </ul>
+        </div>
     </div>
 
     <nav class="navbar">
