@@ -79,10 +79,10 @@ $stmt=mysqli_stmt_init($conn);
 
 
 
-function AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_price){
+function AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_status,$p_item_price){
     $err;
-    $sql ="INSERT INTO `items` (`item_name`, `item_desc`, `item_price`,`seller_id`)
-    VALUES (?,?,?,?) ; ";
+    $sql ="INSERT INTO `items` (`item_name`, `item_desc`, `item_status`,`item_price`,`seller_id`)
+    VALUES (?,?,?,?,?) ; ";
 
     $stmt = mysqli_stmt_init($conn);
 
@@ -91,7 +91,7 @@ function AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_price){
         exit();
     }
 
-    mysqli_stmt_bind_param($stmt, "ssss", $p_item_name,$p_item_desc,$p_item_price, $USER_ID);
+    mysqli_stmt_bind_param($stmt, "sssss", $p_item_name,$p_item_desc, $p_item_status, $p_item_price, $USER_ID);
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
