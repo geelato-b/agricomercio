@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2021 at 01:13 PM
+-- Generation Time: Apr 13, 2021 at 05:01 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -113,7 +113,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (2, 'Potatoes', 4, '1kg per Pack', 'A', 180, 2, '23.png'),
 (3, 'Tomatoes', 1, '1kg per Pack', 'A', 95, 2, '9.jpg'),
 (4, 'Banana', 1, '1kg per Pack', 'A', 55, 4, '10.jpg'),
-(5, 'Carrots', 2, '1kg per Pack', 'A', 60, 3, ''),
+(5, 'Carrots', 2, '1kg per Pack', 'A', 60, 3, 'carrot.png'),
 (6, 'Fruit Bundle', 1, 'Assorted', 'A', 50, 5, '1.jpg'),
 (7, 'Lettuce', 2, '1kg per Pack', 'NA', 50, 6, '2.jpg'),
 (8, 'Rice', 4, '50kg per Sack', 'A', 50, 7, '3.jpg'),
