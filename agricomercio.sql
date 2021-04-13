@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2021 at 05:01 AM
+-- Generation Time: Apr 13, 2021 at 05:17 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -124,7 +124,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (13, 'Coconut', 1, '1 whole per Pack', 'A', 35, 9, '8.jpg'),
 (14, 'Alugbati', 2, '1 bundle per Pack', 'A', 10, 10, '33.png'),
 (15, 'Ampalaya', 2, '1kg per Pack', 'A', 45, 11, '34.png'),
-(16, 'Aratiles', 1, '1kg per Pack', 'A', 15, 12, ''),
+(16, 'Aratiles', 1, '1kg per Pack', 'A', 15, 12, '11.jpg'),
 (17, 'Balimbing', 1, '1kg per Pack', 'A', 25, 13, '31.png'),
 (18, 'Calamansi', 1, '1kg per Pack', 'A', 40, 14, '12.jpg'),
 (19, 'Chico', 1, '1kg per Pack', 'A', 25, 15, '29.png'),
