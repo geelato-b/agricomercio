@@ -240,7 +240,7 @@ INSERT INTO `users` (`user_id`, `user_type`, `user_name`, `password`, `status`) 
 (13, 'Customer', 'Lara', '3333', 'Active'),
 (14, 'Customer', 'Sara', '4444', 'Inactive'),
 (15, 'Customer', 'Jack', '5555', 'Blocked'),
-(16, 'Admin', 'Admin', '', ''),
+(16, 'Admin', 'Admin', 'Admin', ''),
 (17, 'Customer', 'Olivia', '8991', 'Active'),
 (18, 'Customer', 'Oliver', '3660', 'Inactive'),
 (19, 'Customer', 'Amelia', '5095', 'Active'),
