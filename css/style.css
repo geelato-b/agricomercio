@@ -64,7 +64,42 @@ body{
     color: #000000;
   
    
-}    
+} 
+
+.search-container{
+    display: inline;
+    position: relative;
+  
+}
+
+#search{
+    position: absolute;
+    top:-2rem; right: 0.8rem;
+    height: 3.5rem;
+    width: 3.5rem;
+    font-size: 1.5rem;
+    padding: 0.1rem;
+    border: none;
+    outline: none;
+    border-radius: 5rem;
+    
+}
+
+#search:hover, :focus{
+    width: 25rem;
+    
+
+}
+
+.fa-search{
+    top: -1.3rem; right: 1.5rem;
+    position: absolute;
+    
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1;
+    color: #333;
+}
 
 
 
@@ -114,6 +149,7 @@ body{
 }
 
 #home {
+    margin-top: -10rem;
     min-height: 100vh;
     width: 100vw;
    background:radial-gradient(#fff,#80ffbf);
@@ -454,11 +490,10 @@ letter-spacing: .3rem;
 
 
 
-
-
 /*-----sign-in---*/
 
 #sign-in{
+    margin-top: -10rem;
     min-height: 100vh;
     width: 100vw;
    background:radial-gradient(#fff,#80ffbf);   
@@ -620,6 +655,7 @@ a{
 }
 
 #services {
+    margin-top: -10rem;
    min-height: 100vh;
    width: 100vw;
    background:radial-gradient(#fff,#80ffbf);
@@ -1166,3 +1202,224 @@ width: 100%;
     font-weight: bold;
    
 }
+
+main{
+    margin-left: 30rem;
+    padding: 0;
+}
+
+.sidenav{
+    height: 100%;
+    width: 300px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color:#333333;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+.sidenav a{
+    padding: 10px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 2rem;
+    color: #fff;
+    display: block;
+    font-weight: lighter;
+}
+.sidenav i{
+    margin: 1rem;
+    color: white;
+}
+.sidenav img{
+    margin-bottom: 6rem;
+}
+.sidenav h1{
+ color: white;
+ margin-top: -10rem;
+ margin-bottom: 2rem;
+ margin-left: 10rem;
+ 
+}
+
+.sidenav a:hover {
+    font-weight: bold;
+  }
+
+@media screen and (max-width: 200px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+  }
+
+.column{
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+#cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem;
+   
+}
+
+#cards:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+    .card1{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #b3cccc;
+  }
+
+  .card2{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color:  #c6ecc6;
+  }
+  .card3{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    padding: 16px;
+    text-align: center;
+    background-color: #9fdfbf;
+    
+  }
+
+
+  .card4{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    height: 5rem;
+    width: 20rem;
+    text-align: center;
+    background-color: #ffcccc;
+    margin: 2rem;
+    justify-content: center;
+   
+  }
+
+  .card5{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+    height: 5rem;
+    width: 20rem;
+    text-align: center;
+    background-color: #ffccb3;
+    margin: 2rem;
+    justify-content: center;
+}
+
+ 
+ 
+  .card1 a{
+      font-size: 2rem;
+      font-weight: lighter;
+      color: #006666;
+  }
+
+  .card2 a{
+    font-size: 2rem;
+    font-weight: lighter;
+    color: #006666;
+}
+
+.card3 a{
+    font-size: 2rem;
+    font-weight: lighter;
+    color: #006666;
+   
+}
+
+.card4 a{
+     margin-top: 5rem;
+    font-size: 2rem;
+    font-weight: lighter;
+    color: #006666;
+}
+
+.card5 a{
+    font-size: 2rem;
+    font-weight: lighter;
+    color: #006666;
+}
+.card1 a:hover{
+   font-weight: bold;
+  
+}
+
+.card2 a:hover{
+    font-weight: bold;
+  
+}
+
+.card3 a:hover{
+    font-weight: bold;
+}
+
+.card4 a:hover{
+    font-weight: bold;
+}
+
+.card5 a:hover{
+    font-weight: bold;
+}
+
+.box_cards{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); 
+    padding: 50px;
+    text-align: center;
+    background-color: beige;
+    align-items: center;
+    justify-content: center;
+    height: 30rem;
+    width: 35rem;  
+}
+
+.box_cards h2 {
+    font-weight: bold;
+    margin-top: -2rem;
+    margin-bottom: 4rem;
+    text-align-last: center;
+}
+
+
+  @media screen and (max-width: 600px) {
+    .column {
+      width: 100%;
+      display: block;
+      margin-bottom: 20px;
+    }
+  }
+
+
+  .main__container{
+      margin-top: 5rem;
+      margin-left: 2rem;
+      text-align: center;
+      justify-content: center;
+  }
+
+ .container_fluid .col-12{
+     font-size: 1.5rem;
+     text-align-last: center;
+ }
+ .text-center{
+     text-align-last: center;
+ }
+
+ #contentPanel .col-12 .btn-primary{
+     border-radius: 1px;
+     border: none;
+     font-weight: normal;
+     padding: 5px;
+     font-size: 2rem;
+
+    
+ }
+
+
+ 
