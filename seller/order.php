@@ -18,8 +18,15 @@
 
 <div class="right">
     
-    <div class="fas fa-bars" id="bars"></div>
+<img clas ="logo" src="../img/logo1.png" alt="" width="70px" height="70px">   
 </div>
+        <div class="nav-bar">
+            <ul>
+            <li><a href="product.php">Product</a></li>
+            <li><a href="order.php">Orders' Approval</a></li>
+            <li><a href="order.php">Sales Report</a></li>
+            </ul>
+        </div>
 
 <div class="left">
 
@@ -39,19 +46,7 @@
 
 </div>
 
-<nav class="navbar">
-<ul>
-<img clas ="logo" src="../img/logo1.png" alt="" width="70px" height="70px">
-<h1>AgriComercio</h1>
-<br>
-<br>
 
-<li><a href="product.php">Product</a></li>
-<li><a href="order.php">Orders' Approval</a></li>
-<li><a href="order.php">Sales Report</a></li>
-
-</ul>
-</nav>
 
 </header>
    

@@ -24,19 +24,17 @@ if(isset($_SESSION['usertype'])){
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/fontawesome.css">
-    <link rel="stylesheet" href="../css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 </head>
 <body>
     
 <header id="header">
-    <div class="right">
-        <img clas ="logo" src="../img/logo1.png" alt="" width="70px" height="70px">
-        
-    </div>
 
-    <div class="nav-bar">
+<div class="right">
+    
+<img clas ="logo" src="../img/logo1.png" alt="" width="70px" height="70px">   
+</div>
+        <div class="nav-bar">
             <ul>
             <li><a href="product.php">Product</a></li>
             <li><a href="order.php">Orders' Approval</a></li>
@@ -44,8 +42,9 @@ if(isset($_SESSION['usertype'])){
             </ul>
         </div>
 
-    <div class="left">
-    <div class="dropdown">
+<div class="left">
+
+<div class="dropdown">
 
   <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
   <div class="fas fa-user"></div>
@@ -53,13 +52,16 @@ if(isset($_SESSION['usertype'])){
   <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
     <a href="seller_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
     <a href="../form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
-    <a href="../includes/login.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
+    <a href="../sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
     <a href="../logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
   </ul>
 </div>
    
 
-    </div>
+</div>
+
+
+
 </header>
 
 <section id = "profile">
