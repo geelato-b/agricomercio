@@ -8,7 +8,7 @@
     , initial-scale=1.0">
     <title>AgriComercio</title>
 
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
@@ -108,6 +108,62 @@ else{
 }
     
 ?>
+
+<?php
+        $sql = "SELECT i.item_id
+        , i.item_name
+        , c.cat_desc
+        , i.item_status
+        , i.item_price
+        FROM `items` i
+        JOIN `category` c
+        ON i.item_id = c.item_id ;";
+  
+  $stmt=mysqli_stmt_init($conn);
+  
+  if (!mysqli_stmt_prepare($stmt, $sql)){
+     echo "Statement Failed.";
+     exit();
+  }
+
+   mysqli_stmt_execute($stmt);
+  //get the results of the executed statement and put it into a variable
+   $resultData = mysqli_stmt_get_result($stmt);
+  //declare a container array.
+   $arr=array();
+   while($row = mysqli_fetch_assoc($resultData)){
+      
+       array_push($arr,$row);
+   }
+ 
+   if(!empty($arr))
+   {
+      echo "<table class='table'>";
+      echo "<thead>";
+      echo "<th> Item Name </th>";
+      echo "<th> Item Description </th>";
+      echo "<th> Item Status </th>";
+      echo "<th> Price </th>";
+      echo "<th> Actions </th>";
+      echo "</thead>";
+      foreach($arr as $key => $val){
+      echo "<tr>";
+          echo "<td>" . $val['item_name'] . "</td>";
+          echo "<td>" . $val['cat_desc']       . "</td>";
+          echo "<td>" . $val['item_status']        . "</td>";
+          echo "<td> Php ". number_format($val['item_price'],2) . "</td>";
+          echo "<td> <a href='orderform.php?itemid=".$val['item_id']."' class='btn btn-primary'>order this item</a> </td>";
+      echo "</tr>";
+      }
+      echo "<tr >";
+          echo "<td colspan=4 class='text-center'><em>End of result</em></td>";
+      echo "</tr>";
+  echo "</table>";
+   }
+   else{
+       echo "<h4> No Records Found.</h4>";
+   }
+  ?>
 
 
 </section>
