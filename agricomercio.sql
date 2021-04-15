@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 13, 2021 at 05:17 AM
+-- Generation Time: Apr 15, 2021 at 05:32 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -98,7 +98,7 @@ CREATE TABLE `items` (
   `item_name` varchar(128) NOT NULL,
   `cat_id` int(11) NOT NULL,
   `item_desc` varchar(255) NOT NULL,
-  `item_status` varchar(20) NOT NULL,
+  `item_status` varchar(20) NOT NULL COMMENT 'A for Available, NA for unavailable',
   `item_price` int(11) NOT NULL,
   `seller_id` int(11) NOT NULL,
   `item_img` varchar(128) NOT NULL
@@ -229,7 +229,7 @@ INSERT INTO `users` (`user_id`, `user_type`, `user_name`, `password`, `status`) 
 (2, 'Seller', 'Ron', '5623', 'Active'),
 (3, 'Seller', 'Lary', '9237', 'Active'),
 (4, 'Seller', 'May', '4567', 'Blocked'),
-(5, 'Seller', 'Sam', '3421', 'Inactive'),
+(5, 'Seller', 'Sam', '3421', 'Active'),
 (6, 'Shipper', 'John', '9806', 'Active'),
 (7, 'Shipper', 'Wen', '3067', 'Active'),
 (8, 'Shipper', 'Dan', '7654', 'Active'),
@@ -238,53 +238,49 @@ INSERT INTO `users` (`user_id`, `user_type`, `user_name`, `password`, `status`) 
 (11, 'Customer', 'Jen', '1111', 'Active'),
 (12, 'Customer', 'Brad', '2222', 'Active'),
 (13, 'Customer', 'Lara', '3333', 'Active'),
-(14, 'Customer', 'Sara', '4444', 'Inactive'),
+(14, 'Customer', 'Sara', '4444', 'Active'),
 (15, 'Customer', 'Jack', '5555', 'Blocked'),
-(16, 'Admin', 'Admin', 'Admin', ''),
+(16, 'Admin', 'Admin', 'admin', ''),
 (17, 'Customer', 'Olivia', '8991', 'Active'),
-(18, 'Customer', 'Oliver', '3660', 'Inactive'),
+(18, 'Customer', 'Oliver', '3660', 'Active'),
 (19, 'Customer', 'Amelia', '5095', 'Active'),
 (20, 'Customer', 'George', '1558', 'Blocked'),
 (21, 'Customer', 'Isla', '4739', 'Active'),
-(22, 'Customer', 'Harry', '0405', 'Inactive'),
+(22, 'Customer', 'Harry', '0405', 'Active'),
 (23, 'Customer', 'Ava', '9997', 'Active'),
 (24, 'Customer', 'Noah', '8584', 'Active'),
 (25, 'Customer', 'Emily', '1785', 'Blocked'),
-(26, 'Customer', 'Sophia', '6134', 'Inactive'),
+(26, 'Customer', 'Sophia', '6134', 'Active'),
 (27, 'Customer', 'Charlie', '3281', 'Active'),
 (28, 'Customer', 'Grace', '9232', 'Active'),
 (29, 'Customer', 'Leo', '6935', 'Active'),
 (30, 'Customer', 'Mia', '9729', 'Blocked'),
 (31, 'Customer', 'Jacob', '3279', 'Active'),
 (32, 'Customer', 'Poppy', '3522', 'Active'),
-(33, 'Customer', 'Freddie', '2931', 'Inactive'),
+(33, 'Customer', 'Freddie', '2931', 'Active'),
 (34, 'Customer', 'Ella', '1198', 'Active'),
-(35, 'Customer', 'Alfie', '2320', 'Inactive'),
+(35, 'Customer', 'Alfie', '2320', 'Active'),
 (36, 'Customer', 'Angelica', '1029', 'Active'),
 (37, 'Seller', 'Liam', '8363', 'Active'),
 (38, 'Seller', 'Elijah', '7077', 'Active'),
-(39, 'Seller', 'Benjamin', '2786', 'Inactive'),
+(39, 'Seller', 'Benjamin', '2786', 'Active'),
 (40, 'Seller', 'Lucas', '9233', 'Active'),
 (41, 'Seller', 'Mason', '8320', 'Blocked'),
 (42, 'Seller', 'Ethan', '7447', 'Active'),
 (43, 'Seller', 'Alexander', '8052', 'Active'),
-(44, 'Seller', 'Abigail', '8283', 'Inactive'),
-(45, 'Seller', 'Adia', '2560', 'Inactive'),
+(44, 'Seller', 'Abigail', '8283', 'Active'),
+(45, 'Seller', 'Adia', '2560', 'Active'),
 (46, 'Seller', 'Alyssa', '6124', 'Active'),
 (47, 'Seller', 'Dora', '7011', 'Active'),
 (48, 'Seller', 'Felicity', '1266', 'Active'),
 (49, 'Seller', 'Ivy', '3018', 'Blocked'),
-(50, 'Seller', 'Kylie', '8780', 'Inactive'),
+(50, 'Seller', 'Kylie', '8780', 'Active'),
 (51, 'Seller', 'Megan', '9750', 'Blocked'),
 (52, 'Seller', 'Rose', '1596', 'Active'),
-(53, 'Seller', 'Violet', '1612', 'Inactive'),
+(53, 'Seller', 'Violet', '1612', 'Active'),
 (54, 'Seller', 'Roxanne', '4668', 'Active'),
 (55, 'Seller', 'Myla', '3472', 'Blocked'),
-(56, 'Seller', 'Taylor', '9649', 'Active'),
-(57, 'Seller', 'christine joyce', '1010', ''),
-(58, 'Seller', 'nat', '1212', ''),
-(59, 'Seller', 'asdf', 'password', ''),
-(60, 'Seller', 'asdf', 'asdf', '');
+(56, 'Seller', 'Taylor', '9649', 'Active');
 
 -- --------------------------------------------------------
 
