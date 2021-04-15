@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2021 at 05:32 AM
+-- Generation Time: Apr 15, 2021 at 03:54 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -28,64 +28,21 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `category` (
-  `cat_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `item_name` varchar(50) NOT NULL,
-  `cat_desc` varchar(50) NOT NULL
+  `cat_id` int(50) NOT NULL,
+  `cat_desc` varchar(128) NOT NULL,
+  `cat_status` varchar(50) NOT NULL COMMENT 'A for Active\r\nNA for Not Available'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`cat_id`, `item_id`, `item_name`, `cat_desc`) VALUES
-(5, 1, 'plantmate', 'fertilizer'),
-(4, 2, 'potatoes', 'crop'),
-(1, 3, 'tomatoes', 'fruit'),
-(1, 4, 'banana', 'fruit'),
-(2, 5, 'carrots', 'vegetable'),
-(1, 6, 'fruit bundle', 'fruit'),
-(2, 7, 'lettuce', 'vegetable'),
-(4, 8, 'rice', 'crop'),
-(4, 9, 'sweet potato', 'crop'),
-(1, 10, 'pineapple', 'fruit'),
-(2, 11, 'spinach', 'vegetable'),
-(4, 12, 'coffee beans', 'crop'),
-(1, 13, 'coconut', 'fruit'),
-(2, 14, 'alugbati', 'vegetable'),
-(2, 15, 'ampalaya', 'vegetable'),
-(1, 16, 'aratiles', 'fruit'),
-(1, 17, 'balimbing', 'fruit'),
-(1, 18, 'calamansi', 'fruit'),
-(1, 19, 'chico', 'fruit'),
-(1, 20, 'durian', 'fruit'),
-(4, 21, 'gabi', 'crop'),
-(1, 22, 'guyabano', 'fruit'),
-(4, 23, 'singkamas', 'crop'),
-(4, 24, 'garlic', 'crop'),
-(4, 25, 'onion', 'crop'),
-(2, 26, 'cauli flower', 'vegetable'),
-(2, 27, 'sili', 'vegetable'),
-(3, 28, 'white angel', 'plant'),
-(3, 29, 'daisy', 'plant'),
-(2, 30, 'upo', 'vegetable'),
-(2, 31, 'sitaw', 'vegetable'),
-(2, 32, 'sigarilyas', 'vegetable'),
-(2, 33, 'kalabasa', 'vegetable'),
-(2, 34, 'talong', 'vegetable'),
-(2, 35, 'repolyo', 'vegetable'),
-(1, 36, 'lanzones', 'fruit'),
-(2, 37, 'kangkong', 'vegetable'),
-(2, 38, 'malunggay', 'vegetable'),
-(1, 39, 'mango', 'fruit'),
-(2, 40, 'munggo', 'vegetable'),
-(2, 41, 'mustasa', 'vegetable'),
-(2, 42, 'pechay', 'vegetable'),
-(2, 43, 'banana blossom', 'vegetable'),
-(1, 44, 'rambutan', 'fruit'),
-(1, 45, 'santol', 'fruit'),
-(2, 46, 'sayote', 'vegetable'),
-(1, 47, 'atis', 'fruit');
+INSERT INTO `category` (`cat_id`, `cat_desc`, `cat_status`) VALUES
+(1, 'fruit', 'A'),
+(2, 'vegetable', 'A'),
+(3, 'plant', 'A'),
+(4, 'crop', 'A'),
+(5, 'fertilizer', 'A');
 
 -- --------------------------------------------------------
 
@@ -366,7 +323,7 @@ INSERT INTO `user_info` (`user_info_id`, `user_fullname`, `user_id`, `gender`, `
 -- Indexes for table `category`
 --
 ALTER TABLE `category`
-  ADD PRIMARY KEY (`item_id`);
+  ADD PRIMARY KEY (`cat_id`);
 
 --
 -- Indexes for table `items`
@@ -406,7 +363,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `cat_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `items`
