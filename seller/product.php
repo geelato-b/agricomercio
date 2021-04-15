@@ -18,7 +18,6 @@ include_once "../includes/function.inc.php";
 
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 </head>
 <body>
@@ -111,6 +110,7 @@ else{
         , i.item_name
         , c.cat_desc
         , i.item_price
+        , i.item_status
      FROM `items` i
      JOIN `category` c
        ON i.item_id = c.item_id;";
@@ -137,7 +137,7 @@ else{
       echo "<thead>";
       echo "<th> Item Name </th>";
       echo "<th> Item Description </th>";
-      //echo "<th> Item Status </th>";
+      echo "<th> Item Status </th>";
       echo "<th> Price </th>";
       echo "<th> Actions </th>";
       echo "</thead>";
@@ -145,7 +145,7 @@ else{
       echo "<tr>";
           echo "<td>" . $val['item_name'] . "</td>";
           echo "<td>" . $val['cat_desc']       . "</td>";
-          //echo "<td>" . $val['item_status']        . "</td>";
+          echo "<td>" . $val['item_status']        . "</td>";
           echo "<td> Php ". number_format($val['item_price'],2) . "</td>";
           echo "<td> <a href='orderform.php?itemid=".$val['item_id']."' class='btn btn-primary'>Delete</a> </td>";
       echo "</tr>";
@@ -165,12 +165,6 @@ else{
           </div>
 </main>
 
-
-
-
-   
-
-  
 
         
             <script src="../js/bootstrap.bundle.js"></script>
