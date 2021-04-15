@@ -1421,5 +1421,45 @@ main{
     
  }
 
+ #addItem{
+    height: 50vh;
+    max-width: 500px;
+    width: 100%;
+    background: beige;
+    padding: 25px 30px;
+    border-radius: 5px;
+    justify-self: center;
+    align-items: center;
+    margin-left: 10rem;
+    margin-bottom: 5rem;
+ }
+
+ #addItem input{
+    height: 3rem;
+    width: 20rem;
+   justify-content: center;
+   align-items: center;
+   margin: 1rem;
+}
+.add_btn{
+border: none;
+border-radius: 0;
+width: 10rem;
+}
+
+.col-10{
+    font-size: 2rem;
+    align-items: center;
+    margin-left: -5rem;
+    justify-content: center;
+}
+
+.col-10 .btn-primary{
+    border: none;
+    border-radius: 0;
+    height: 3rem;
+    font-size: 1.5rem;
+}
+
 
  
