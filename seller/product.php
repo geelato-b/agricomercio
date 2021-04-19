@@ -106,14 +106,11 @@ else{
           <div class="row" id="contentPanel">
             <div class="col-10">
 <?php
-        $sql="SELECT i.item_id
-        , i.item_name
-        , c.cat_desc
-        , i.item_price
-        , i.item_status
-     FROM `items` i
-     JOIN `category` c
-       ON i.item_id = c.item_id;";
+        $sql="SELECT i.item_name, 
+        i.item_status, c.cat_desc, 
+        i.item_price FROM `items` i 
+        JOIN `category` c 
+        ON i.cat_id = c.cat_id;";
 
   $stmt=mysqli_stmt_init($conn);
   if (!mysqli_stmt_prepare($stmt, $sql)){
