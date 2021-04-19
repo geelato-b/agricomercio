@@ -101,7 +101,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (32, 'sigarilyas', 2, '1 kg per pack', 'NA', 50, 24, '5.png'),
 (33, 'kalabasa', 2, '1 kg per pack', 'A', 50, 22, '20.png'),
 (34, 'talong', 2, '1 kg per pack', 'A', 50, 22, '19.png'),
-(35, 'repolyo', 2, '1 kg per pack', 'A', 50, 25, '15.png'),
+(35, 'repolyo', 2, '1 kg per pack', 'A', 50, 25, '18.png'),
 (36, 'lanzones', 1, '1 kg per pack', 'A', 50, 26, '17.png'),
 (37, 'kangkong', 2, '1 bundle per pack', 'A', 50, 25, '15.png'),
 (38, 'malunggay', 2, '1 bundle per pack', 'A', 50, 27, '14.png'),
