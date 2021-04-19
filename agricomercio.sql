@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 15, 2021 at 03:54 PM
+-- Generation Time: Apr 19, 2021 at 04:09 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -30,19 +30,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `category` (
   `cat_id` int(50) NOT NULL,
   `cat_desc` varchar(128) NOT NULL,
-  `cat_status` varchar(50) NOT NULL COMMENT 'A for Active\r\nNA for Not Available'
+  `cat_status` varchar(50) NOT NULL COMMENT 'A for Active\r\nNA for Not Available',
+  `cat_img` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `category`
 --
 
-INSERT INTO `category` (`cat_id`, `cat_desc`, `cat_status`) VALUES
-(1, 'fruit', 'A'),
-(2, 'vegetable', 'A'),
-(3, 'plant', 'A'),
-(4, 'crop', 'A'),
-(5, 'fertilizer', 'A');
+INSERT INTO `category` (`cat_id`, `cat_desc`, `cat_status`, `cat_img`) VALUES
+(1, 'fruit', 'A', 'c1.jpg'),
+(2, 'vegetable', 'A', 'c2.jpg'),
+(3, 'plant', 'A', 'c3.jpg'),
+(4, 'crop', 'A', 'c4.jpg'),
+(5, 'fertilizer', 'A', 'c5.jpg');
 
 -- --------------------------------------------------------
 
