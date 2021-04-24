@@ -37,7 +37,28 @@ include_once "includes/function.inc.php";
         
         <div class="left">
         <div class="dropdown">
-            <a href="cart.php"><div class="fas fa-shopping-cart"></div></a>
+            <a href="cart.php"><div class="fas fa-shopping-cart"></div>
+            <?php 
+                        $sql_cart_count = "SELECT COUNT(*) cartcount FROM `cart` WHERE status = 'P' AND user_id = ?;";
+                        $stmt=mysqli_stmt_init($conn);
+    
+                    if (!mysqli_stmt_prepare($stmt, $sql_cart_count)){
+                        header("location: index.php?error=stmtfailed");
+                        exit();
+                    }
+                        mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']);
+                        mysqli_stmt_execute($stmt);
+
+                        $resultData = mysqli_stmt_get_result($stmt);
+
+                        if($row = mysqli_fetch_assoc($resultData)){ ?>
+                            <span class="badge bg-danger"><?php echo $row['cartcount']; ?></span>
+                        <?php }
+                       
+                        ?>
+            
+            </a>
+            
                 <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="fas fa-user"></div>
                 </button>
@@ -55,8 +76,7 @@ include_once "includes/function.inc.php";
 
     </header>
 
-
-    <section id="product-category">
+ <section id="product-category">
     <div class="heading-two">Category</div>
     <div class="category-cont">
         <div class="category-slider">
@@ -104,10 +124,7 @@ include_once "includes/function.inc.php";
         </div>
     </div>
 
-</section>
-
-    
-
+ </section>
 
 <?php    
   
@@ -132,11 +149,8 @@ include_once "includes/function.inc.php";
               echo "Oops!Something's wrong.";
           }
       }
-           
-
     }
 }
-
 
 ?>
         
@@ -170,9 +184,7 @@ include_once "includes/function.inc.php";
        array_push($arr,$row);
    }
       ?>
-
-
-      
+    
 <section id="product">
     <div class="product-container">
         <?php
@@ -188,14 +200,17 @@ include_once "includes/function.inc.php";
                     <div class="content">
                         <h3><?php echo $val['item_name'] ?></h3>
                         <h4><?php echo $val['item_desc'] ?></h4>
-                        <div class="price"><p><?php echo number_format($val['item_price'],2)  ?></p>
+                        <div class="price"><p> Php <?php echo number_format($val['item_price'],2)  ?></p>
                         </div>
+
+                        <form action="includes/processorder.php" method= "GET">
+                        <input hidden type="text" name="item_id"  value = "<?php echo $val['item_id']; ?>">
                         <label for="Quantity">Quantity</label>
-                        <input type="number" value = "1" min="1" max="10">
-                        <button class = "btn-addcart">
-                        <a href="orderform.php?itemid=" <?php $val['item_id']?>><i class="fas fa-shopping-cart"></i></a>
+                        <input  type="number" value = "1" min="1" max="10" name="item_qty">
+                        <button type="submit" class = "btn-addcart">
+                        <i class="fas fa-shopping-cart" ></i>
                         </button>
-                   
+                        </form>
                     </div>
             </div>
         </div>
@@ -206,16 +221,7 @@ include_once "includes/function.inc.php";
     </div>
 </section>
 
-
-                   
-
-            
-        
-
-            
-    
-        
-            <section id="footer">
+<section id="footer">
    <div class="footer-content">
    <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">
        <h3>AgriComercio</h3>
