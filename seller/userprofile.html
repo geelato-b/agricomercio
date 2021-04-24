@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html background="#8ce6ca">
+<head>
+   <title>Seller</title>
+   <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+  
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.html">Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="userprofile.html">Profile <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="products.html">Products</a>
+      </li>
+            <li class="nav-item active">
+        <a class="nav-link" href="orders.html">Orders</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="about.html">About</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="logout.html">Log Out</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<!-- end of navbar -->
+
+<div class="container">
+<div class="card-body">
+<form>
+                        <table class="table table-striped table-hover">
+                          <thead>
+                            <br>
+                           <h1>Profile</h1>
+                          <br>
+                          <div class="profile">
+                              <img width="150px" src="img/01.jpg" class="rounded-circle" alt="img">
+                              <br><br>
+                              <span class="badge rounded-pill bg-success" style="font-size: 15px;">Status : </span>
+                              <input type="text" id="status">
+                          </div>
+                             <br>
+                             <br/>
+                          </thead>
+                          <tbody>
+                          <tr>
+                            <td>
+                               <label for="user_name"><b>Username:</b></label>
+                            </td>
+                            <td>
+                               <input type="text" id="user_name">
+                            </td>
+                             <td>
+                              <label for="user_id"><b>User ID:</b></label>
+                            </td>
+                            <td>
+                              <input type="text" id="user_id">
+                            </td>
+                          </tr>
+                          
+                          <tr>
+                            <td>
+                              <label for="user_fullname"><b>Full Name:</b></label>
+                            </td>
+                            <td>
+                              <input type="text" id="user_fullnam">
+                            </td>
+                            <td>
+                              <label for="status"><b>Status:</b></label>
+                            </td>
+                            <td>
+                               <input type="text" id="status">
+                            </td>  
+                          </tr>
+                          <tr>
+                            <td>
+                              <label for="address"><b>Address:</b></label>
+                            </td>
+                            <td>
+                               <input type="text" id="address">
+                            </td> 
+                            <td>
+                              <label for="postal_code"><b>Postal Code:</b></label>
+                            </td>
+                            <td>
+                               <input type="text" id="postal_code">
+                            </td>   
+                          </tr>
+                          <tr>
+                            <td>
+                              <label for="contact_details"><b>Contact:</b></label>
+                            </td>
+                            <td>
+                               <input type="text" id="contact_details">
+                            </td>  
+                          </tr>
+                          </tbody>
+                        </table>
+   </form>                   
+</div>
+</div>
+
+
+<script src="jquery.js"></script>
+<script src="popper.js"></script>
+<script src="bootstrap.js"></script>
+
+
+</body>
+</html>
