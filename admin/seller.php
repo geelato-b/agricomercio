@@ -10,7 +10,7 @@ include_once ('../includes/db_conn.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AgriComercio</title>
 
-   
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/fontawesome.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
@@ -105,7 +105,7 @@ include_once ('../includes/db_conn.php');
               if(!empty($arr)){
                   echo "<table class='table'>";
                   echo "<thead>";
-                  echo "<th> User Id </th>";
+                  echo "<th> User Info Id </th>";
                   echo "<th> Fullname</th>";
                   echo "<th> Gender </th>";
                   echo "<th> House Number, Street, Brgy </th>";
@@ -115,7 +115,7 @@ include_once ('../includes/db_conn.php');
                   echo "</thead>";
                   foreach($arr as $key => $val){
                   echo "<tr>";
-                  echo "<td>" . $val ['user_id']         . "</td>";
+                  echo "<td>" . $val ['user_info_id']         . "</td>";
                   echo "<td>" . $val ['user_fullname']   . "</td>";
                   echo "<td>" . $val ['gender']          .  " </td> ";
                   echo "<td>" . $val ['house_no_street_brgy'] .  " </td>";
@@ -158,7 +158,7 @@ include_once ('../includes/db_conn.php');
 
 
 
-<script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/jquery.js"></script> 
     <script src="js/main.js"></script>
     
