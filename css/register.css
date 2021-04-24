@@ -25,7 +25,8 @@ body{
     background: #fff;
     padding: 25px 30px;
     border-radius: 5px;
-    height: 90%;
+    height: 100%;
+    margin-top: -2rem;
 
 }
 
@@ -34,6 +35,7 @@ body{
     font-weight: bolder;
     position: relative;
     margin-bottom: 1rem;
+   
     
 }
 
@@ -92,10 +94,10 @@ form .user-details .input-box{
 form .gender-deatils .gender-title{
     font-size: 20px;
     font-weight: 500;
+    margin-top: -2rem;
 }
 
 .usertype{
-
     margin-top: .2rem;
 }
 

@@ -189,7 +189,7 @@ font-size: 1.5rem;
 margin-left: 3rem;
 }
 
-.btn{
+.btn-home{
     height: 4rem;
     width: 12rem;
     background: #339966;
@@ -201,6 +201,7 @@ margin-left: 3rem;
     text-decoration:none;
     margin-left: 3.5rem;
     margin-top: 00.5rem;
+    border: none;
 
 }
 
@@ -716,52 +717,6 @@ color: #fff;
     letter-spacing: .3rem;
   
    
-}
-
-
-#cart-page{
-margin: 50px;
-font-size: 2rem;
-
-}
-
-table{
-    width: 100%;
-    border-collapse: collapse ;
-}
-
-.cart-info{
-display: flex;
-
-}
-
-.cart-info p{
-    text-align: center;
-    font-size: 1.5rem;
-    margin: 4rem;
-}
-th{
-    text-align: left;
-    padding: 5px;
-    color: #fff;
-    background: #339966;
-    font-weight: normal;
-}
-
-td{
-    padding: 10px 5px;
-}
-
-td input{
-
-    width: 50px;
-    height: 30px;
-    padding: 5px;
-
-}
-
-td a{
-    margin-top: 6rem;  
 }
 
 
@@ -1294,7 +1249,6 @@ main{
     border: none;
     margin-top: 1rem;
     line-height: 4rem; 
-    border: none;
     outline: none;   
 }
 
@@ -1399,5 +1353,35 @@ main{
         font-weight: bolder;
       
     }
-    
- 
+#cart-page{
+    margin: 50px;
+    font-size: 2rem;
+        
+}   
+
+.cart_card{
+    height: 30rem;
+    width: 30rem;
+}
+
+.cart_card .image{
+    height: 100%;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+.cart_card .card-title{
+    margin-top: -3rem;
+    font-size: 2.5rem;
+}
+
+.cart-sum{
+    text-align: right;
+    font-weight: bold;
+    font-size: 3rem;
+    color: tomato;
+}
+
+form input .cart-qty{
+    width: 20rem;
+}
