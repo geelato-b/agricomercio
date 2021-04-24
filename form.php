@@ -31,14 +31,14 @@
                 </div>
                 <div class="input-box">
                     <span class="details">Contact Number</span>
-                    <input type="text" name="contact_no" placeholder="Enter Your Number" required>
+                    <input type="text" name="contact_no" placeholder="Enter Your Number" maxlength="11" required >
                 </div>
 
                 <div class="input-box">
                 <span class="details">Password</span>
                     <input type="password" id="psword" name ="psword" placeholder="Enter Your password" required>
                 </div>
-
+                
                 <div class="input-box">
                 <span class="details">Address</span>
                       <input type="text" class="form-control" name ="hnsb" placeholder = "House Number, Street, Barangay" value = "" >
@@ -48,13 +48,19 @@
                         <input type="text" class="form-control" name = "prv" placeholder = "Province" value = "">
                         
                         <input type="text" class="form-control" name ="pc" placeholder = "Postal Code" value = "" >
+                        <div class="input-box">
+                <span class="details">Status</span>    
+                        <input type="text" class="form-control" name="status" placeholder = "Active" value = "Active" require>
                         
-                </div>
-                
-                      
+                </div> 
+
+                        
+                </div> 
                
+
             
             </div>
+            
             <div class="gender-deatils">
                 <div class="category">
                 <label for="gender">Gender:</label>
@@ -76,6 +82,8 @@
                 </select>
                 </div>
             </div>
+
+            
             <div class="button">
                 <input type="submit" name="" value="Register" name= "submit_reg">
 
