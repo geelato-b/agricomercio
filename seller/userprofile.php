@@ -43,65 +43,6 @@
 
 <div class="container">
 <div class="card-body">
-<!-- <form>
-                        <table class="table table-striped table-hover">
-                          <thead>
-                            <br>
-                           <h1>Profile</h1>
-                          <br>
-                          <div class="profile">
-                              <img width="150px" src="img/profile.png" class="rounded-circle" alt="img">
-                              <br><br>
-                              <span class="badge rounded-pill bg-success" style="font-size: 15px;"><font color="white">Status : </font></span>
-                              <input type="text" id="status">
-                          </div>
-                             <br>
-                             <br/>
-                          </thead>
-                          <tbody>
-                          <tr>
-                            <td>
-                               <span class="">User Name : </span>
-                               <input type="text" id="user_name" placeholder="User Name">
-                            </td>
-                            <td>
-                              <input type="text" id="user_id" placeholder="User ID">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <input type="text" id="user_fullname" placeholder="Full Name">
-                            </td>
-                            <td>
-                               <input type="text" id="status" placeholder="Status">
-                            </td>  
-                          </tr>
-                          <tr>
-                            <td>
-                               <input type="text" id="house_no_street_brgy" placeholder="Address">
-                            </td> 
-                            <td>
-                               <input type="text" id="postal_code" placeholder="Postal Code">
-                            </td>   
-                          </tr>
-                          <tr>
-                            <td>
-                              <input type="text" id="city" placeholder="City" >
-                            </td>
-                            <td>
-                              <input type="text" id="province" placeholder="Province">
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                               <input type="text" id="contact_details" placeholder="Contact">
-                            </td> 
-                          </tr>
-                          </tbody>
-                        </table>
-                        <br>
-                        <button type="button" class="btn btn-success">Update</button>
-   </form>                  -->  
   <div>
     <br>
     <h1>Profile</h1>
