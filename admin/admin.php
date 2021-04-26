@@ -1,3 +1,8 @@
+<?php 
+session_start();
+include_once ('../includes/db_conn.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +18,6 @@
 
 </head>
 <body>
-    
 
 <header id="header">
 
@@ -49,7 +53,7 @@
 
   <a href="admin.php"><i class="fas fa-home"></i> Dashboard</a>
   <a href="user.php"><i class="fas fa-users"></i> User Management</a>
-  <a href="#"><i class="fas fa-question"></i> Request</a>
+
   
 </div>
 

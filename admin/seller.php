@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <?php 
+session_start();
 include_once ('../includes/db_conn.php');
 ?>
 <!DOCTYPE html>
@@ -47,9 +48,7 @@ include_once ('../includes/db_conn.php');
   </div>
 
   <a href="admin.php"><i class="fas fa-home"></i> Dashboard</a>
-  <a href="user.php"><i class="fas fa-users"></i> User Management</a>
-  <a href="#"><i class="fas fa-question"></i> Request</a>
-  
+  <a href="user.php"><i class="fas fa-users"></i> User Management</a>  
 </div>
 
 
