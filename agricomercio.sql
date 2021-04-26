@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2021 at 04:57 AM
+-- Generation Time: Apr 26, 2021 at 07:18 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -152,6 +152,19 @@ INSERT INTO `orders` (`order_id`, `cust_id`, `item_id`, `seller_id`, `item_qty`,
 (1, 1, 2, 1, 2, 1170),
 (2, 2, 2, 2, 1, 585),
 (3, 3, 3, 3, 1, 95);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request`
+--
+
+CREATE TABLE `request` (
+  `req_id` int(128) NOT NULL,
+  `user_id` int(128) NOT NULL,
+  `user_name` varchar(128) NOT NULL,
+  `password` varchar(128) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -359,6 +372,12 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
+-- Indexes for table `request`
+--
+ALTER TABLE `request`
+  ADD PRIMARY KEY (`req_id`);
+
+--
 -- Indexes for table `track_order`
 --
 ALTER TABLE `track_order`
@@ -403,6 +422,12 @@ ALTER TABLE `items`
 --
 ALTER TABLE `orders`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `request`
+--
+ALTER TABLE `request`
+  MODIFY `req_id` int(128) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `track_order`
