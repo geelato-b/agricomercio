@@ -4,14 +4,13 @@ include_once "includes/db_conn.php";
 include_once "includes/function.inc.php";
 if(isset($_SESSION['usertype'])){
     if($_SESSION['usertype'] == 'Customer'){
-    
+
     $USER_ID = $_SESSION['userid'];
     
-        $users = GetUserName($conn, $USER_ID );
+        $user_info = GetUserDetails($conn, $USER_ID );
         
         
-       ?>       
-  
+       ?> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -76,51 +75,53 @@ if(isset($_SESSION['usertype'])){
     <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
   </ul>
 </div>
-   
 
     </div>
 </header>
 
-<section id = "custpage">
-<div class= "user-prof">
-        <div class="card">
-            <img src="img/user.png" class="img_profile" alt="...">
-            <div class="card-body">
-                <form action="form.php" method  = "GET">
-                            <div class="form-group">
-                                    <label hidden for="">UserName</label>
-                                <a href="user_profile.php"> <input type="text" class="form-content" value = "<?php   echo $users['user_name']; ?>" disabled> </a>            
-                            </div>
+
+<section id = "profile">
+
+<div class = "profile-container">
+    <div class = "row">
+        <div class = "col-md-12">
+            <div class = "card">
+                <div class = "card-body">
+                <h1>User Profile</h1>
+                <hr>
+                <form action="includes/updateprofile.php"  method  = "post">
+                    <div class="form-group">
+                        <label for="">Name</label>
+                        <input type="text" class="form-control" value = "<?php   echo $user_info['user_fullname']; ?>">
+                        <label for="">Contact</label>
+                        <input type="text" class="form-control" value = "<?php  echo $user_info['contact_details']; ?>">
+                        <label for="">Address</label>
+                        <input type="text" class="form-control" placeholder = "House Number, Street, Barangay" value = "<?php echo $user_info['house_no_street_brgy']; ?>" >
+                        <br>
+                        <input type="text" class="form-control" placeholder = "City" value = "<?php echo $user_info['city']; ?>" >
+                        <br>
+                        <input type="text" class="form-control" placeholder = "Province" value = "<?php echo $user_info['province']; ?>">
+                        <br>
+                        <input type="text" class="form-control" placeholder = "Postal Code" value = "<?php echo $user_info['postal_code']; ?>">
+                        <br>
+                        <button class="update_prof">Update</button>
+
+                    </div>
                 </form>
+                
+                </div>
+
             </div>
-        </div>    
+            
+
+           
+        </div>
+
+    </div>
+
 </div>
-    
 
-</section>
-
-
-<section id="profile_order">
-        <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <button class="nav-link" id="nav-pay-tab" data-bs-toggle="tab" data-bs-target="#nav-pay" type="button" role="tab" aria-controls="nav-pay" aria-selected="false"> <i class="fas fa-wallet"></i>  To Pay </button>
-            <button class="nav-link" id="nav-ship-tab" data-bs-toggle="tab" data-bs-target="#nav-ship" type="button" role="tab" aria-controls="nav-ship" aria-selected="false"> <i class="fas fa-truck-loading"></i>   To Ship</button>
-            <button class="nav-link" id="nav-receive-tab" data-bs-toggle="tab" data-bs-target="#nav-receive" type="button" role="tab" aria-controls="nav-receive" aria-selected="false"> <i class="fas fa-truck"></i>  To Receive</button>
-            <button class="nav-link" id="nav-complete-tab" data-bs-toggle="tab" data-bs-target="#nav-complete" type="button" role="tab" aria-controls="nav-complete" aria-selected="false"> <i class="fas fa-check-square"></i> Complete</button>
-            <button class="nav-link" id="nav-canceled-tab" data-bs-toggle="tab" data-bs-target="#nav-canceled" type="button" role="tab" aria-controls="nav-canceled" aria-selected="false"> <i class="fas fa-window-close"></i> Canceled</button>
-        </div>
-        </nav>
-        <div class="tab-content" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-pay" role="tabpanel" aria-labelledby="nav-pay-tab">bjdbcjdbcj</div>
-        <div class="tab-pane fade" id="nav-ship" role="tabpanel" aria-labelledby="nav-ship-tab">jdbcjdbcd</div>
-        <div class="tab-pane fade" id="nav-receive" role="tabpanel" aria-labelledby="nav-receive-tab">idiosnc</div>
-        <div class="tab-pane fade" id="nav-complete" role="tabpanel" aria-labelledby="nav-complete-tab">88888</div>
-        <div class="tab-pane fade" id="nav-canceled" role="tabpanel" aria-labelledby="nav-canceled-tab">00000</div>
-        </div>
-
-</section>
     <script src="js/bootstrap.min.js"></script>
-
     <script src="js/bootstrap.bundle.js"></script>
     <script src="js/jquery.js"></script> 
     <script src="js/main.js"></script>
@@ -137,9 +138,9 @@ else{
     header("location: sign_in.php");
     
 }
-    
-    
-    
-    
 
 ?>
+
+
+        
+  

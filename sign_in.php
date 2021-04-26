@@ -23,9 +23,16 @@ include_once ('includes/function.inc.php');
 <body>
     <header id="header">
     <div class="right">
-        <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">
-        
+        <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">  
     </div>
+    <div class="nav-bar">
+            <ul>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="product.php">Product</a></li>
+            <li><a href="services.php">Services</a></li>
+            <li><a href="about.php">About</a></li>
+            </ul>
+        </div>
 
     <div class="left">
 

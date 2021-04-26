@@ -150,7 +150,7 @@ include_once "includes/function.inc.php";
                             <a href="includes/deletecartitem.php?cartid=<?php echo $row['cart_id']; ?>" class="btn-cart">
                             <i class="fas fa-trash-alt"></i></i>
                             </a>
-                    </form>
+                </form>
                  
        </td>
         
@@ -165,14 +165,6 @@ include_once "includes/function.inc.php";
         ?>
     </div>
 
-
-
-
-
-
-
-
-
     <?php }
                         
     ?>
@@ -184,10 +176,13 @@ include_once "includes/function.inc.php";
                     echo "Total Qty: ". $nval['total_qty'] . " pcs "; 
                     echo "<br>";
                     echo "Total Price: Php ". number_format($nval['total_price'],2);    
-                    }
-                            
+                    } 
+                    echo "<br>";                    
         ?> 
+         <a class="cart_check_out" href="">Check Out</a>
     </p>
+
+    
 
 </section>
 
