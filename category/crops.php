@@ -64,7 +64,7 @@ include_once "../includes/function.inc.php";
                 </button>
                 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                    <a href="../customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
                     <a href="../form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
                     <a href="../sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
                     <a href="../logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
