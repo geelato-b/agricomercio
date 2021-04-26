@@ -1385,3 +1385,90 @@ main{
 form input .cart-qty{
     width: 20rem;
 }
+
+
+.cart-sum .cart_check_out{
+    background: #339966;
+}
+
+
+#profile_order{
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    padding: 8rem;
+
+}
+
+#nav-tab{
+    font-size: 2rem;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+    border: none;
+    background: #339966
+
+
+}
+
+#nav-tab button{
+    background: transparent;
+    border-bottom: none;
+    border: none;
+}
+
+#nav-tabContent{
+ height: 100%;   
+ padding: 10rem;
+ font-size: 1.5rem;
+
+ 
+}
+
+#nav-tab button:hover{
+    background: white;
+}
+
+#custpage{
+    width: 100vw;
+    height: 50vh;
+    background: linear-gradient(#99ffcc,#ccffe6);
+   
+}
+#custpage .card{
+  height: 49vh;
+  background: transparent;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.user-prof form {
+    border: none;
+    justify-content: center;
+}
+.user-prof form input{
+    border: none;
+    font-size: 4rem;
+    color: black;
+    height: 5rem;
+    background: transparent;
+    font-weight: bold;
+    justify-content: center;
+    text-align-last: center;
+    margin-top: -2rem;
+}
+
+.user-prof .form-group a{
+   border: none;
+   outline: none;
+   background: transparent;
+}
+
+.img_profile{
+    width: 15%;
+    align-items: center;
+    margin: 3rem;
+
+}
