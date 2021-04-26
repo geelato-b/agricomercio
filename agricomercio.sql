@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 24, 2021 at 03:49 AM
+-- Generation Time: Apr 26, 2021 at 04:57 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -86,9 +86,9 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (3, 'Tomatoes', 1, '1kg per Pack', 'A', 95, 2, '9.jpg'),
 (4, 'Banana', 1, '1kg per Pack', 'A', 55, 4, '10.jpg'),
 (5, 'Carrots', 2, '1kg per Pack', 'A', 60, 3, 'carrot.png'),
-(6, 'Fruit Bundle', 1, 'Assorted', 'A', 50, 5, '1.jpg'),
+(6, 'Fruit Bundle', 1, 'Assorted', 'A', 250, 5, '1.jpg'),
 (7, 'Lettuce', 2, '1kg per Pack', 'NA', 50, 6, '2.jpg'),
-(8, 'Rice', 4, '50kg per Sack', 'A', 50, 7, '3.jpg'),
+(8, 'Rice', 4, '50kg per Sack', 'A', 1800, 7, '3.jpg'),
 (9, 'Sweet Potato', 4, '1kg per Pack', 'A', 50, 2, '4.jpg'),
 (10, 'Pineapple', 1, '1kg per Pack', 'A', 50, 10, '5.jpg'),
 (11, 'Spinach', 2, '1kg per Pack', 'NA', 50, 6, '6.jpg'),
@@ -116,7 +116,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (33, 'kalabasa', 2, '1 kg per pack', 'A', 50, 22, '20.png'),
 (34, 'talong', 2, '1 kg per pack', 'A', 50, 22, '19.png'),
 (35, 'repolyo', 2, '1 kg per pack', 'A', 50, 25, '18.png'),
-(36, 'lanzones', 1, '1 kg per pack', 'A', 50, 26, '17.png'),
+(36, 'lanzones', 1, '1 kg per pack', 'A', 180, 26, '17.png'),
 (37, 'kangkong', 2, '1 bundle per pack', 'A', 50, 25, '15.png'),
 (38, 'malunggay', 2, '1 bundle per pack', 'A', 50, 27, '14.png'),
 (39, 'mango', 1, '1 kg per pack', 'A', 50, 26, '13.png'),
@@ -124,7 +124,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (41, 'mustasa', 2, '1 bundle per pack', 'NA', 50, 28, '11.png'),
 (42, 'pechay', 2, '1 bundle per pack', 'A', 50, 28, '10.png'),
 (43, 'banana blossom', 2, '1 kg per pack', 'NA', 50, 4, '9.png'),
-(44, 'rambutan', 1, '1 kg per pack', 'NA', 50, 26, '8.png'),
+(44, 'rambutan', 1, '1 kg per pack', 'NA', 80, 26, '8.png'),
 (45, 'santol', 1, '1 kg per pack', 'A', 50, 29, '7.png'),
 (46, 'sayote', 2, '1 kg per pack', 'A', 50, 30, '6.png'),
 (47, 'atis', 1, '1 kg per pack', 'NA', 50, 29, '2.png');
