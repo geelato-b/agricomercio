@@ -164,29 +164,10 @@ include_once "includes/function.inc.php";
             echo "</table>";
         ?>
     </div>
- 
-
 
     <?php }
                         
     ?>
- main
-
-    <?php }
-                        
-    ?>
-
-    <p class="cart-sum">
-    <?php $summary = getCartSummary($conn, $_SESSION['userid']); 
-            foreach($summary as $key => $nval){
-                    echo "Total Qty: ". $nval['total_qty'] . " pcs "; 
-                    echo "<br>";
-                    echo "Total Price: Php ". number_format($nval['total_price'],2);    
-                    } 
-                    echo "<br>";                    
-        ?> 
-         <a class="cart_check_out" href="">Check Out</a>
-    </p>
 
 
     <p class="cart-sum">
@@ -200,9 +181,6 @@ include_once "includes/function.inc.php";
         ?> 
          <a class="cart_check_out" href="">Check Out</a>
     </p>    
-
-    
- main
 
 </section>
 
