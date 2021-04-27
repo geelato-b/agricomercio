@@ -1,3 +1,9 @@
+<?php
+session_start();
+include_once "includes/db_conn.php";
+include_once "includes/function.inc.php";   
+ ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,14 +30,45 @@
 
 <div class="left">
 
-        <a href="profile.php"><div class="fas fa-user"></div></a>
-        <a href="cart.php"><div class="fas fa-shopping-cart"></div></a>
+        <div class="dropdown">
+        <a href="cart.php"><div class="fas fa-shopping-cart"></div>
+            <?php 
+                        $sql_cart_count = "SELECT COUNT(*) cartcount FROM `cart` WHERE status = 'P' AND user_id = ?;";
+                        $stmt=mysqli_stmt_init($conn);
+    
+                    if (!mysqli_stmt_prepare($stmt, $sql_cart_count)){
+                        header("location: index.php?error=stmtfailed");
+                        exit();
+                    }
+                        mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']);
+                        mysqli_stmt_execute($stmt);
+
+                        $resultData = mysqli_stmt_get_result($stmt);
+
+                        if($row = mysqli_fetch_assoc($resultData)){ ?>
+                            <span class="badge bg-danger"><?php echo $row['cartcount']; ?></span>
+                        <?php }
+                       
+                        ?>
+            
+            </a>
+            
+                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="fas fa-user"></div>
+                </button>
+                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                    <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
+                    <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
+                    <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                </ul>
+        </div>
 
 </div>
 
 <nav class="navbar">
 <ul>
-<li><a href="sign_in.php">Sign in</a></li>
 <li><a href="index.php">Home</a></li>
 <li><a href="product.php">Product</a></li>
 <li><a href="services.php">Services</a></li>
