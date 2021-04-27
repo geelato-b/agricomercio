@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2021 at 07:18 AM
+-- Generation Time: Apr 27, 2021 at 10:47 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -72,7 +72,7 @@ CREATE TABLE `items` (
   `item_desc` varchar(255) NOT NULL,
   `item_status` varchar(20) NOT NULL COMMENT 'A for Available, NA for unavailable',
   `item_price` int(11) NOT NULL,
-  `seller_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `item_img` varchar(128) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -80,54 +80,54 @@ CREATE TABLE `items` (
 -- Dumping data for table `items`
 --
 
-INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status`, `item_price`, `seller_id`, `item_img`) VALUES
+INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status`, `item_price`, `user_id`, `item_img`) VALUES
 (1, 'Plantmate', 5, 'Fertilizer for plants', 'A', 585, 1, '35.png'),
 (2, 'Potatoes', 4, '1kg per Pack', 'A', 180, 2, '23.png'),
 (3, 'Tomatoes', 1, '1kg per Pack', 'A', 95, 2, '9.jpg'),
 (4, 'Banana', 1, '1kg per Pack', 'A', 55, 4, '10.jpg'),
 (5, 'Carrots', 2, '1kg per Pack', 'A', 60, 3, 'carrot.png'),
 (6, 'Fruit Bundle', 1, 'Assorted', 'A', 250, 5, '1.jpg'),
-(7, 'Lettuce', 2, '1kg per Pack', 'NA', 50, 6, '2.jpg'),
-(8, 'Rice', 4, '50kg per Sack', 'A', 1800, 7, '3.jpg'),
+(7, 'Lettuce', 2, '1kg per Pack', 'NA', 50, 37, '2.jpg'),
+(8, 'Rice', 4, '50kg per Sack', 'A', 1800, 38, '3.jpg'),
 (9, 'Sweet Potato', 4, '1kg per Pack', 'A', 50, 2, '4.jpg'),
-(10, 'Pineapple', 1, '1kg per Pack', 'A', 50, 10, '5.jpg'),
-(11, 'Spinach', 2, '1kg per Pack', 'NA', 50, 6, '6.jpg'),
-(12, 'Coffee Beans', 4, '1kg per Pack', 'NA', 30, 8, '7.jpg'),
-(13, 'Coconut', 1, '1 whole per Pack', 'A', 35, 9, '8.jpg'),
-(14, 'Alugbati', 2, '1 bundle per Pack', 'A', 10, 10, '33.png'),
-(15, 'Ampalaya', 2, '1kg per Pack', 'A', 45, 11, '34.png'),
-(16, 'Aratiles', 1, '1kg per Pack', 'A', 15, 12, '11.jpg'),
-(17, 'Balimbing', 1, '1kg per Pack', 'A', 25, 13, '31.png'),
-(18, 'Calamansi', 1, '1kg per Pack', 'A', 40, 14, '12.jpg'),
-(19, 'Chico', 1, '1kg per Pack', 'A', 25, 15, '29.png'),
-(20, 'Durian', 1, '1kg per Pack', 'NA', 55, 16, '15.jpg'),
-(21, 'Gabi', 4, '1kg per Pack', 'A', 20, 2, '28.png'),
-(22, 'Guyabano', 1, '1kg per Pack', 'A', 35, 16, '14.jpg'),
-(23, 'Singkamas', 4, '1kg per Pack', 'A', 45, 17, '4.png'),
-(24, 'Garlic', 4, '1kg per Pack', 'A', 30, 18, '24.png'),
-(25, 'Onions', 4, '1kg per Pack', 'A', 35, 18, '25.png'),
-(26, 'Cauli Flower', 2, '1kg per Pack', 'A', 25, 19, '22.png'),
-(27, 'Sili', 2, '1kg per Pack', 'A', 60, 20, '21.png'),
-(28, 'white angel', 3, '1 plant per pot', 'A', 200, 21, '36.png'),
-(29, 'daisy', 3, '1 plant per pot', 'A', 200, 21, '37.png'),
-(30, 'upo', 2, '1 kg per pack', 'A', 50, 22, '1.png'),
-(31, 'sitaw', 2, '1 bundle per pack', 'A', 45, 23, '3.png'),
-(32, 'sigarilyas', 2, '1 kg per pack', 'NA', 50, 24, '5.png'),
-(33, 'kalabasa', 2, '1 kg per pack', 'A', 50, 22, '20.png'),
-(34, 'talong', 2, '1 kg per pack', 'A', 50, 22, '19.png'),
-(35, 'repolyo', 2, '1 kg per pack', 'A', 50, 25, '18.png'),
-(36, 'lanzones', 1, '1 kg per pack', 'A', 180, 26, '17.png'),
-(37, 'kangkong', 2, '1 bundle per pack', 'A', 50, 25, '15.png'),
-(38, 'malunggay', 2, '1 bundle per pack', 'A', 50, 27, '14.png'),
-(39, 'mango', 1, '1 kg per pack', 'A', 50, 26, '13.png'),
-(40, 'munggo', 2, '1 kg per pack', 'A', 50, 28, '12.png'),
-(41, 'mustasa', 2, '1 bundle per pack', 'NA', 50, 28, '11.png'),
-(42, 'pechay', 2, '1 bundle per pack', 'A', 50, 28, '10.png'),
-(43, 'banana blossom', 2, '1 kg per pack', 'NA', 50, 4, '9.png'),
-(44, 'rambutan', 1, '1 kg per pack', 'NA', 80, 26, '8.png'),
-(45, 'santol', 1, '1 kg per pack', 'A', 50, 29, '7.png'),
-(46, 'sayote', 2, '1 kg per pack', 'A', 50, 30, '6.png'),
-(47, 'atis', 1, '1 kg per pack', 'NA', 50, 29, '2.png');
+(10, 'Pineapple', 1, '1kg per Pack', 'A', 50, 39, '5.jpg'),
+(11, 'Spinach', 2, '1kg per Pack', 'NA', 50, 40, '6.jpg'),
+(12, 'Coffee Beans', 4, '1kg per Pack', 'NA', 30, 41, '7.jpg'),
+(13, 'Coconut', 1, '1 whole per Pack', 'A', 35, 42, '8.jpg'),
+(14, 'Alugbati', 2, '1 bundle per Pack', 'A', 10, 40, '33.png'),
+(15, 'Ampalaya', 2, '1kg per Pack', 'A', 45, 43, '34.png'),
+(16, 'Aratiles', 1, '1kg per Pack', 'A', 15, 44, '11.jpg'),
+(17, 'Balimbing', 1, '1kg per Pack', 'A', 25, 45, '31.png'),
+(18, 'Calamansi', 1, '1kg per Pack', 'A', 40, 46, '12.jpg'),
+(19, 'Chico', 1, '1kg per Pack', 'A', 25, 47, '29.png'),
+(20, 'Durian', 1, '1kg per Pack', 'NA', 55, 54, '15.jpg'),
+(21, 'Gabi', 4, '1kg per Pack', 'A', 20, 48, '28.png'),
+(22, 'Guyabano', 1, '1kg per Pack', 'A', 35, 49, '14.jpg'),
+(23, 'Singkamas', 4, '1kg per Pack', 'A', 45, 50, '4.png'),
+(24, 'Garlic', 4, '1kg per Pack', 'A', 30, 51, '24.png'),
+(25, 'Onions', 4, '1kg per Pack', 'A', 35, 51, '25.png'),
+(26, 'Cauli Flower', 2, '1kg per Pack', 'A', 25, 56, '22.png'),
+(27, 'Sili', 2, '1kg per Pack', 'A', 60, 55, '21.png'),
+(28, 'white angel', 3, '1 plant per pot', 'A', 200, 3, '36.png'),
+(29, 'daisy', 3, '1 plant per pot', 'A', 200, 3, '37.png'),
+(30, 'upo', 2, '1 kg per pack', 'A', 50, 5, '1.png'),
+(31, 'sitaw', 2, '1 bundle per pack', 'A', 45, 37, '3.png'),
+(32, 'sigarilyas', 2, '1 kg per pack', 'NA', 50, 39, '5.png'),
+(33, 'kalabasa', 2, '1 kg per pack', 'A', 50, 40, '20.png'),
+(34, 'talong', 2, '1 kg per pack', 'A', 50, 41, '19.png'),
+(35, 'repolyo', 2, '1 kg per pack', 'A', 50, 42, '18.png'),
+(36, 'lanzones', 1, '1 kg per pack', 'A', 180, 43, '17.png'),
+(37, 'kangkong', 2, '1 bundle per pack', 'A', 50, 44, '15.png'),
+(38, 'malunggay', 2, '1 bundle per pack', 'A', 50, 45, '14.png'),
+(39, 'mango', 1, '1 kg per pack', 'A', 50, 46, '13.png'),
+(40, 'munggo', 2, '1 kg per pack', 'A', 50, 47, '12.png'),
+(41, 'mustasa', 2, '1 bundle per pack', 'NA', 50, 48, '11.png'),
+(42, 'pechay', 2, '1 bundle per pack', 'A', 50, 49, '10.png'),
+(43, 'banana blossom', 2, '1 kg per pack', 'NA', 50, 1, '9.png'),
+(44, 'rambutan', 1, '1 kg per pack', 'NA', 80, 50, '8.png'),
+(45, 'santol', 1, '1 kg per pack', 'A', 50, 51, '7.png'),
+(46, 'sayote', 2, '1 kg per pack', 'A', 50, 52, '6.png'),
+(47, 'atis', 1, '1 kg per pack', 'NA', 50, 53, '2.png');
 
 -- --------------------------------------------------------
 
