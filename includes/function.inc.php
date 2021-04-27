@@ -48,10 +48,38 @@ $stmt=mysqli_stmt_init($conn);
 }
 
 
-
 function GetUserDetails($conn, $userid ){
     $err;
     $sql="SELECT * FROM `user_info` 
+    WHERE  user_id = ?;
+    ";
+
+$stmt=mysqli_stmt_init($conn);
+
+        if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: index.php?error=stmtfailed");
+        exit();
+    }
+
+        mysqli_stmt_bind_param($stmt, "s" , $userid);
+        mysqli_stmt_execute($stmt);
+
+        $resultData = mysqli_stmt_get_result($stmt);
+        
+        if($row = mysqli_fetch_assoc($resultData)){
+            return $row;
+        }
+        else{
+            $err=  false;
+            return $err;   
+        }
+        mysql_stmt_close($stmt);
+}
+
+
+function GetUserName($conn, $userid ){
+    $err;
+    $sql= "SELECT `user_id`, `user_name`, `status` FROM `users` 
     WHERE  user_id = ?;
     ";
 

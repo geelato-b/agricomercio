@@ -11,6 +11,8 @@ $hnsb =$_POST['hnsb'];
 $city =$_POST['city'];
 $prv =$_POST['prv'];
 $pc =$_POST['pc'];
+$status =$_POST['status'];
+
 
 /* if you can observe, the ‘fname’ and ‘lname’ inside the POST is the “name” attribute
 in the input tags in the form*/
@@ -28,8 +30,8 @@ die("Connection failed: " . mysqli_connect_error());
  
 
 // Here goes your SQL for INSERT the values will be the variables declared.
-$sql = "INSERT INTO `users` (`user_name`, `password`, `user_type`)
-VALUES ( '${usrname}', '${psword}', '${usertype}');" ;
+$sql = "INSERT INTO `users` (`user_name`, `password`, `status`, `user_type`)
+VALUES ( '${usrname}', '${psword}', '${status}', '${usertype}');" ;
 
 $sql .="INSERT INTO  `user_info` 
 (`user_fullname`,`gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) 
