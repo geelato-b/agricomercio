@@ -5,6 +5,12 @@ $usrname= $_POST['usrname'];
 $psword= $_POST['psword'];
 $usertype =$_POST['usertype'];
 $fname =$_POST['fname'];
+$gender =$_POST['gender'];
+$contact_no = $_POST['contact_no'];
+$hnsb =$_POST['hnsb'];
+$city =$_POST['city'];
+$prv =$_POST['prv'];
+$pc =$_POST['pc'];
 
 /* if you can observe, the ‘fname’ and ‘lname’ inside the POST is the “name” attribute
 in the input tags in the form*/
@@ -25,24 +31,18 @@ die("Connection failed: " . mysqli_connect_error());
 $sql = "INSERT INTO `users` (`user_name`, `password`, `user_type`)
 VALUES ( '${usrname}', '${psword}', '${usertype}');" ;
 
-if ($usertype == "Customer") {
-    $sql .= "INSERT INTO `customer` (`cust_name`)
-VALUES ('${fname}');";
-}
-else {
-    $sql .= "INSERT INTO `seller` (`seller_name`)
-VALUES ('${fname}');";
-}
-
+$sql .="INSERT INTO  `user_info` 
+(`user_fullname`,`gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) 
+ VALUES('${fname}', '${gender}', '${contact_no}', '${hnsb}', '${city}', '${prv}', '${pc}', '${usertype}');";
 
 // Check if the query successfully ran.
 if (mysqli_multi_query($conn, $sql)) {
-// if no error. Then new record created.
-echo "New record created successfully";
-} else {
-// else then error will show up.
-echo "Error: " . $sql . mysqli_error($conn);
-}
-
-mysqli_close($conn);
+    // if no error. Then new record created.
+    header("location: ../sign_in.php");
+    } else {
+    // else then error will show up.
+    echo "Error: " . $sql . mysqli_error($conn);
+    }
+    
+    mysqli_close($conn);
 ?> 
