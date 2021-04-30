@@ -153,40 +153,37 @@ body{
     width: 100vw;
    background:radial-gradient(#fff,#80ffbf);
 }
-.col-2{
-    text-align-last: left;
-	flex-basis: 50%;
-	min-width: 20rem;
-	margin-top: 25rem; 	
-}
 
-
-.col-2 img{
+#home .img_home{
 	max-width: 100%;
-	padding: 50px;
+    margin-top: 10rem;
+    padding:50px;
 
 }
-.col-2 h1{
+
+.content-home{
+   padding:15rem;
+ 
+}
+.content-home h1{
     text-align: left;
-	font-size: 4rem;
+	font-size: 5rem;
 	line-height: 5rem;
 	margin: 2rem 0;
 	margin-top: 1rem;
-    margin-left: 3rem;
+   
 }
 
-.col-2 h2{
+.content-home h2{
     text-align: left;
 	font-size: 2.5rem;
-    margin-left: 4rem;
     align-items: center;
     font-weight: bolder;
   
 }
 
-.col-2 p{
+.content-home p{
 font-size: 1.5rem;
-margin-left: 3rem;
 }
 
 .btn-home{
@@ -220,14 +217,17 @@ margin-left: 3rem;
 }
 
 #promo{
-    margin-top: -15rem;
+    height: 50vh;
+    width: 100vw;
     align-items: center;
+    margin: 8rem;
+}
+#promo img{
+    max-width: 80%;
+    justify-content: space-around;
 }
 
-
-
 .caption {
-
     text-align-last: center;
     padding-bottom: 20px;
     padding-top: 1%;
@@ -239,8 +239,7 @@ margin-left: 3rem;
     margin-top: 8rem;
     text-align-last: center;
     color: #006600;
-    font-size: 3rem;
-    margin-left: 4rem;
+    font-size: 4rem;
     font-weight: bolder;
 } 
 .caption a{
@@ -392,26 +391,30 @@ letter-spacing: .3rem;
 /*-----sign-in---*/
 
 #sign-in{
-    margin-top: -20rem;
-    min-height: 100vh;
-    width: 100vw;
+   min-height: 100vh;
+   width: 100vw;
    background:radial-gradient(#fff,#80ffbf);   
    text-align: center;
 
 
 }
+#sign-in .col{
+    max-width: 100%;
+
+}
 
 .form-box{
-   
+    margin: 10rem;
 	width: 300px;
 	height: 400px;
 	position: relative;
-	margin:auto;
 	padding:20px 0;
 	box-shadow: 0 0 20px 0px rgba(0,0,0,0.1);
 	background:#fff;
-
-
+}
+#sign-in .sigin_img{
+    margin-top: .5rem;
+    max-width: 100%;
 }
 
 .button-box{
@@ -553,49 +556,47 @@ a{
    width: 100vw;
    background:radial-gradient(#fff,#80ffbf);
 }
-.slide img{
-    margin-top: -10rem;
-    height: 90vh;
-    width: 90vh;
+#services  .img_services{
+    max-width: 80%;
+    margin: 5rem;
+    max-height: 100%;
 }
 
 
 #services-avail{
-
-    margin-top: 10rem;
- background: linear-gradient(to bottom,#fff, #33ccff, #ff99cc, #fff);
+min-height: 100vh;
+width: 100vw;
+margin-top: 10rem;
+background: linear-gradient(to bottom,#fff, #33ccff, #ff99cc, #fff);
  
- 
-
 }
+
+.img_services 
 #services-avail .row{
     align-items: center;
 }
 
 
-#services-avail .row h2{
+#services-avail  h2{
     margin-top: 5rem;
     text-align: center;
 	font-size: 2.5rem;
     align-items: center;
     font-weight: bolder;
-
     
 }
 
-#services-avail .col-2 p{
+#services-avail .col p{
 font-size: 1.5rem;
 margin-left: 3rem;
 }
 
-#services-avail img{
-    margin-top: -20rem;
+#services-avail .img_serv{
+ margin-top: 5rem;
  width: 80%;
  height: 80%;
 
 }
-
-
 
 #caption{
     background-image: linear-gradient(to bottom right,#fff, #ff6666,#fff);
@@ -612,6 +613,16 @@ color: #fff;
 
 }
 
+#promo-services{
+ min-height: 100vh;
+   width: 100vw; 
+}
+
+#promo-services img{
+    margin: 6rem;
+    max-width: 80%;
+    justify-content: space-around;
+}
 
 #promo-two{
     margin-top: -25rem;
