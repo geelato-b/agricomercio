@@ -90,6 +90,7 @@ include_once "includes/function.inc.php";
                         , i.item_price
                         , c.item_qty
                         , c.user_id
+                        , (i.item_price * c.item_qty) subtotal_price
                         FROM cart c
                         JOIN items i
                         ON c.item_id = i.item_id
@@ -107,10 +108,7 @@ include_once "includes/function.inc.php";
                     $resultData = mysqli_stmt_get_result($stmt);
                     
     ?>
-
-
         <div class = "cart_label"> 
-            
               <?php
 
                echo "<table class='table'>";
@@ -136,13 +134,13 @@ include_once "includes/function.inc.php";
                 </div>
                 <div class="card-title">
                     <p ><?php echo $row['item_name']?>
-                    </div>
+                    Php <?php  echo number_format($row['item_price'],2); ?> 
+                    
                 </div>       
 
             </div>
             <?php echo "</td>"  ?>
        <td>
-       
                 <form action="includes/updatecart.php" method="post">
                             <input hidden type="text" name="cart_id" value="<?php echo $row['cart_id']; ?>">
                             <input type="number" class="cart-qty" name="item_qty" value="<?php echo $row['item_qty']; ?>">
@@ -152,24 +150,18 @@ include_once "includes/function.inc.php";
                             </a>
                 </form>
                  
-       </td>
-        
+        </td> 
         <td>
-        Php <?php  echo number_format($row['item_price'],2); ?> 
+           Php <?php echo number_format($row['subtotal_price'],2); ?>
         </td>
         </tr>
-
         <?php
             echo "</tr>";
             echo "</table>";
         ?>
     </div>
 
-    <?php }
-                        
-    ?>
-
-
+    <?php } ?>
     <p class="cart-sum">
     <?php $summary = getCartSummary($conn, $_SESSION['userid']); 
             foreach($summary as $key => $nval){
@@ -181,7 +173,6 @@ include_once "includes/function.inc.php";
         ?> 
          <a class="cart_check_out" href="">Check Out</a>
     </p>    
-
 </section>
 
     <script src="js/bootstrap.bundle.js"></script>

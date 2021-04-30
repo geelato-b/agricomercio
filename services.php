@@ -82,117 +82,60 @@ include_once "includes/function.inc.php";
 
 <section id="services">
        
-<div class="slide">
-            <div class="row">
-                <div class="col-2">
-                    <div class="content text-center text-md-left pl-md-3 ml-md-3">
-                        
-                        <h1>AgriComercio - Change The Way</h1>
-                        <h1>You Trade.</h1>
-                        <h2>AgriComercio Services</h2>
-                        <h2>We have the solutions for your Agri-Needs</h2>
-            
+    <div class="slide">
+                <div class="row">
+                    <div class="col">
+                        <div class="content-home ">
+                            
+                            <h1>AgriComercio - Change The Way You Trade.</h1>
+                            <h2>AgriComercio Services</h2>
+                            <h2>We have the solutions for your Agri-Needs</h2>
                 
-                             <a href="sign_in.php"><button class="btn">Sign In &#8594;</button></a>
+                    
+                                <a href="sign_in.php"><button class="btn-home">Sign In &#8594;</button></a>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <img class="img_services" src="img/sv3.png" alt="">
                     </div>
                 </div>
-                <div class="col-2">
-                    <img class="img" src="img/sv3.png" alt="">
-                </div>
-            </div>
-        </div>
+    </div>
     
 </section> 
 
 
 <section id="services-avail">
-
-<div class="row">
-<h2>We provide Information and Consultation</h2>
-<div class="col-2">
-    <img src="img/info.png" alt="">
-</div>
-<div class="col-2">
-<img src="img/consult.png" alt="">
-</div>
-</div>
-</div>
+    <h2>We provide Information and Consultation</h2>
+    <div class="row">
+        <div class="col">
+            <img  class= "img_serv" src="img/info.png" alt="">
+        </div>
+        <div class="col">
+        <img class="img_serv" src="img/consult.png" alt="">
+        </div>
+        </div>
+    </div>
 
 </section>
 
 
+<section id="caption">
+    <h2>We provide a better way to supply and distribute agri-products</h2>
+        <a href="product.php" class="btn-promo">Shop Now 🛍</a> 
+</section>
 
-
-
-<section id="promo">
-
+<section id="promo-services">
         <div class="row">
-        <div class="col-2">
+        <div class="col">
             <img src="img/sv4.png" alt="">
             <img src="img/sv7.png" alt="">
         </div>
-        <div class="col-2">
+        <div class="col">
             <img src="img/sv5.png "alt="">
         </div>
     </div>
 </div>
-
     </section>
-
-
-    <section id="caption">
-    <h2>We provide a better way to supply and distribute agri-products</h2>
-        <a href="product.php" class="btn-promo">Shop Now 🛍</a> 
-    </section>
-
-
-    <section id="product">
-<div class="product-container">
-<div class="product-slider">
-    <div class="product-card item">
-        <div class="image">
-            <img src="img/free.jpg" alt="">
-        </div>
-
-        <div class="content">
-            <h3>Free Shipping Promos</h3>
-            
-        </div>
-
-    </div>
-
-
-    <div class="product-card item">
-        <div class="image">
-            <img src="img/f1.jpg" alt="">
-        </div>
-
-        <div class="content">
-            <h3>Discounts</h3>
-        </div>
-
-
-    </div>
-
-
-    <div class="product-card item">
-        <div class="image">
-            <img src="img/f2.jpg" alt="">
-        </div>
-
-        <div class="content">
-            <h3>Online Payment</h3>
-            
-        </div>
-
-    </div>
-
-    
-</div>
-</div>
-</section>
-
-
 
 <section id="footer">
    <div class="footer-content">
