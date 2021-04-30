@@ -10,7 +10,7 @@ if(isset($_POST['user_info_id'])){
         $postal_code= htmlentities($_POST['postal_code']);
 
          $sql_upd = "UPDATE `user_info` 
-                     SET   `user_fullname`= ?
+                     SET    `user_fullname`= ?
                             ,`contact_details`= ?
                             ,`house_no_street_brgy`= ?
                             ,`city`= ?
