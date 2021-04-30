@@ -892,65 +892,20 @@ font-weight: bolder;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(#99ffcc,#ccffe6);
-}
-
-.profile-container{
-    max-width: 700px;
-    width: 100%;
-    background: #fff;
-    padding: 25px 30px;
-    border-radius: 5px;
-    
-}
-.form-group label{
- font-size: 1.5rem;
-}
-
-.form-group input{
-
-    height: 35px;
-    width: 100%;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid lightpink;
-    padding: 15px;
-    font-size: 14px;
-    border-bottom-width: 2px;
-    transition: all 0.3s ease;
-}
-
-.form-group a{
-    margin-top: 1rem;
-    height: 40px;
-    width: 100%;
-    outline: none;
-    border-radius: 5px;
-    border: 1px solid green;
     font-size: 2rem;
-    background: linear-gradient(#99ffcc,#ccffe6);
-    transition: all 0.3s ease;
-    justify-content: right;
-  
+}
+
+#profile form .form-control{
+    height: 4rem;
+    font-size: 1.5rem;
+}
+#profile .Update-btn{
+    width: 10rem;
+    height: 4rem;
+    font-size: 2rem;
 
 }
 
-.form-group a:hover{
-    background: #003300;
-    text-decoration: none;
-    color: #fff;
-    font-weight: bolder;
-}
-
-.form-group .sbt{
-    text-align-last: center;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-group button {
-    justify-content: center;
-}
 
 .dropdown #dropdownMenu2  {
  background: none;
