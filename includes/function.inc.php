@@ -109,7 +109,7 @@ $stmt=mysqli_stmt_init($conn);
 
 function AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_price){
     $err;
-    $sql ="INSERT INTO `items` (`item_name`, `item_desc`, `item_price`,`seller_id`)
+    $sql ="INSERT INTO `items` (`item_name`, `item_desc`, `item_price`,`user_id`)
     VALUES (?,?,?,?) ; ";
 
     $stmt = mysqli_stmt_init($conn);
@@ -127,40 +127,7 @@ function AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_price){
 
 }
 
-function getItemListPerCat($conn,$cat_id){
-    $err;
-    $sql = "SELECT i.item_id
-                 , i.item_name
-                 , i.item_details
-                 , i.item_code
-                 , i.cat_id
-                 , i.item_price
-                 , i.item_img
-                 , s.store_name
-             FROM items i
-             JOIN store s
-               on (i.store_id = s.store_id)
-            WHERE i.cat_id = ?
-              AND i.status = 'A' ";
-    
-    $stmt = mysqli_stmt_init($conn);
 
-    if (!mysqli_stmt_prepare($stmt, $sql)){
-        header("location: products.php?error=stmtfailed");
-        exit();
-    }
-    mysqli_stmt_bind_param($stmt, "s" ,$cat_id); 
-    mysqli_stmt_execute($stmt);
-
-    $resultData = mysqli_stmt_get_result($stmt);
-    $arr = array();
-    while($row = mysqli_fetch_assoc($resultData)){
-            array_push($arr,$row);
-    }
-    return $arr;
-    mysql_stmt_close($stmt);
-
-}
 
 function getCartSummary($conn, $user_id){
     $sql_cart_list = "SELECT c.user_id
@@ -188,3 +155,5 @@ function getCartSummary($conn, $user_id){
         return $arr;               //this is the return value
         mysqli_stmt_close($stmt);  //close the mysqli_statement
 }
+
+
