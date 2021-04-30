@@ -8,7 +8,7 @@ if(isset($_SESSION['usertype'])){
     $USER_ID = $_SESSION['userid'];
     
         $user_info = GetUserDetails($conn, $USER_ID );
-        
+        $user = GetUserName($conn, $USER_ID );
         
        ?> 
 <!DOCTYPE html>
@@ -79,47 +79,63 @@ if(isset($_SESSION['usertype'])){
     </div>
 </header>
 
-
 <section id = "profile">
-
-<div class = "profile-container">
-    <div class = "row">
-        <div class = "col-md-12">
-            <div class = "card">
-                <div class = "card-body">
-                <h1>User Profile</h1>
-                <hr>
-                <form action="includes/updateprofile.php"  method  = "post">
-                    <div class="form-group">
-                        <label for="">Name</label>
-                        <input type="text" class="form-control" value = "<?php   echo $user_info['user_fullname']; ?>">
-                        <label for="">Contact</label>
-                        <input type="text" class="form-control" value = "<?php  echo $user_info['contact_details']; ?>">
-                        <label for="">Address</label>
-                        <input type="text" class="form-control" placeholder = "House Number, Street, Barangay" value = "<?php echo $user_info['house_no_street_brgy']; ?>" >
-                        <br>
-                        <input type="text" class="form-control" placeholder = "City" value = "<?php echo $user_info['city']; ?>" >
-                        <br>
-                        <input type="text" class="form-control" placeholder = "Province" value = "<?php echo $user_info['province']; ?>">
-                        <br>
-                        <input type="text" class="form-control" placeholder = "Postal Code" value = "<?php echo $user_info['postal_code']; ?>">
-                        <br>
-                        <button class="update_prof">Update</button>
-
-                    </div>
-                </form>
-                
-                </div>
-
-            </div>
-            
-
-           
-        </div>
-
-    </div>
+<div class="container">
+<div class="card-body">
+  <div>
+    <br>
+    <h1>Profile</h1>
+    <br>
+    <img width="150px" src="img/user.png" class="rounded-circle" alt="img">        
+    <br>
+    <br/>
+  </div>
+  <form action="includes/updateprofile.php"  method  = "post" class="row g-3">
+  <div class="col-md-6">
+    <label for="user_name" class="form-label">User Name</label>
+    <input type="text" class="form-control" id="user_name" value = "<?php echo $user['user_name']; ?>" >
+  </div>
+  <div class="col-md-2">
+    <label for="user_id" class="form-label">User ID</label>
+    <input type="text" class="form-control" id="user_id" value = "<?php echo $user['user_id']; ?>">
+  </div>
+  <div class="col-md-6">
+    <label for="user_fullname" class="form-label">Full Name</label>
+    <input type="text" class="form-control" id="user_fullname" value = "<?php echo $user_info['user_fullname']; ?>">
+  </div>
+  <div class="col-md-2">
+    <label for="status" class="form-label">Status</label>
+    <input type="text" class="form-control" id="status" value = "<?php echo $user['status']; ?>">
+  </div>
+  <label for="house_no_street_brgy" class="form-label">Address</label>
+  <div class="col-8">
+  <label for="house_no_street_brgy" class="form-label">House Number, Street, Barangay</label>
+    <input type="text" class="form-control" id="house_no_street_brgy" placeholder="House No. Street Barangay." value = "<?php  echo $user_info['house_no_street_brgy']; ?>">
+  </div>
+  <div class="col-6">
+    <label for="city" class="form-label">City</label>
+    <input type="text" class="form-control" id="city" placeholder="City" value = "<?php echo $user_info['city']; ?>">
+  </div>
+  <div class="col-md-4">
+    <label for="province" class="form-label">Province</label>
+    <input type="text" class="form-control" id="province" placeholder="Province"  value = "<?php echo $user_info['province']; ?>">
+  </div>
+  <div class="col-md-2">
+    <label for="postal_code" class="form-label">Postal Code</label>
+    <input type="text" class="form-control" id="postal_code" value = "<?php echo $user_info['postal_code']; ?>">
+  </div>
+  </div>
+  <div class="col-md-10">
+    <button type="submit" class="Update-btn btn btn-success">Update</button>
+  </div><br><br>
+</form>
 
 </div>
+</div>
+
+
+</section>
+
 
     <script src="js/bootstrap.min.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
