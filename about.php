@@ -83,19 +83,18 @@ include_once "includes/function.inc.php";
        
        <div class="slide">
            <div class="row">
-               <div class="col-2">
-                   <div class="content text-center text-md-left pl-md-3 ml-md-3">
+               <div class="col">
+                   <div class="content-home ">
                        
-                       <h1>AgriComercio - Change The Way</h1>
-                       <h1>You Trade.</h1>
+                       <h1>AgriComercio - Change The Way You Trade.</h1>
                        <h2>Right out of the Farm!</h2>
                        <h2>Reap Fresh, Eat Fresh</h2>
                
-                            <a href="sign_in.php"><button class="btn">Sign In &#8594;</button></a>
+                            <a href="sign_in.php"><button class="btn-home">Sign In &#8594;</button></a>
                    </div>
                </div>
-               <div class="col-2">
-                   <img class="img" src="img/Ag1.png" alt="">
+               <div class="col">
+                   <img class="img_home" src="img/Ag1.png" alt="">
                </div>
            </div>
        </div>
