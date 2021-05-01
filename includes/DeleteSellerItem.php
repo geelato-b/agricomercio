@@ -1,7 +1,7 @@
 <?php
-if(isset($_GET['itemid'])){
+if(isset($_GET['item_id'])){
         include "db_conn.php";
-        $item_id = htmlentities($_GET['itemid']);
+        $item_id = htmlentities($_GET['item_id']);
          $sql_del = "DELETE FROM `items` WHERE item_id = ? ; ";
         $stmt_del = mysqli_stmt_init($conn);
             if(!mysqli_stmt_prepare($stmt_del, $sql_del)){
