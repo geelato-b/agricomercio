@@ -2,6 +2,11 @@
 session_start();
 include_once "../includes/db_conn.php";
 include_once "../includes/function.inc.php";   
+$searchkey="";
+if(isset($_GET['searchkey'])){
+  $searchkey = htmlentities($_GET['searchkey']);
+  echo "<h2>".$searchkey."</h2>";
+}
 
 ?>
 
@@ -42,9 +47,11 @@ include_once "../includes/function.inc.php";
         <a class="nav-link" href="../logout.php">Log Out</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <form action="product.php" method="GET">
+                       <div class="input-group">
+                          <input id="searhbar" name="searchkey" class="form-control" type="text" placeholder="Search">
+                          <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+                      </div>
     </form>
   </div>
 </nav>
@@ -73,6 +80,7 @@ include_once "../includes/function.inc.php";
                     <!--Navigation button to show the form to add item button--->
                  </li>
                 </ul>
+
             </div>
              </div>
          </nav>
@@ -158,7 +166,8 @@ include_once "../includes/function.inc.php";
   //declare the SQL
   //Scenario: I wanted to show item_id, item_name, item_short_code
   //          category description, price
-  $sql = "SELECT i.item_id
+  if ($searchkey == "") {
+    $sql = "SELECT i.item_id
             , i.item_name
             ,i.item_desc
             , c.cat_desc
@@ -167,7 +176,7 @@ include_once "../includes/function.inc.php";
          FROM `items` i
          JOIN `category` c
            ON i.cat_id = c.cat_id
-           WHERE i.user_id = ? ;";
+           WHERE i.user_id = ?;";
   //initialize MYSQL statement connection to the database.
   //$conn is a variable declared inside db_conn.
   $stmt=mysqli_stmt_init($conn);
@@ -176,8 +185,30 @@ include_once "../includes/function.inc.php";
      echo "Statement Failed.";
      exit();
   }
+  mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']);
+  }
+  else{
+        $sql = "SELECT i.item_id
+            , i.item_name
+            ,i.item_desc
+            , c.cat_desc
+            , i.item_price
+            ,i.item_status
+         FROM `items` i
+         JOIN `category` c
+           ON i.cat_id = c.cat_id
+           WHERE i.item_name= ?
+           OR c.cat_desc= ?;";
+
+           $stmt=mysqli_stmt_init($conn);
+           if (!mysqli_stmt_prepare($stmt, $sql)) {
+             echo "Statement Failed.";
+             exit();
+           }
+           mysqli_stmt_bind_param($stmt, "ss" , $searchkey , $searchkey);         
+         }
   //it will execute the statement
-  mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']); 
+   
    mysqli_stmt_execute($stmt);
   //get the results of the executed statement and put it into a variable
    $resultData = mysqli_stmt_get_result($stmt);
@@ -188,8 +219,7 @@ include_once "../includes/function.inc.php";
        //if there is a result.
        array_push($arr,$row);
    }
-   // if the new array is not empty, display the tabular representation
-   // as HTML
+   
    if(!empty($arr)){
       echo "<table class='table'>";
       echo "<thead>";
@@ -223,14 +253,16 @@ include_once "../includes/function.inc.php";
        echo "<h4> No Records Found.</h4>";
    }
 
+  
       ?>
-    
 
   </div>
 </div>
+
+
+
+   
 </div>
-
-
 </main>
 
 
