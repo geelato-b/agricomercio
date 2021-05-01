@@ -144,7 +144,7 @@ include_once "includes/function.inc.php";
                 <form action="includes/updatecart.php" method="post">
                             <input hidden type="text" name="cart_id" value="<?php echo $row['cart_id']; ?>">
                             <input type="number" class="cart-qty" name="item_qty" value="<?php echo $row['item_qty']; ?>">
-                            <button class="btn btn-success"> <i class="fas fa-check"></i> </button>
+                            <button class="btn btn-success"><i class="fas fa-clipboard-check"></i> </button>
                             <a href="includes/deletecartitem.php?cartid=<?php echo $row['cart_id']; ?>" class="btn-cart">
                             <i class="fas fa-trash-alt"></i></i>
                             </a>
@@ -162,17 +162,35 @@ include_once "includes/function.inc.php";
     </div>
 
     <?php } ?>
-    <p class="cart-sum">
-    <?php $summary = getCartSummary($conn, $_SESSION['userid']); 
-            foreach($summary as $key => $nval){
-                    echo "Total Qty: ". $nval['total_qty'] . " pcs "; 
-                    echo "<br>";
-                    echo "Total Price: Php ". number_format($nval['total_price'],2);    
-                    } 
-                    echo "<br>";                    
-        ?> 
-         <a class="cart_check_out" href="">Check Out</a>
-    </p>    
+    <div class="cart-sum">
+        <?php $summary = getCartSummary($conn, $_SESSION['userid']); 
+                foreach($summary as $key => $nval){
+                        echo "Total Qty: ". $nval['total_qty'] . " pcs "; 
+                        echo "<br>";
+                        echo "Total Price: Php ". number_format($nval['total_price'],2);    
+                        } 
+                        echo "<br>";                    
+            ?> 
+
+        
+            <div class="checkout">
+                <a style = " font-size: 3rem;" class="btn btn-success" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                Check Out
+                </a>
+                <form action="" class = "checkout_form" style = "align-item: right;">
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body" style= "margin: 1rem; font-size:2.5rem; text-align:left;">
+                            Are you sure you want to check out?
+                            <button style = " font-size: 2rem; width: 10rem; margin: 1rem;" type="button" class="btn-checkout btn btn-success">Yes</button>
+                            <button style = " font-size: 2rem; width: 10rem; margin: 1rem;"   type="button" class=" btn-checkout btn btn-success">No</button>
+                            </div>
+                    </div>
+                </form>
+
+            </div>    
+      
+        
+    </div>   
 </section>
 
     <script src="js/bootstrap.bundle.js"></script>
