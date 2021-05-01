@@ -57,11 +57,11 @@ include_once ('includes/function.inc.php');
 <section id="sign-in">  
     <div class="slide">
         <div class="row">
-            <div class="col-2">
-                <img src="img/bg.svg" alt="">
+            <div class="col">
+            <img class="sigin_img" src="img/bg.svg" alt="">
             </div>
             
-            <div class="col-2">
+            <div class="col">
                 <div class="form-box">
                     <div class="button-box">
                         <div id="btn"></div>
