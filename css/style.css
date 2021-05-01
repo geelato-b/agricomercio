@@ -65,42 +65,36 @@ body{
   
    
 } 
-
-.search-container{
-    display: inline;
-    position: relative;
-  
-}
-
 #search{
-    position: absolute;
-    top:-2rem; right: 0.8rem;
-    height: 3.5rem;
-    width: 3.5rem;
+    background:#ccffe6;
+    width: 100vw;
+    height: 10vh;
+    
+}
+
+#search form{
+    padding: 2rem;
+    justify-content: center;
+}
+
+#search .form-control{
+    width: 30rem;
+    height: 3rem;
     font-size: 1.5rem;
-    padding: 0.1rem;
-    border: none;
-    outline: none;
-    border-radius: 5rem;
-    
 }
-
-#search:hover, :focus{
-    width: 25rem;
-    
-
-}
-
-.fa-search{
-    top: -1.3rem; right: 1.5rem;
-    position: absolute;
-    
+#search button{
+    margin-top: -0.5rem;
     font-size: 2rem;
-    cursor: pointer;
-    z-index: 1;
-    color: #333;
+    background: transparent;
+    border: none;
+
 }
 
+#search button:hover{
+    font-weight: bolder;
+    color: white;
+    background: #006633;
+}
 
 
 .navbar{
@@ -478,6 +472,8 @@ letter-spacing: .3rem;
     font-size: 2rem;
     text-decoration:none;
     text-align-last: center;
+    border: none;
+    margin-top: 1rem;
 
 }
 .submit-btn:hover{
@@ -790,6 +786,7 @@ margin-left: 3rem;
     margin-left: 15rem;
     margin-top: 00.5rem;
     text-align-last: center;
+    border: none;
 
 }
 
@@ -1352,10 +1349,6 @@ form input .cart-qty{
     width: 20rem;
 }
 
-
-.cart-sum .cart_check_out{
-    background: #339966;
-}
 
 
 #profile_order{
