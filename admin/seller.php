@@ -28,10 +28,10 @@ include_once ('../includes/db_conn.php');
 
 </div>
 <div class="left">
-          <div class="search-container">
-            <input type="search" placeholder="" id="search">
-              <label for="search" class="fas fa-search"></label>
-           </div>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
 
 </div>
 </header>
