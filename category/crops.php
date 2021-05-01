@@ -1,7 +1,11 @@
 <?php
 session_start();
 include_once "../includes/db_conn.php";
-include_once "../includes/function.inc.php";   
+include_once "../includes/function.inc.php"; 
+$searchkey="";
+if (isset($_GET['searchkey'])){
+    $searchkey=htmlentities($_GET['searchkey']);  
+}   
  ?>
 
 <!DOCTYPE html>
@@ -75,6 +79,15 @@ include_once "../includes/function.inc.php";
         </div>   
 
     </header>
+    <section id= "search">
+        <div class = "container-fluid">
+            <form action="crops.php" method="GET" class="d-flex">
+                <input id="searchbar" name="searchkey" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+
+        </div>
+    </section>
 
 <?php    
   
@@ -107,35 +120,69 @@ include_once "../includes/function.inc.php";
 
 ?>
         
-<?php
-        $sql="SELECT i.item_id,
-                    i.item_img,
-                    i.item_name,
-                    i.item_desc, 
-                    i.item_status, 
-                    c.cat_desc, 
-                    i.item_price 
-                    FROM items i 
-                    JOIN category c 
-                    ON i.cat_id = c.cat_id
-                    WHERE c.cat_id= 4;";
-
-  $stmt=mysqli_stmt_init($conn);
-  if (!mysqli_stmt_prepare($stmt, $sql)){
-     echo "Statement Failed.";
-     exit();
-  }
-
-   mysqli_stmt_execute($stmt);
-  //get the results of the executed statement and put it into a variable
-   $resultData = mysqli_stmt_get_result($stmt);
-  //declare a container array.
-   $arr=array();
-   while($row = mysqli_fetch_assoc($resultData)){
-      
-       array_push($arr,$row);
-   }
-      ?>
+        <?php
+        //check if searchkey has no value
+    if($searchkey == "") {
+        //declare the SQL
+       $sql = "SELECT i.item_id
+                 , i.item_name
+                  ,item_desc
+                 , c.cat_desc
+                 , i.item_price
+                 , i.item_img
+              FROM `items` i
+              JOIN `category` c
+                ON i.cat_id = c.cat_id 
+                WHERE c.cat_id= 4;";
+    
+        //initialize connection to the database.
+    $stmt=mysqli_stmt_init($conn);
+        //prepare the statement
+     if (!mysqli_stmt_prepare($stmt, $sql)){
+    echo "Statement Failed.";
+    exit();
+     }
+    }
+        //check if searchkey has value
+    else{
+        
+            $sql = "SELECT i.item_id
+                , i.item_name
+                , i.item_img
+                ,i.item_desc
+                , c.cat_desc
+                , i.item_price
+                ,i.item_status
+             FROM `items` i
+             JOIN `category` c
+               ON i.cat_id = c.cat_id
+               WHERE i.item_name= ?
+               AND c.cat_id= 4
+               OR c.cat_desc= ?;";
+    
+               $stmt=mysqli_stmt_init($conn);
+               if (!mysqli_stmt_prepare($stmt, $sql)) {
+                 echo "Statement Failed.";
+                 exit();
+               }
+               mysqli_stmt_bind_param($stmt, "ss" , $searchkey , $searchkey);         
+             }
+      //it will execute the statement
+       
+       mysqli_stmt_execute($stmt);
+      //get the results of the executed statement and put it into a variable
+       $resultData = mysqli_stmt_get_result($stmt);
+      //declare a container array.
+       $arr=array();
+       while($row = mysqli_fetch_assoc($resultData)){
+           //we will do the transfer of data to another array to test 
+           //if there is a result.
+           array_push($arr,$row);
+       }
+     if(!empty($arr)){
+        
+         ?>
+         
       
 <section id="product">
     <div class="product-container">
@@ -151,15 +198,15 @@ include_once "../includes/function.inc.php";
 
                     <div class="content">
                         <h3><?php echo $val['item_name'] ?></h3>
-                        <h3><?php echo $val['item_desc'] ?></h3>
-                        <div class="price"><p> Php <?php echo number_format($val['item_price'],2)  ?></p>
+                        <h4><?php echo $val['item_desc'] ?></h4>
+                        <div class="price"><p >Php <?php echo number_format($val['item_price'],2)  ?></p>
                         </div>
                         <form action="../includes/processorder.php" method= "GET">
                             <input hidden type="text" name="item_id"  value = "<?php echo $val['item_id']; ?>">
                             <label for="Quantity">Quantity</label>
-                            <input  type="number" value = "1" min="1" max="10" name="item_qty">
+                            <input  type="number" value = "1" min="1" name="item_qty">
                             <button type="submit" class = "btn-addcart">
-                            <i class="fas fa-shopping-cart" ></i>
+                            <i class="fas fa-cart-arrow-down"></i></i>
                             </button>
                         </form>
                    
@@ -169,6 +216,7 @@ include_once "../includes/function.inc.php";
 
                     <?php
                         }
+                    }
                         ?>
     </div>
 </section>
