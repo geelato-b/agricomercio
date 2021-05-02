@@ -1317,24 +1317,24 @@ main{
       
     }
 #cart-page{
-    margin: 50px;
+    margin: 100px;
     font-size: 2rem;
         
 }   
 
 .cart_card{
-    height: 30rem;
-    width: 30rem;
+    height: 20rem;
+    width: 20rem;
 }
 
 .cart_card .image{
-    height: 100%;
-    width: 100%;
-    margin-top: 2rem;
+    height: 60%;
+    width: 60%;
+    margin-top: 1rem;
 }
 
 .cart_card .card-title{
-    margin-top: -3rem;
+    margin-top: 2rem;
     font-size: 2.5rem;
 }
 
@@ -1430,4 +1430,19 @@ form input .cart-qty{
     align-items: center;
     margin: 3rem;
 
+}
+#checkout-page{
+    margin: 50px;
+    font-size: 1.5rem;
+}
+
+.Checkout_card{
+    height: 5rem;
+    width: 30rem;
+}
+.checkout-sum{
+    text-align:center; 
+    margin:2rem; 
+    font-size:2rem; 
+    color: green;
 }
