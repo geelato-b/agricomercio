@@ -2,6 +2,11 @@
 <?php 
 session_start();
 include_once ('../includes/db_conn.php');
+$searchkey="";
+if(isset($_GET['searchkey'])){
+  $searchkey = htmlentities($_GET['searchkey']);
+
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +31,8 @@ include_once ('../includes/db_conn.php');
 
 </div>
 <div class="left">
-      <form class="d-flex">
+      <form action ="user.php" method="GET" class="d-flex" >
+        <input id="searchbar" name="searchkey" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
@@ -61,6 +67,7 @@ include_once ('../includes/db_conn.php');
                   //Scenario: I wanted to show item_id, item_name,
                   //item_short_code
                   // category description, price
+                  if($searchkey == ""){
                   $sql = " SELECT `user_id`, 
                   `user_type`, 
                   `user_name`, 
@@ -75,8 +82,28 @@ include_once ('../includes/db_conn.php');
                   if (!mysqli_stmt_prepare($stmt, $sql)){
                   echo "Statement Failed.";
                   exit();
+                    }
                   }
+                  else{
+                    $sql = "SELECT
+                                  `user_id`, 
+                                  `user_type`, 
+                                  `user_name`, 
+                                  `password`, 
+                                  `status` 
+                                  FROM `users`
+                                  WHERE user_name = ?
+                                  OR user_id = ?
+                                  ;";
 
+                             $stmt=mysqli_stmt_init($conn);
+                             if (!mysqli_stmt_prepare($stmt, $sql)) {
+                               echo "Statement Failed. Record Not Found.";
+                               exit();
+                             }
+
+                  mysqli_stmt_bind_param($stmt, "ss" , $searchkey , $searchkey);
+                  }
                   //it will execute the statement
                   mysqli_stmt_execute($stmt);
                   //get the results of the executed statement and put it into a variable

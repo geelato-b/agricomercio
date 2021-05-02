@@ -2,6 +2,10 @@
 <?php 
 session_start();
 include_once ('../includes/db_conn.php');
+$searchkey="";
+if(isset($_GET['searchkey'])){
+  $searchkey = htmlentities($_GET['searchkey']);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,8 +31,8 @@ include_once ('../includes/db_conn.php');
 
 </div>
 <div class="left">
-    <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <form action="customer.php" method="GET" class="d-flex">
+        <input id="searchbar" name="searchkey" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>
       
@@ -66,7 +70,8 @@ include_once ('../includes/db_conn.php');
                 //Scenario: I wanted to show item_id, item_name,
                 //item_short_code
                 // category description, price
-                $sql =" SELECT 
+                if($searchkey == ""){
+                                    $sql =" SELECT 
                                     `user_info_id`,
                                     `user_fullname`, 
                                     `user_id`, 
@@ -79,15 +84,39 @@ include_once ('../includes/db_conn.php');
                                     `user_type`
                                     FROM `user_info` 
                                     WHERE user_type = 'Customer';";
-                //initialize MYSQL statement connection to the database.
-                //$conn is a variable declared inside db_conn.
-                $stmt=mysqli_stmt_init($conn);
-                //prepare the statement
-                if (!mysqli_stmt_prepare($stmt, $sql)){
-                echo "Statement Failed.";
-                exit();
+                    //initialize MYSQL statement connection to the database.
+                    //$conn is a variable declared inside db_conn.
+                    $stmt=mysqli_stmt_init($conn);
+                    //prepare the statement
+                    if (!mysqli_stmt_prepare($stmt, $sql)){
+                    echo "Statement Failed.";
+                    exit();
+                    }
                 }
+                else{
+                    $sql =" SELECT 
+                                    `user_info_id`,
+                                    `user_fullname`, 
+                                    `user_id`, 
+                                    `gender`, 
+                                    `contact_details`, 
+                                    `house_no_street_brgy`,
+                                    `city`, 
+                                    `province`, 
+                                    `postal_code`, 
+                                    `user_type`
+                                    FROM `user_info` 
+                                    WHERE user_fullname = ?
+                                    OR gender = ?
+                                    OR city = ?;";
 
+                  $stmt=mysqli_stmt_init($conn);
+                  if (!mysqli_stmt_prepare($stmt, $sql)) {
+                        echo "Statement Failed. Record Not Found.";
+                        exit();
+                        }
+                  mysqli_stmt_bind_param($stmt, "sss" , $searchkey , $searchkey , $searchkey);
+                }
                 //it will execute the statement
                 mysqli_stmt_execute($stmt);
                 //get the results of the executed statement and put it into a variable
