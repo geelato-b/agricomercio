@@ -169,6 +169,7 @@ if(isset($_GET['searchkey'])){
   if ($searchkey == "") {
     $sql = "SELECT i.item_id
             , i.item_name
+            ,i.item_img
             ,i.item_desc
             , c.cat_desc
             , i.item_price
@@ -190,6 +191,7 @@ if(isset($_GET['searchkey'])){
   else{
         $sql = "SELECT i.item_id
             , i.item_name
+            ,i.item_img
             ,i.item_desc
             , c.cat_desc
             , i.item_price
@@ -221,32 +223,35 @@ if(isset($_GET['searchkey'])){
    }
    
    if(!empty($arr)){
-      echo "<table class='table'>";
-      echo "<thead>";
-      echo "<th> Item Name </th>";
-      echo "<th> Item Description </th>";
-      echo "<th> Category </th>";
-      echo "<th> Price </th>";
-      echo "<th> Item Status </th>";
-      echo "<th> Actions </th>";
-      echo "</thead>";
-      foreach($arr as $key => $val){
-      echo "<tr>";
-          echo "<td>" . $val['item_name']       . "</td>";
-          echo "<td>" . $val['item_desc']        . "</td>";
-          echo "<td>" . $val['cat_desc']        . "</td>";
-          echo "<td> Php ". number_format($val['item_price'],2) . "</td>";
-          echo "<td>" . $val['item_status'] . "</td>";
-          ?>
-          <td><a href="../includes/DeleteSellerItem.php?itemid=<?php echo $row['item_id']; ?>">
-          <i class="fas fa-trash-alt"></i></a></td>
+
+    ?>
+    <div class="container-fluid">
+      <div class="row px-3">
+        
+          <?php
+        foreach($arr as $key => $val){ ?>
+        <div class="col-3">
+          <br>
+            <div class="card">
+                <img src="../img/<?php echo $val['item_img']; ?>" alt="1 x 1" width="100px" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $val['item_name']?></h5>
+                    <em class="card-text" > Php <?php echo number_format($val['item_price'],2); ?> </em>
+                </div>
+                <div class="card-footer">
+                    <form action="../includes/DeleteSellerItem.php" method="get">
+                        <input hidden type="text" name="item_id" value="<?php echo $val['item_id']; ?>" >
+                        <div class="input-group">  
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></i> </button>
+                        </div>
+                    </form>
+              </div>
+        </div>
+   </div>
       <?php 
 
         echo "</tr>";
       }
-      echo "<tr >";
-          echo "<td colspan=4 class='text-center'><em>End of result</em></td>";
-      echo "</tr>";
   echo "</table>";
    }
    else{
