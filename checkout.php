@@ -75,14 +75,9 @@ include_once "includes/function.inc.php";
 
 </header>
 
-<section id="cart-page">
-    <?php $summary = getCartSummary($conn, $_SESSION['userid']); 
-                            foreach($summary as $key => $nval){
-                            echo "(". $nval['total_qty'] . " pcs )";    
-                            }
-                            
-                            ?> 
+<h4 class="text-center text-info p-2" style="margin-top:2rem; font-size:2rem;">Confirm your order!</h4>
 
+<section id="checkout-page" style= "background:#d9f2e6;">
     <?php
         $sql_cart_list = "SELECT c.cart_id
                         , i.item_name
@@ -108,7 +103,8 @@ include_once "includes/function.inc.php";
                     $resultData = mysqli_stmt_get_result($stmt);
                     
     ?>
-        <div class = "cart_label"> 
+   
+        <div class = "checkout_label"> 
               <?php
 
                echo "<table class='table'>";
@@ -128,36 +124,19 @@ include_once "includes/function.inc.php";
 
         <tr>
         <?php echo "<td>"  ?>
-            <div class="cart_card">
-                <div class="image">
-                    <img src="img/<?php echo $row['item_img'];?>" alt="">
-                </div>
-
-                <div class="card-title">
-                    <p ><?php echo $row['item_name']?>
-                    <br>
-                    Php <?php  echo number_format($row['item_price'],2); ?> 
-                    
-                </div>       
-
+            <div class="Checkout_card">
+                    <p ><?php echo $row['item_name']?></p>     
             </div>
             <?php echo "</td>"  ?>
-       <td>
-            <div class="cart_card">
-                <form action="includes/updatecart.php" method="post">
-                            <input hidden type="text" name="cart_id" value="<?php echo $row['cart_id']; ?>">
-                            <input type="number" class="cart-qty" name="item_qty" min="1" value="<?php echo $row['item_qty']; ?>">
-                            <button class="btn btn-success"> <i class="fas fa-clipboard-check"></i></i> </button>
-                            <a href="includes/deletecartitem.php?cartid=<?php echo $row['cart_id']; ?>" class="btn-cart">
-                            <i class="fas fa-trash-alt"></i></i>
-                            </a>
-                </form>
-            </div>        
-        </td> 
         <td>
-            <div class="cart_card">
-                Php <?php echo number_format($row['subtotal_price'],2); ?>
-            </div>
+        <div class="Checkout_card">
+                    <p ><?php echo $row['item_qty']?></p>
+        </div>     
+        </td>
+        <td>
+        <div class="Checkout_card">
+                Php <?php  echo number_format($row['item_price'],2); ?>       
+        </div>     
         </td>
         </tr>
         <?php
@@ -167,7 +146,7 @@ include_once "includes/function.inc.php";
     </div>
 
     <?php } ?>
-    <div class="cart-sum">
+    <div class="checkout-sum">
         <?php $summary = getCartSummary($conn, $_SESSION['userid']); 
                 foreach($summary as $key => $nval){
                         echo "Total Qty: ". $nval['total_qty'] . " pcs "; 
@@ -177,10 +156,9 @@ include_once "includes/function.inc.php";
                         echo "<br>";                    
             ?> 
 
-        
-            <div class="checkout">
-                <a  style = " font-size: 3rem;" class="btn btn-success"  href="checkout.php" role="button">
-                Check Out
+            <div class="checkout" style = "text-align:center; margin:2rem; padding-bottom:2rem;">
+                <a  style = " font-size: 2rem;" class="btn btn-success" href="#" role="button">
+                Place Order
                 </a>
             </div>    
       
