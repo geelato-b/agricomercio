@@ -75,11 +75,11 @@ include_once "includes/function.inc.php";
 
 </header>
 
-<h4 class="text-center text-info p-2" style="margin-top:2rem; font-size:2rem;">Confirm your order!</h4>
+<section id="checkout-page">
 
-<section id="checkout-page" style= "background:#d9f2e6;">
     <?php
         $sql_cart_list = "SELECT c.cart_id
+                        ,i.item_id
                         , i.item_name
                         , i.item_img
                         , i.item_price
@@ -103,40 +103,64 @@ include_once "includes/function.inc.php";
                     $resultData = mysqli_stmt_get_result($stmt);
                     
     ?>
-   
         <div class = "checkout_label"> 
-              <?php
+            <h4 class="text-center text-info p-2">Confirm your order!</h4>
+            <?php
 
                echo "<table class='table'>";
+               echo "<th> Order #</th>";
                echo "<th> Items</th>";
                echo "<th> Quantity </th>";
                echo "<th>  Price </th>";
+               echo "<th>  Order </th>";
                echo "</table>";
 
               ?>
+            
+                
         </div>
 
         <?php
         while($row = mysqli_fetch_assoc($resultData)){ 
             echo "<table class='table'>";
         ?>
-    <div class="cart-info">
-
+    <div class="checkout-info">
         <tr>
-        <?php echo "<td>"  ?>
+        <td>
             <div class="Checkout_card">
-                    <p ><?php echo $row['item_name']?></p>     
-            </div>
-            <?php echo "</td>"  ?>
-        <td>
-        <div class="Checkout_card">
-                    <p ><?php echo $row['item_qty']?></p>
-        </div>     
+                <?php echo rand (1, 100);?>
+            </div>       
         </td>
+
         <td>
-        <div class="Checkout_card">
-                Php <?php  echo number_format($row['item_price'],2); ?>       
-        </div>     
+            <div class="Checkout_card">
+           
+                <div class="card-title">
+                    <?php echo $row['item_name']?>
+                </div>       
+
+            </div>
+        </td>
+       <td>
+            <div class="Checkout_card">
+            <p ><?php echo $row['item_qty']?> pcs     
+            </div>        
+        </td> 
+        <td>
+            <div class="Checkout_card">
+                Php <?php echo number_format($row['subtotal_price'],2); ?>
+            </div>
+        </td>
+
+        <td>
+            <div class="Checkout_card">
+                <form action="">
+                    <input hidden type="text" value="<?php echo $row['item_id']?>">
+                    <input hidden type="text" value="<?php echo $row['item_qty']?>">
+                    <button class = "btn btn-success"><i class="fas fa-check-square"></i></button>
+                </form>
+              
+            </div>
         </td>
         </tr>
         <?php
@@ -156,19 +180,12 @@ include_once "includes/function.inc.php";
                         echo "<br>";                    
             ?> 
 
-            <div class="checkout" style = "text-align:center; margin:2rem; padding-bottom:2rem;">
-                <a  style = " font-size: 2rem;" class="btn btn-success" href="#" role="button">
-                Place Order
-                </a>
-            </div>    
       
         
     </div>   
 </section>
-
     <script src="js/bootstrap.bundle.js"></script>
     <script src="js/jquery.js"></script> 
     <script src="js/main.js"></script>
-    
 </body>
 </html>
