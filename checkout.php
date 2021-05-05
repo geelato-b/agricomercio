@@ -108,7 +108,7 @@ include_once "includes/function.inc.php";
             <?php
 
                echo "<table class='table'>";
-               echo "<th> Order #</th>";
+              
                echo "<th> Items</th>";
                echo "<th> Quantity </th>";
                echo "<th>  Price </th>";
@@ -126,12 +126,7 @@ include_once "includes/function.inc.php";
         ?>
     <div class="checkout-info">
         <tr>
-        <td>
-            <div class="Checkout_card">
-                <?php echo rand (1, 100);?>
-            </div>       
-        </td>
-
+        
         <td>
             <div class="Checkout_card">
            
@@ -154,7 +149,9 @@ include_once "includes/function.inc.php";
 
         <td>
             <div class="Checkout_card">
+
                 <form action="includes/order.php" method="post">
+                        <input hidden type="text" name="order_number" value="<?php echo $rand['order_number']; ?>" >
                         <input hidden type="text" name="item_id" value="<?php echo $row['item_id']; ?>" >
                         <input hidden type="text" name="item_qty" value="<?php echo $row['item_qty']; ?>" >
                         <button value="submit" class = "btn btn-success"><i class="fas fa-check-square"></i></button>
@@ -166,6 +163,7 @@ include_once "includes/function.inc.php";
         <?php
             echo "</tr>";
             echo "</table>";
+
         ?>
     </div>
 
