@@ -154,12 +154,12 @@ include_once "includes/function.inc.php";
 
         <td>
             <div class="Checkout_card">
-                <form action="">
-                    <input hidden type="text" value="<?php echo $row['item_id']?>">
-                    <input hidden type="text" value="<?php echo $row['item_qty']?>">
-                    <button class = "btn btn-success"><i class="fas fa-check-square"></i></button>
-                </form>
-              
+                <form action="includes/order.php" method="post">
+                        <input hidden type="text" name="item_id" value="<?php echo $row['item_id']; ?>" >
+                        <input hidden type="text" name="item_qty" value="<?php echo $row['item_qty']; ?>" >
+                        <button value="submit" class = "btn btn-success"><i class="fas fa-check-square"></i></button>
+                        
+                    </form>
             </div>
         </td>
         </tr>
