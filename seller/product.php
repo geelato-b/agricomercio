@@ -31,7 +31,7 @@ if(isset($_GET['searchkey'])){
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
       <li class="nav-item active">
-        <a class="nav-link" href="userprofile.php">Profile <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="index.php">Profile <span class="sr-only">(current)</span></a>
       </li>
       </li>
             <li class="nav-item active">
@@ -177,7 +177,7 @@ if(isset($_GET['searchkey'])){
          FROM `items` i
          JOIN `category` c
            ON i.cat_id = c.cat_id
-           WHERE i.user_id = ?;";
+           WHERE i.user_id = ? ;";
   //initialize MYSQL statement connection to the database.
   //$conn is a variable declared inside db_conn.
   $stmt=mysqli_stmt_init($conn);

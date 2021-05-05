@@ -15,19 +15,19 @@ if(isset($_POST['login'])){
      {
         case 'Seller':
              $_SESSION['usertype'] = 'Seller';
-             $_SESSION['userid'] = $user_info['user_id'];
-             header("location: ../seller/userprofile.php");
+             $_SESSION['userid'] = $user_info['user_ref_num'];
+             header("location: ../seller/");
              break;
 
         case 'Customer':
             $_SESSION['usertype'] = 'Customer';
-            $_SESSION['userid'] = $user_info['user_id'];
+            $_SESSION['userid'] = $user_info['user_ref_num'];
             header("location: ../index.php");
             break; 
 
        case 'Admin':
             $_SESSION['usertype'] = 'Admin';
-            $_SESSION['userid'] = $user_info['user_id'];
+            $_SESSION['userid'] = $user_info['user_ref_num'];
             header("location: ../admin/admin.php");
             break;        
      }

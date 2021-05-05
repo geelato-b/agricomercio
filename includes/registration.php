@@ -12,6 +12,7 @@ $city =$_POST['city'];
 $prv =$_POST['prv'];
 $pc =$_POST['pc'];
 $status =$_POST['status'];
+$user_ref_number = random_int(1000, 99999999999) . rand(1000, 999999) . hex2bin($usrname);
 
 
 /* if you can observe, the ‘fname’ and ‘lname’ inside the POST is the “name” attribute
@@ -30,17 +31,17 @@ die("Connection failed: " . mysqli_connect_error());
  
 
 // Here goes your SQL for INSERT the values will be the variables declared.
-$sql = "INSERT INTO `users` (`user_name`, `password`, `status`, `user_type`)
-VALUES ( '${usrname}', '${psword}', '${status}', '${usertype}');" ;
+$sql = "INSERT INTO `users` ( `user_ref_num`, `user_name`, `password`, `status`, `user_type`)
+VALUES ( '{$user_ref_number}', '${usrname}', '${psword}', '${status}', '${usertype}');" ;
 
 $sql .="INSERT INTO  `user_info` 
-(`user_fullname`,`gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) 
- VALUES('${fname}', '${gender}', '${contact_no}', '${hnsb}', '${city}', '${prv}', '${pc}', '${usertype}');";
+(  `user_ref_num`, `user_fullname`,`gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) 
+ VALUES('{$user_ref_number}','${fname}', '${gender}', '${contact_no}', '${hnsb}', '${city}', '${prv}', '${pc}', '${usertype}');";
 
 // Check if the query successfully ran.
 if (mysqli_multi_query($conn, $sql)) {
     // if no error. Then new record created.
-    header("location: ../sign_in.php");
+    header("location: ../sign_in.php?success");
     } else {
     // else then error will show up.
     echo "Error: " . $sql . mysqli_error($conn);

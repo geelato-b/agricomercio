@@ -90,6 +90,7 @@ include_once "includes/function.inc.php";
                         , i.item_price
                         , c.item_qty
                         , c.user_id
+                        , c.cart_status
                         , (i.item_price * c.item_qty) subtotal_price
                         FROM cart c
                         JOIN items i
@@ -108,65 +109,56 @@ include_once "includes/function.inc.php";
                     $resultData = mysqli_stmt_get_result($stmt);
                     
     ?>
-        <div class = "cart_label"> 
-              <?php
-
-               echo "<table class='table'>";
-               echo "<th> Items</th>";
-               echo "<th> Quantity </th>";
-               echo "<th>  Price </th>";
-               echo "</table>";
-
-              ?>
-        </div>
-
+        
+       <table class='table'>
+               <thead>
+                   <th> Items</th>
+                   <th> Quantity </th>
+                   <th> Total Net Amount </th>
+               </thead>
+    <tbody>
         <?php
-        while($row = mysqli_fetch_assoc($resultData)){ 
-            echo "<table class='table'>";
-        ?>
-    <div class="cart-info">
-
+        while($row = mysqli_fetch_assoc($resultData)){ ?>
         <tr>
-        <?php echo "<td>"  ?>
-            <div class="cart_card">
-                <div class="image">
-                    <img src="img/<?php echo $row['item_img'];?>" alt="">
-                </div>
-
+          <td>
+            <div class="cart_card card">
+                <div class="image"><img src="img/<?php echo $row['item_img'];?>" class="card-img-top" alt=""></div>
                 <div class="card-title">
-                    <p ><?php echo $row['item_name']?>
-                    <br>
-                    Php <?php  echo number_format($row['item_price'],2); ?> 
-                    
-                </div>       
-
+                   
+                    <h2><?php echo $row['item_name']?></h2>
+                    <p class="lead"> 
+                       Php <?php  echo number_format($row['item_price'],2); ?> 
+                    </p>
+                </div>  
             </div>
-            <?php echo "</td>"  ?>
-       <td>
+           </td>
+           <td>
             <div class="cart_card">
                 <form action="includes/updatecart.php" method="post">
                             <input hidden type="text" name="cart_id" value="<?php echo $row['cart_id']; ?>">
                             <input type="number" class="cart-qty" name="item_qty" min="1" value="<?php echo $row['item_qty']; ?>">
-                            <button class="btn btn-success"> <i class="fas fa-clipboard-check"></i></i> </button>
+                            
+                            <input type="Hidden" name="confirm_cart" value="<?php echo $row['cart_status'] == 'P' ? 'C' : 'P' ; ?>">
+                            
+                            <p class="lead"><?php echo $row['cart_status'] == 'P' ? 'For Confirmation' : 'Confirmed' ; ?></p>
+                            
+                            <button class="btn btn-success"> <i class="fas fa-clipboard-check"></i>  <?php echo $row['cart_status'] == 'P' ? 'Confirm' : 'Unconfirm' ; ?> </button>
                             <a href="includes/deletecartitem.php?cartid=<?php echo $row['cart_id']; ?>" class="btn-cart">
-                            <i class="fas fa-trash-alt"></i></i>
+                            <i class="fas fa-trash-alt"></i>
                             </a>
                 </form>
             </div>        
-        </td> 
-        <td>
+           </td> 
+           <td>
             <div class="cart_card">
                 Php <?php echo number_format($row['subtotal_price'],2); ?>
             </div>
-        </td>
+           </td>
         </tr>
-        <?php
-            echo "</tr>";
-            echo "</table>";
-        ?>
-    </div>
 
     <?php } ?>
+    </tbody>
+    </table>
     <div class="cart-sum">
         <?php $summary = getCartSummary($conn, $_SESSION['userid']); 
                 foreach($summary as $key => $nval){

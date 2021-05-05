@@ -51,7 +51,7 @@ $stmt=mysqli_stmt_init($conn);
 function GetUserDetails($conn, $userid ){
     $err;
     $sql="SELECT * FROM `user_info` 
-    WHERE  user_id = ?;
+    WHERE  user_ref_num = ?;
     ";
 
 $stmt=mysqli_stmt_init($conn);
@@ -79,8 +79,8 @@ $stmt=mysqli_stmt_init($conn);
 
 function GetUserName($conn, $userid ){
     $err;
-    $sql= "SELECT `user_id`, `user_name`, `status` FROM `users` 
-    WHERE  user_id = ?;
+    $sql= "SELECT * FROM `users` 
+    WHERE  user_ref_num = ?;
     ";
 
 $stmt=mysqli_stmt_init($conn);
@@ -138,6 +138,7 @@ function getCartSummary($conn, $user_id){
                           ON c.item_id = i.item_id
                        WHERE c.user_id = ? 
                           AND c.status = 'P'
+                          AND c.cart_status = 'C'
                     GROUP BY c.user_id; ";
                       $stmt=mysqli_stmt_init($conn);
     

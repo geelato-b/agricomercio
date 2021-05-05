@@ -1,6 +1,4 @@
 <?php
-echo "This is a test change";
-echo "This is a test change again";
 if(isset($_POST['itemstatus'])){
 include_once "db_conn.php";
     session_start();
@@ -13,13 +11,14 @@ include_once "db_conn.php";
     
     $sql_check = "SELECT item_id 
                     FROM items
-                   WHERE item_name = ?;";
+                   WHERE item_name = ?
+                     AND user_id = ? ;";
     $stmt_chk = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt_chk, $sql_check)){
         header("location: index.php?error=3"); //statement failed
         exit();
     }
-    mysqli_stmt_bind_param($stmt_chk,"s",$itemname);
+    mysqli_stmt_bind_param($stmt_chk,"ss",$itemname,$_SESSION['userid']);
     mysqli_stmt_execute($stmt_chk);
     $chk_result=mysqli_stmt_get_result($stmt_chk);
     $arr=array();
