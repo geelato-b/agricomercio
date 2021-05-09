@@ -80,8 +80,8 @@ $stmt=mysqli_stmt_init($conn);
 function GetUserName($conn, $userid ){
     $err;
     $sql= "SELECT * FROM `users` 
-    WHERE  user_ref_num = ?;
-    ";
+    WHERE  user_ref_num = ?;";
+
 
 $stmt=mysqli_stmt_init($conn);
 
