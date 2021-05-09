@@ -1,12 +1,22 @@
+
 <?php
 session_start();
 include_once "includes/db_conn.php";
 include_once "includes/function.inc.php"; 
+$status_logged_in = null;
+if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
+    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+    
+    $USER_ID = $_SESSION['userid'];
+    $user_info = GetUserDetails($conn, $USER_ID );
+    $user = GetUserName($conn, $USER_ID );
+}
 $searchkey="";
 if (isset($_GET['searchkey'])){
     $searchkey=htmlentities($_GET['searchkey']);  
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,15 +71,34 @@ if (isset($_GET['searchkey'])){
             
             </a>
            
-                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="fas fa-user"></div>
-                </button>
-                
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+            <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="fas fa-user"></div>
+            </button>
+            
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+               
+                <?php
+                if(isset($status_logged_in)){
+                          switch($status_logged_in['usertype']){
+                              case 'Customer':
+                          ?>
+                           <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                           <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                 <?php        break;
+                              case 'Admin': 
+                               header("location: admin/admin.php");
+                                break;
+                              case 'Seller':
+                               header("location: seller/index.php");
+                               break;
+                          }
+                }
+                else{ ?>
                     <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
                     <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
-                    <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                <?php }
+                ?>
+            
                 </ul>
                 
         </div>
@@ -197,14 +226,36 @@ if (isset($_GET['searchkey'])){
                         <div class="price"><p> Php <?php echo number_format($val['item_price'],2)  ?></p>
                         </div>
 
-                        <form action="includes/processorder.php" method= "GET">
-                        <input hidden type="text" name="item_id"  value = "<?php echo $val['item_id']; ?>">
-                        <label for="Quantity">Quantity</label>
-                        <input  type="number" value = "1" min="1" name="item_qty">
-                        <button type="submit" class = "btn-addcart">
-                        <i class="fas fa-cart-arrow-down"></i>
-                        </button>
-                        </form>
+                        <?php
+                if(isset($status_logged_in)){
+                          switch($status_logged_in['usertype']){
+                              case 'Customer':
+                          ?>
+                            <form action="includes/processorder.php" method= "GET">
+                            <input hidden type="text" name="item_id"  value = "<?php echo $val['item_id']; ?>">
+                            <label for="Quantity">Quantity</label>
+                            <input  type="number" value = "1" min="1" name="item_qty">
+                            <button type="submit" class = "btn-addcart">
+                            <i class="fas fa-cart-arrow-down"></i>
+                            </button>
+                            </form>
+                           
+                 <?php        break;
+                              case 'Admin': 
+                               header("location: admin/admin.php");
+                                break;
+                              case 'Seller':
+                               header("location: seller/index.php");
+                               break;
+                          }
+                }
+                else{ ?>
+                <br>
+                    <h3>Sign In to Add Item to Cart</h3>
+                <?php }
+                ?>
+
+                      
                     </div>
             </div>
         </div>
