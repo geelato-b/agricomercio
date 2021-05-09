@@ -2,7 +2,15 @@
 session_start();
 include_once "includes/db_conn.php";
 include_once "includes/function.inc.php";   
- ?>
+$status_logged_in = null;
+if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
+    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+    
+    $USER_ID = $_SESSION['userid'];
+    $user_info = GetUserDetails($conn, $USER_ID );
+    $user = GetUserName($conn, $USER_ID );
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -50,16 +58,34 @@ include_once "includes/function.inc.php";
             
             </a>
             
-                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="fas fa-user"></div>
-                </button>
-                
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+            <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+            <div class="fas fa-user"></div>
+            </button>
+            
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+               
+                <?php
+                if(isset($status_logged_in)){
+                          switch($status_logged_in['usertype']){
+                              case 'Customer':
+                          ?>
+                           <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                           <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                 <?php        break;
+                              case 'Admin': 
+                               header("location: admin/admin.php");
+                                break;
+                              case 'Seller':
+                               header("location: seller/index.php");
+                               break;
+                          }
+                }
+                else{ ?>
                     <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
                     <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
-                    <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
-                </ul>
+                <?php }
+                ?>
+            </ul>
         </div>
     </div>
 
@@ -109,6 +135,8 @@ include_once "includes/function.inc.php";
                     $resultData = mysqli_stmt_get_result($stmt);
                     
     ?>
+
+
         
        <table class='table'>
                <thead>
@@ -137,16 +165,14 @@ include_once "includes/function.inc.php";
                 <form action="includes/updatecart.php" method="post">
                             <input hidden type="text" name="cart_id" value="<?php echo $row['cart_id']; ?>">
                             <input type="number" class="cart-qty" name="item_qty" min="1" value="<?php echo $row['item_qty']; ?>">
-                            
                             <input type="Hidden" name="confirm_cart" value="<?php echo $row['cart_status'] == 'P' ? 'C' : 'P' ; ?>">
-                            
                             <p class="lead"><?php echo $row['cart_status'] == 'P' ? 'For Confirmation' : 'Confirmed' ; ?></p>
-                            
                             <button class="btn btn-success"> <i class="fas fa-clipboard-check"></i>  <?php echo $row['cart_status'] == 'P' ? 'Confirm' : 'Unconfirm' ; ?> </button>
                             <a href="includes/deletecartitem.php?cartid=<?php echo $row['cart_id']; ?>" class="btn-cart">
                             <i class="fas fa-trash-alt"></i>
                             </a>
                 </form>
+
             </div>        
            </td> 
            <td>
@@ -169,12 +195,34 @@ include_once "includes/function.inc.php";
                         echo "<br>";                    
             ?> 
 
+                        <?php
+                            if(isset($status_logged_in)){
+                            switch($status_logged_in['usertype']){
+                                case 'Customer':
+                          ?>
+                            <div class="checkout">
+                                <a  style = " font-size: 3rem;" class="btn btn-success"  href="checkout.php" role="button">
+                                Check Out
+                                </a>
+                            </div>   
+                           
+                 <?php        break;
+                              case 'Admin': 
+                               header("location: admin/admin.php");
+                                break;
+                              case 'Seller':
+                               header("location: seller/index.php");
+                               break;
+                          }
+                }
+                else{ ?>
+                <br>
+                    <h3>Sign In to see cart items</h3>
+                <?php }
+                ?>
+
         
-            <div class="checkout">
-                <a  style = " font-size: 3rem;" class="btn btn-success"  href="checkout.php" role="button">
-                Check Out
-                </a>
-            </div>    
+             
       
         
     </div>   
