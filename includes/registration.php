@@ -41,7 +41,8 @@ $sql .="INSERT INTO  `user_info`
 // Check if the query successfully ran.
 if (mysqli_multi_query($conn, $sql)) {
     // if no error. Then new record created.
-    header("location: ../sign_in.php?success");
+    header("location: ../sign_in.php"); 
+
     } else {
     // else then error will show up.
     echo "Error: " . $sql . mysqli_error($conn);
