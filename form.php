@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +41,13 @@
                 <span class="details">Password</span>
                     <input type="password" id="psword" name ="psword" placeholder="Enter Your password" required>
                 </div>
+                <div class="input-box">
                 
+                </div>
+                <div class="input-box">
+                <span class="details">Confirm Password</span>
+                    <input type="password" id="cpsword" name ="cpsword" placeholder="Confirm Your password" required>
+                </div>
                 <div class="input-box">
                 <span class="details">Address</span>
                       <input type="text" class="form-control" name ="hnsb" placeholder = "House Number, Street, Barangay" value = "" >
@@ -47,18 +56,22 @@
                         
                         <input type="text" class="form-control" name = "prv" placeholder = "Province" value = "">
                         
-                        <input type="text" class="form-control" name ="pc" placeholder = "Postal Code" value = "" >
-                        <div class="input-box">
-                <span class="details">Status</span>    
-                        <input type="text" class="form-control" name="status" placeholder = "Active" value = "Active" require>
-                        
+                        <input type="text" class="form-control" name ="pc" placeholder = "Postal Code" value = "" >                     
                 </div> 
-
+                <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    <div class="input-box">
+                    <div class="alert alert-warning" role="alert">
+                    <?php echo $_SESSION['status']; ?>
+                    </div>
+                    </div>
+                    <?php
                         
-                </div> 
-               
+                        unset($_SESSION['status']);
+                    }
+                ?>
 
-            
             </div>
             
             <div class="gender-deatils">
@@ -90,7 +103,9 @@
             </div>
 
             <div class="sign_in">
-                <a  href="sign_in.php">Already have an account</a>
+                <center>
+                <a  href="sign_in.php" >Already have an account</a>
+                </center>
             </div>
 
             
