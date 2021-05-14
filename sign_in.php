@@ -114,7 +114,19 @@ include_once ('includes/function.inc.php');
             <img class="sigin_img" src="img/bg.svg" alt="">
             </div>
             <div class="col">
-            
+            <?php
+                    if (isset($_SESSION['status'])) {
+                    ?>
+                    
+                    <div class="alert alert-light" role="alert">
+                    <?php echo $_SESSION['status']; ?>
+                    </div>
+                    
+                    <?php
+                        
+                        unset($_SESSION['status']);
+                    }
+                    ?>
                 <div class="form-box">
                     <div class="button-box">
                     
