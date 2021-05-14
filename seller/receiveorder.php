@@ -8,6 +8,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     
     $USER_ID = $_SESSION['userid'];
     $user = GetUserName($conn, $USER_ID );
+
 }
 
 
@@ -42,14 +43,14 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="userprofile.php">Profile <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="userprofile.php">Profile</a>
             </li>
-            </li>
-                    <li class="nav-item active">
+            
+            <li class="nav-item active">
                 <a class="nav-link" href="receiveorder.php">Orders</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="../about.php">About</a>
+                <a class="nav-link" href="about.php">About</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="product.php">Items</a>
@@ -62,8 +63,71 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 </nav>
 <!-- end of navbar -->
 
+
+
+<section>
+<p>
+  <a class="btn btn-danger" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+  Order History
+  </a>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+  <?php
+  $sql_order_list = "SELECT 
+                           o.order_number
+                        ,o.order_status
+                        , SUM(o.item_qty) total_item_qty
+                        , SUM(i.item_price * o.item_qty) total_net_amt
+                        FROM orders o
+                        JOIN items i
+                        ON o.item_id = i.item_id
+                        WHERE o.user_id = ? 
+                        AND o.status = 'C'
+                        AND o.order_status = 'C'
+                        AND o.order_number IS NOT NULL
+                        GROUp BY o.order_number; ";
+                        $stmt=mysqli_stmt_init($conn);
+        
+                if (!mysqli_stmt_prepare($stmt, $sql_order_list)){
+                    header("location: ?error=failedcheckout");
+                    exit();
+                    }
+                    mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']);
+                    mysqli_stmt_execute($stmt);
+
+                    $resultData = mysqli_stmt_get_result($stmt); ?>
+        <div class="container">
+            <div class="row">
+               <h3 class="display-5">Order History</h3>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Order Number</th>
+                        <th>Total Item Qty</th>
+                        <th>Total Net Amt</th>
+                        <th>Status</th>
+                        
+                    </thead>
+                <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
+                    <tr>
+                        <td><?php echo $row['order_number']; ?></td>
+                        <td><?php echo $row['total_item_qty']; ?></td>
+                        <td><?php echo $row['total_net_amt']; ?></td>
+                        <td>
+                        <?php echo $row['order_status'] == 'P' ? 'Pending for Delivery' : 'Delivered' ;?>
+                        </td>
+                    </tr>
+                <?php }?>
+
+                </table>
+            
+  </div>
+</div>
+
+
 </section>
-  
+
+</section> 
 <main>
         <div class="main__container">
           <div class="container_fluid">
@@ -167,6 +231,11 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 
           
       </main>
+
+      <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/jquery.js"></script> 
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.js"></script>
 
 </body>
 </html>

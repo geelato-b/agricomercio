@@ -43,20 +43,20 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
    
       <li class="nav-item active">
-        <a class="nav-link" href="userprofile.php">Profile <span class="sr-only">(current)</span></a>
+        <a class="nav-link active" href="userprofile.php">Profile <span class="sr-only">(current)</span></a>
       </li>
-      </li>
-            <li class="nav-item active">
-        <a class="nav-link" href="receiveorder.php">Orders</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="about.php">About</a>
+      
+       <li class="nav-item active">
+        <a class="nav-link active" href="receiveorder.php">Orders</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="product.php">Items</a>
+        <a class="nav-link active" href="about.php">About</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="../logout.php">Log Out</a>
+        <a class="nav-link active" href="product.php">Items</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link active" href="../logout.php">Log Out</a>
       </li>
     </ul>
     
@@ -68,7 +68,14 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 <section id="home">
         <?php
           if(isset($status_logged_in)){ ?>
-              <h3 class="display-5">Welcome User!</h3>
+            <br>
+            <div class="container">
+              <div class="row">
+                <div class="col">
+              <h3 class="display-5">  Welcome User! </h3>
+                 </div>
+              </div>
+              </div>
           <?php }
             ?>
   <div class="slide">
@@ -102,9 +109,9 @@ else{
 ?>
 
 <script src="../js/bootstrap.min.js"></script>
-<script src="jquery.js"></script>
-<script src="popper.js"></script>
-<script src="bootstrap.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/popper.js"></script>
+<script src="../js/bootstrap.js"></script>
 
 
 </body>

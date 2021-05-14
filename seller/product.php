@@ -1,11 +1,19 @@
 <?php
 session_start();
 include_once "../includes/db_conn.php";
-include_once "../includes/function.inc.php";   
+include_once "../includes/function.inc.php"; 
+$status_logged_in = null;
+if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
+    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+    
+    $USER_ID = $_SESSION['userid'];
+    $user_info = GetUserDetails($conn, $USER_ID );
+    $user = GetUserName($conn, $USER_ID );  
+  }
 $searchkey="";
 if(isset($_GET['searchkey'])){
   $searchkey = htmlentities($_GET['searchkey']);
-  echo "<h2>".$searchkey."</h2>";
+
 }
 
 ?>
@@ -16,13 +24,22 @@ if(isset($_GET['searchkey'])){
 <head>
    <title>Seller</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-   <link rel="stylesheet" href="bootstrap.css"> 
+   <link rel="stylesheet" href="../css/bootstrap.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
 </head>
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
-  
+  <a class="nav-link" href="index.php">
+        <input style="border:none;
+                      background:transparent;
+                      color:white;
+                     font-size:2rem;
+                      font-weight:bold;
+                      width:8rem;
+                      ext-decoration: none;" type="text" class="form-control" id="user_name" value = "<?php echo $user['user_name']; ?>"disabled >
+          <span class="sr-only">(current)</span>
+      </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -31,27 +48,30 @@ if(isset($_GET['searchkey'])){
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 
       <li class="nav-item active">
-        <a class="nav-link" href="index.php">Profile <span class="sr-only">(current)</span></a>
+        <a class="nav-link active" href="userprofile.php">Profile</a>
       </li>
+      <!-- <li class="nav-item active">
+        <a class="nav-link active" href="orders.php">Orders</a>
+      </li> -->
+       <li class="nav-item active">
+        <a class="nav-link active" href="receiveorder.php">Orders</a>
       </li>
-            <li class="nav-item active">
-        <a class="nav-link" href="orders.php">Orders</a>
-      </li>  
+
       <li class="nav-item active">
-        <a class="nav-link" href="../about.php">About</a>
+        <a class="nav-link active" href="about.php">About</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="product.php">Items</a>
+        <a class="nav-link active" href="product.php">Items</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="../logout.php">Log Out</a>
+        <a class="nav-link active" href="../logout.php">Log Out</a>
       </li>
     </ul>
     <form action="product.php" method="GET">
-                       <div class="input-group">
-                          <input id="searhbar" name="searchkey" class="form-control" type="text" placeholder="Search">
-                          <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
-                      </div>
+        <div class="input-group">
+            <input id="searhbar" name="searchkey" class="form-control" type="text" placeholder="Search">
+            <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i></button>
+            </div>
     </form>
   </div>
 </nav>
@@ -94,16 +114,16 @@ if(isset($_GET['searchkey'])){
                     switch($_GET['error']){
                         case 1: 
                             if(isset($_GET['itemname'])){
-                               echo "<p class='text-danger'>".$_GET['itemname']." Exists.</p>";
+                               echo "<p class='alert-alert-danger'>".$_GET['itemname']." Exists.</p>";
                             }
                                 break;
-                        case 2: echo "<p class='text-danger'>Adding Record Failed.</p>";
+                        case 2: echo "<p class='alert-alert-danger'>Adding Record Failed.</p>";
                                 break;
-                        case 3: echo "<p class='text-danger'>Checking Item Failed.</p>";
+                        case 3: echo "<p class='alert-alert-danger'>Checking Item Failed.</p>";
                                 break;
                         case 0:
                             if(isset($_GET['itemname'])){
-                               echo "<p class='text-success'>".$_GET['itemname']." has been added.</p>";
+                               echo "<p class='alert-alert-success'>".$_GET['itemname']." has been added.</p>";
                             }
                                 break;
                         default: echo "";
@@ -114,13 +134,16 @@ if(isset($_GET['searchkey'])){
                <div class="card-header">
                    <h3 class="display-6">Add New Item</h3>
                </div>
-             <form action="../includes/AddItem.php" method="POST">
+             <form action="../includes/AddItem.php" method="POST" enctype="multipart/form-data">
                <div class="card-body">
                   <div class="mb-1">
                       <label for="i_ItemName" class="form-label">Item Name</label>
                       <input name="itemname" id="i_ItemName" type="text" class="form-control">
                   </div>
-                  
+                  <div class="mb-1">
+                      <label for="" class="form-label">Image</label>
+                      <input name="itemimagefile" type="file" class="form-control">
+                  </div>
                   <div class="mb-1">
                       <label for="" class="form-label">Item Price</label>
                       <input name="itemprice" type="Number" class="form-control">
@@ -152,7 +175,7 @@ if(isset($_GET['searchkey'])){
                   </div>
                </div>
                <div class="card-footer">
-                   <button class="btn btn-outline-primary"> <i class="bi bi-save"></i> Save </button>
+                   <button class="btn btn-outline-primary" name="AddItem" type="submit"> <i class="bi bi-save"></i> Save </button>
                </div>
              </form>
             </div>
@@ -278,9 +301,9 @@ if(isset($_GET['searchkey'])){
 
 
 <script src="../js/bootstrap.min.js"></script>
-<script src="jquery.js"></script>
-<script src="popper.js"></script>
-<script src="bootstrap.js"></script>
+<script src="../js/jquery.js"></script>
+<script src="../js/popper.js"></script>
+<script src="../js/bootstrap.js"></script>
 
 
 </body>

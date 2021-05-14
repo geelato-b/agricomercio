@@ -40,7 +40,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
             <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <li class="nav-item active">
-                <a class="nav-link" href="userprofile.php">Profile <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="userprofile.php">Profile</a>
             </li>
             </li>
                     <li class="nav-item active">
@@ -78,6 +78,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     else if(isset($_GET['confirm_order'])){
          $sql_order_list = "SELECT 
                            o.order_number
+                        ,o.order_status
                         , SUM(o.item_qty) total_item_qty
                         , SUM(i.item_price * o.item_qty) total_net_amt
                         FROM orders o
@@ -114,7 +115,9 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         <td><?php echo $row['order_number']; ?></td>
                         <td><?php echo $row['total_item_qty']; ?></td>
                         <td><?php echo $row['total_net_amt']; ?></td>
-                        <td><?php echo $row['order_status'] = 'P' ? 'Pending for Delivery' : 'Delivered' ;?></td>
+                        <td>
+                        <?php echo $row['order_status'] == 'P' ? 'Pending for Delivery' : 'Delivered' ;?>
+                        </td>
                     </tr>
                 <?php }?>
 
@@ -168,9 +171,10 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                     <th>Item</th>
                     <th>Qty</th>
                     <th>Total Amount</th>
+                    <th>Delete</th>
                 </thead>
-                
-                <tbody>
+    
+            <tbody>
    <?php
         while($row = mysqli_fetch_assoc($resultData)){  ?>
                 <tr>
@@ -192,6 +196,16 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                 <td>
                     <div class="Checkout_card">
                         Php <?php echo number_format($row['subtotal_price'],2); ?>
+                    </div>
+                </td>
+                <td>
+                    <div class="Checkout_card">
+                    <form action="../includes/deleteorderitem.php" method="get">
+                        <input hidden type="text" name="order_id" value="<?php echo $row['order_id']; ?>" >
+                        <div class="input-group">  
+                            <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></i> </button>
+                        </div>
+                    </form>
                     </div>
                 </td>
 
@@ -218,7 +232,10 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     <?php }
     ?>
 
-
+ <script src="../js/bootstrap.bundle.js"></script>
+    <script src="../js/jquery.js"></script> 
+    <script src="../js/popper.js"></script>
+    <script src="../js/bootstrap.js"></script>
     
 </body>
 </html>
