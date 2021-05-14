@@ -31,76 +31,93 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 <body>
     
 <header id="header">
-    <div class="right">
-        <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">
-        
-    </div>
-
-    <div class="nav-bar">
-            <ul>
-            <li><a href="index.php">Home</a></li>
-            <li><a href="product.php">Product</a></li>
-            <li><a href="services.php">Services</a></li>
-            <li><a href="about.php">About</a></li>
-            </ul>
-        </div>
-
-    <div class="left">
-    <div class="dropdown">
-    <a href="cart.php"><div class="fas fa-shopping-cart"></div>
-            <?php 
-                        $sql_cart_count = "SELECT COUNT(*) cartcount FROM `cart` WHERE status = 'P' AND user_id = ?;";
-                        $stmt=mysqli_stmt_init($conn);
-    
-                    if (!mysqli_stmt_prepare($stmt, $sql_cart_count)){
-                        header("location: index.php?error=stmtfailed");
-                        exit();
-                    }
-                        mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']);
-                        mysqli_stmt_execute($stmt);
-
-                        $resultData = mysqli_stmt_get_result($stmt);
-
-                        if($row = mysqli_fetch_assoc($resultData)){ ?>
-                            <span class="badge bg-danger"><?php echo $row['cartcount']; ?></span>
-                        <?php }
-                       
-                        ?>
-            
-            </a>
-            <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-            <div class="fas fa-user"></div>
-            </button>
-            
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+    <nav class="navbar navbar-expand-lg ">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">
+        <div class="right">
+        <img clas ="logo" src="img/logo2.png" alt="" width="100px" height="100px">
                
-                <?php
-                if(isset($status_logged_in)){
-                          switch($status_logged_in['usertype']){
-                              case 'Customer':
-                          ?>
-                           <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
-                           <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
-                 <?php        break;
-                              case 'Admin': 
-                               header("location: admin/admin.php");
+               
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span   class="navbar-toggler-icon"><i style= "color:black; " class="fas fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="product.php">Products</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="services.php">Services</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="About.php">About Us</a>
+            </li>
+            
+        </ul>
+
+        <div class="dropdown">
+            <a href="cart.php"><div class="fas fa-shopping-cart"></div>
+                <?php 
+                            $sql_cart_count = "SELECT COUNT(*) cartcount FROM `cart` WHERE status = 'P' AND user_id = ?;";
+                            $stmt=mysqli_stmt_init($conn);
+        
+                        if (!mysqli_stmt_prepare($stmt, $sql_cart_count)){
+                            header("location: index.php?error=stmtfailed");
+                            exit();
+                        }
+                            mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']);
+                            mysqli_stmt_execute($stmt);
+
+                            $resultData = mysqli_stmt_get_result($stmt);
+
+                            if($row = mysqli_fetch_assoc($resultData)){ ?>
+                                <span class="badge bg-danger"><?php echo $row['cartcount']; ?></span>
+                            <?php }
+                        
+                            ?>
+                
+                </a>
+                
+                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
+                <div class="fas fa-user"></div>
+                </button>
+                
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                
+                    <?php
+                    if(isset($status_logged_in)){
+                            switch($status_logged_in['usertype']){
+                                case 'Customer':
+                            ?>
+                            <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
+                            <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
+                    <?php        break;
+                                case 'Admin': 
+                                header("location: admin/admin.php");
+                                    break;
+                                case 'Seller':
+                                header("location: seller/index.php");
                                 break;
-                              case 'Seller':
-                               header("location: seller/index.php");
-                               break;
-                          }
-                }
-                else{ ?>
-                    <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
-                    <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
-                <?php }
-                ?>
-            </ul>
-
-</div>
-   
-
+                            }
+                    }
+                    else{ ?>
+                        <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
+                        <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
+                    <?php }
+                    ?>
+                
+                </ul>
+            </div>
+        </div>
+        
+        </div>
     </div>
+    </nav>
 </header>
 
 <section id = "custpage">
@@ -131,40 +148,23 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
         </nav>
         <div class="tab-content" id="nav-tabContent">
         <div class="tab-pane fade" id="nav-receive" role="tabpanel" aria-labelledby="nav-receive-tab">
-    <?php
-    if(isset($_GET['process_checkout'])){
-        $sql_upd = "UPDATE `cart`
-                        SET status = 'X'
-                    WHERE cart_status = 'C'
-                      AND status <> 'X'
-                      AND user_id = ? ;";
-        $stmt_upd = mysqli_stmt_init($conn);
-        if(!mysqli_stmt_prepare($stmt_upd, $sql_upd)){
-        header("location: ?error=8"); //update failed
-        exit();
-        }
-        mysqli_stmt_bind_param($stmt_upd,"s",$_SESSION['userid']);
-        mysqli_stmt_execute($stmt_upd);
-        header("location: ?customer_page=1");
-
-    }
-     
-    else{ 
+    <?php 
         $sql_cart_list = "SELECT 
                          i.item_name
                         , i.item_img
                         , i.item_price
+                        ,c.cart_id
                         , c.item_qty
                         , c.user_id
                         , c.item_id
                         , c.status
+                        , c.cart_status
                         , (i.item_price * c.item_qty) subtotal_price
                         FROM cart c
                         JOIN items i
                         ON i.item_id = c.item_id
                         WHERE  c.user_id= ? 
-                        AND c.status = 'C'
-                        AND c.cart_status = 'C'; ";
+                        AND c.status = 'C'; ";
                         $stmt=mysqli_stmt_init($conn);
         
                 if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
@@ -180,6 +180,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                    <th> Items</th>
                    <th> Quantity </th>
                    <th> Total Net Amount </th>
+                   <th> status </th>
                </thead>
     <tbody>
         <?php
@@ -208,13 +209,23 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                 Php <?php echo number_format($row['subtotal_price'],2); ?>
             </div>
            </td>
+
+           <td>
+            <div class="cart_card">
+            <form action="includes/updatecart&order.php" method="post">
+                            <input hidden type="text" name="cart_id" value="<?php echo $row['cart_id']; ?>">
+                            <input hidden type="number"  name="item_qty" min="1" value="<?php echo $row['item_qty']; ?>">
+                            <input type="Hidden" name="confirm_cart" value="<?php echo $row['cart_status'] == 'C' ? 'X' : 'C' ; ?>">
+                            <p class="lead"><?php echo $row['cart_status'] == 'C' ? 'For Confirmation' : 'Confirmed' ; ?></p>
+                            <button class="btn btn-success"> <i class="fas fa-clipboard-check"></i>  <?php echo $row['cart_status'] == 'C' ? 'Confirm' : 'Unconfirm' ; ?> </button>
+                            </a>
+                </form>
+            </div>
+           </td>
         </tr>
     <?php } ?>
     </tbody>
     </table>
-                 <div class="d-grid gap-2 col-6 mx-auto" style="margin-top:2rem; padding-bottom:5rem;">
-                    <a href="?process_checkout" type="button" class="btn btn-success" type="button">Orders Receive</a>
-                 </div>
         </div>
         <div class="tab-pane fade" id="nav-complete" role="tabpanel" aria-labelledby="nav-complete-tab">
         <?php
@@ -226,13 +237,14 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         , c.user_id
                         , c.item_id
                         , c.status
+                        , c.cart_status
                         , (i.item_price * c.item_qty) subtotal_price
                         FROM cart c
                         JOIN items i
                         ON i.item_id = c.item_id
                         WHERE  c.user_id= ? 
                         AND c.status = 'X'
-                        AND c.cart_status = 'C'; ";
+                        AND c.cart_status = 'X'; ";
                         $stmt=mysqli_stmt_init($conn);
         
                 if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
@@ -248,6 +260,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                    <th> Items</th>
                    <th> Quantity </th>
                    <th> Total Net Amount </th>
+                   <th> Status </th>
                </thead>
     <tbody>
         <?php
@@ -274,6 +287,12 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
            <td>
             <div class="cart_card">
                 Php <?php echo number_format($row['subtotal_price'],2); ?>
+            </div>
+           </td>
+
+           <td>
+            <div class="cart_card">
+            <?php echo $row['cart_status'] == 'X' ?  'Delivered' : 'Not Delivered' ;?>
             </div>
            </td>
         </tr>
@@ -286,18 +305,13 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
         </div>
 
 </section>
-    <script src="js/bootstrap.min.js"></script>
 
-    <script src="js/bootstrap.bundle.js"></script>
+<script src="js/bootstrap.bundle.js"></script>
     <script src="js/jquery.js"></script> 
-    <script src="js/main.js"></script>
-    
+    <script src="js/popper.js"></script>
+    <script src="js/bootstrap.js"></script>
+
+
+
 </body>
 </html>
-
-
-<?php    
-
-        }    
-
-?>
