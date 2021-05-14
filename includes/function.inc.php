@@ -51,7 +51,7 @@ $stmt=mysqli_stmt_init($conn);
 function GetUserDetails($conn, $userid ){
     $err;
     $sql="SELECT * FROM `user_info` 
-    WHERE  user_ref_num = ?;
+    WHERE  user_id = ?;
     ";
 
 $stmt=mysqli_stmt_init($conn);
@@ -79,9 +79,9 @@ $stmt=mysqli_stmt_init($conn);
 
 function GetUserName($conn, $userid ){
     $err;
-    $sql= "SELECT * FROM `users` 
-    WHERE  user_ref_num = ?;";
-
+    $sql= "SELECT `user_id`, `user_name`, `status` FROM `users` 
+    WHERE  user_id = ?;
+    ";
 
 $stmt=mysqli_stmt_init($conn);
 
@@ -127,7 +127,31 @@ function AddItem($conn,$USER_ID,$p_item_name,$p_item_desc,$p_item_price){
 
 }
 
+function checkImage($img_file, $target_dir, $targetimagename){
+    $stat = array(
+        'fileSizeOk' => '',
+        'fileExists' => '',
+        'fileType'   => ''
+    );
 
+    $tmp_filename = $img_file['tmp_name'];
+    $file_size = $img_file['size'];
+    $img_size = getimagesize($img_file['tmp_name']);
+    $img_mime = $img_size['mime'];
+    $acceptable_files = array('image/jpeg','image/png','image/jpg');
+
+    if (! in_array($img_mime, $acceptable_files)) {
+        $stat['fileType'] = "This file is not an image .[jpg / png ]only";
+    }
+    if ($img_size === false || $file_size >500000) {
+        $stat['fileSizeOk'] = "image size is not acceptable";
+    }
+    if (file_exists($target_dir."/".$targetimagename)) {
+        $stat['fileExists'] = "file Exists. Change the Item Name.";
+    }
+
+    return $stat;
+}
 
 function getCartSummary($conn, $user_id){
     $sql_cart_list = "SELECT c.user_id
@@ -138,7 +162,6 @@ function getCartSummary($conn, $user_id){
                           ON c.item_id = i.item_id
                        WHERE c.user_id = ? 
                           AND c.status = 'P'
-                          AND c.cart_status = 'C'
                     GROUP BY c.user_id; ";
                       $stmt=mysqli_stmt_init($conn);
     
