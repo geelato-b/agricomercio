@@ -1,4 +1,5 @@
 <?php
+session_start();
 include_once ('includes/db_conn.php');
 include_once ('includes/function.inc.php');
 ?>
@@ -119,7 +120,7 @@ include_once ('includes/function.inc.php');
                     ?>
                     
                     <div class="alert alert-light" role="alert">
-                    <?php echo $_SESSION['status']; ?>
+                    <?php echo $_SESSION['status'] = "<h2>Successfully Registered. You can Log In now!</h2>"; ?>
                     </div>
                     
                     <?php
@@ -127,6 +128,7 @@ include_once ('includes/function.inc.php');
                         unset($_SESSION['status']);
                     }
                     ?>
+            
                 <div class="form-box">
                     <div class="button-box">
                     
