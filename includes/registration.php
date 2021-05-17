@@ -2,6 +2,7 @@
 //let’s put security aside first just to shorten the explanation.
 //declare a new variable where we will store the POST variable values.
 session_start();
+include_once "function.inc.php";
 $usrname= $_POST['usrname'];
 $psword= $_POST['psword'];
 $cpsword= $_POST['cpsword'];
@@ -30,30 +31,19 @@ if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
 }
 
-$sql_check = "SELECT users_name
-                    FROM users
-                   WHERE users_name = ?
-                  ;";
-    $stmt_chk = mysqli_stmt_init($conn);
-    if(!mysqli_stmt_prepare($stmt_chk, $sql_check)){
-        header("location: index.php?error=3"); //statement failed
-        exit();
-    }
-    mysqli_stmt_bind_param($stmt_chk,"s",$usrname);
-    mysqli_stmt_execute($stmt_chk);
-    $chk_result=mysqli_stmt_get_result($stmt_chk);
-    $arr=array();
-    while($row = mysqli_fetch_assoc($chk_result)){
-        array_push($arr,$row);
-    }
-    if(!empty($arr)){
-        $_SESSION['status'] = "Username already exists.";
-		header("location:../form.php");
-    }else{
-    	exit();
-    }
 	
-		
+		if(cidExists($conn, $usrname)!== false){
+			$_SESSION['status'] = "Username already exist.";
+			header("location:../form.php?error=Username is already taken");
+			exit();
+
+		}
+		if(passExists($conn, $psword)!== false){
+			$_SESSION['status'] = "Password already exist.";
+			header("location:../form.php?error=Password is already taken");
+			exit();
+
+		}
 		if($psword == $cpsword){
 			
 		// Here goes your SQL for INSERT the values will be the variables declared.
