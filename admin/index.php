@@ -9,7 +9,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     $USER_ID = $_SESSION['userid'];
     $user_info = GetUserDetails($conn, $USER_ID );
     $user = GetUserName($conn, $USER_ID );
-}
+
 ?>
 
 <!DOCTYPE html>
@@ -106,6 +106,15 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/jquery.js"></script> 
     <script src="js/main.js"></script>
+
+    <?php    
+
+    }
+
+else{
+    header("location: ../sign_in.php");  
+}
+?>
     
 </body>
 </html>
