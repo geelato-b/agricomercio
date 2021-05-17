@@ -15,7 +15,6 @@ if(isset($_GET['searchkey'])){
   $searchkey = htmlentities($_GET['searchkey']);
 
 }
-
 ?>
 
 
@@ -249,22 +248,31 @@ if(isset($_GET['searchkey'])){
       <div class="row px-3">
         
           <?php
-        foreach($arr as $key => $val){ ?>
+        foreach($arr as $key => $row){ ?>
         <div class="col-3">
           <br>
             <div class="card">
-                <img src="../img/<?php echo $val['item_img']; ?>" alt="1 x 1" width="100px" class="card-img-top">
+                <img src="../img/<?php echo $row['item_img']; ?>" alt="1 x 1" width="100px" class="card-img-top">
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $val['item_name']?></h5>
-                    <em class="card-text" > Php <?php echo number_format($val['item_price'],2); ?> </em>
+                    <h5 class="card-title"><?php echo $row['item_name']?></h5>
+                    <em class="card-text" > Php <?php echo number_format($row['item_price'],2); ?> </em>
                 </div>
                 <div class="card-footer">
-                    <form action="../includes/DeleteSellerItem.php" method="get">
-                        <input hidden type="text" name="item_id" value="<?php echo $val['item_id']; ?>" >
-                        <div class="input-group">  
-                            <button type="submit" class="btn btn-primary"><i class="fas fa-trash-alt"></i></i> </button>
-                        </div>
+                    <form action="../includes/updateitemstatus.php" method="post">
+                            <input hidden type="text" name="item_id" value="<?php echo $row['item_id']; ?>">
+                            <input type="number"  name="item_price"  value="<?php echo $row['item_price']; ?>">
+                            <input type="Hidden" name="new_item_status" value="<?php echo $row['item_status'] == 'A' ? 'NA' : 'A' ; ?>">
+                            <p class="lead"><?php echo $row['item_status'] == 'A' ? 'Available' : 'Not Available' ; ?></p>
+                            <button class="btn btn-success"> <?php echo $row['item_status'] == 'A' ? 'Available' : 'Not Available' ; ?> </button>
+                            </a>
                     </form>
+                    <br>
+                    <form action="../includes/DeleteSellerItem.php" method="get">
+                        <input hidden type="text" name="item_id" value="<?php echo $row['item_id']; ?>" >
+                        <button type="submit" class="btn btn-success"><i class="fas fa-trash-alt"></i></i> </button>
+                    </form>
+                   
+                    
               </div>
         </div>
    </div>
@@ -284,15 +292,8 @@ if(isset($_GET['searchkey'])){
   </div>
 </div>
 
-
-
-   
 </div>
 </main>
-
-
-
-
 </div>
 </div>
 
