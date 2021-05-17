@@ -2,6 +2,9 @@
 //let’s put security aside first just to shorten the explanation.
 //declare a new variable where we will store the POST variable values.
 session_start();
+
+include_once "function.inc.php";
+
 $usrname= $_POST['usrname'];
 $psword= $_POST['psword'];
 $cpsword= $_POST['cpsword'];
@@ -13,9 +16,11 @@ $hnsb =$_POST['hnsb'];
 $city =$_POST['city'];
 $prv =$_POST['prv'];
 $pc =$_POST['pc'];
+
 $status =$_POST['status'];
 $user_ref_number = random_int(1000, 99999999999) . rand(1000, 999999) . hex2bin($usrname);
 $res= NULL;
+
 
 
 /* if you can observe, the ‘fname’ and ‘lname’ inside the POST is the “name” attribute
@@ -31,31 +36,48 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
 }
- 
-if($psword == $cpsword){
-// Here goes your SQL for INSERT the values will be the variables declared.
-$sql = "INSERT INTO `users` ( `user_ref_num`, `user_name`, `password`, `status`, `user_type`)
-VALUES ( '{$user_ref_number}', '${usrname}', '${psword}', 'Active', '${usertype}');" ;
 
-$sql .="INSERT INTO  `user_info` 
-(  `user_ref_num`, `user_fullname`,`gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) 
- VALUES('{$user_ref_number}','${fname}', '${gender}', '${contact_no}', '${hnsb}', '${city}', '${prv}', '${pc}', '${usertype}');";
 
-// Check if the query successfully ran.
-if (mysqli_multi_query($conn, $sql)) {
-    // if no error. Then new record created.
-     $_SESSION['status'] = "<h2>Successfully Registered. You can Log In now!</h2>";
-    header("location: ../sign_in.php");
-    } else {
-    // else then error will show up.
-    echo "Error: " . $sql . mysqli_error($conn);
-    }
-    
-}
-else{
-    $_SESSION['status'] = "Password don't match.";
-    header("location:../form.php");
-    }  	
+	
+		if(cidExists($conn, $usrname)!== false){
+			$_SESSION['status'] = "Username already exist.";
+			header("location:../form.php?error=Username is already taken");
+			exit();
+
+		}
+		if(passExists($conn, $psword)!== false){
+			$_SESSION['status'] = "Password already exist.";
+			header("location:../form.php?error=Password is already taken");
+			exit();
+
+		}
+		if(passMatch($psword, $cpsword)!== false){
+			
+			$_SESSION['status'] = "Password don't match.";
+			header("location:../form.php?error=Password don't match");
+				
+			
+		}
+		else{
+			// Here goes your SQL for INSERT the values will be the variables declared.
+			$sql = "INSERT INTO `users` (`user_name`, `password`, `user_type`)
+					VALUES ( '${usrname}', '${psword}', '${usertype}');" ;
+
+					$sql .="INSERT INTO  `user_info` 
+					(`user_fullname`,`gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) 
+		 			VALUES('${fname}', '${gender}', '${contact_no}', '${hnsb}', '${city}', '${prv}', '${pc}', '${usertype}');";
+		 			// Check if the query successfully ran.
+					if (mysqli_multi_query($conn, $sql)) {
+		   			 // if no error. Then new record created.
+					$_SESSION['status'] = "<h2>Successfully Registered. You can Log In now!</h2>";
+		      		 header("location: ../sign_in.php");
+					} 
+					else {
+		    		// else then error will show up.
+		   		 	echo "Error: " . $sql . mysqli_error($conn);
+					}
+			
+			}  	
 
 
 

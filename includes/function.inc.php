@@ -18,6 +18,59 @@ function createUser($conn, $username, $password, $usertype){
     return true;
 
 }
+function cidExists($conn, $usrname){
+    $sql = "SELECT * FROM `users`  WHERE `user_name` = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../form.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s", $usrname);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+         return $row;
+    } else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+ }
+ function passExists($conn, $psword){
+    $sql = "SELECT * FROM `users`  WHERE `password` = ?;";
+    $stmt = mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)) {
+        header("location: ../form.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s", $psword);
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($resultData)) {
+         return $row;
+    } else {
+        $result = false;
+        return $result;
+    }
+
+    mysqli_stmt_close($stmt);
+ }
+
+function passMatch($psword, $cpsword) {
+    $result;
+    if($psword !== $cpsword) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
+
 function uidExists($conn, $username, $password ){
     $err;
     $sql="SELECT * FROM `users` 
