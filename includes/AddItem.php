@@ -63,14 +63,14 @@ include_once "function.inc.php";
     }
     else{
         $sql_ins = "INSERT INTO `items`
-                  (`item_name`, `item_desc`, `item_price`, `cat_id`, `item_status`, `user_id`, `item_img` ) 
+                  (`item_name`,`cat_id`, `item_desc`, `item_status`, `item_price`, `user_id`, `item_img` ) 
                    VALUES (?,?,?,?,?,?,?);";
         $stmt_ins = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt_ins, $sql_ins)){
         header("location: ../seller/product.php?error=2&itemname={$itemname}"); //insert failed
         exit();
         }
-        mysqli_stmt_bind_param($stmt_ins,"sssssss",$itemname,$itemdesc,$itemPrice,$itemcat,$itemstat,$user_id,$target_filename);
+        mysqli_stmt_bind_param($stmt_ins,"sssssss",$itemname,$itemcat,$itemdesc,$itemstat,$itemPrice,$user_id,$target_filename);
         mysqli_stmt_execute($stmt_ins);
 
         if (!$file_err_count) {
