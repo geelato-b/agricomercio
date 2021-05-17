@@ -44,12 +44,16 @@ die("Connection failed: " . mysqli_connect_error());
 			exit();
 
 		}
-		if($psword == $cpsword){
+		if(passMatch($psword, $cpsword)!== false){
 			
-		// Here goes your SQL for INSERT the values will be the variables declared.
+			$_SESSION['status'] = "Password don't match.";
+			header("location:../form.php?error=Password don't match");
+				
 			
-			
-				$sql = "INSERT INTO `users` (`user_name`, `password`, `user_type`)
+		}
+		else{
+			// Here goes your SQL for INSERT the values will be the variables declared.
+			$sql = "INSERT INTO `users` (`user_name`, `password`, `user_type`)
 					VALUES ( '${usrname}', '${psword}', '${usertype}');" ;
 
 					$sql .="INSERT INTO  `user_info` 
@@ -66,10 +70,6 @@ die("Connection failed: " . mysqli_connect_error());
 		   		 	echo "Error: " . $sql . mysqli_error($conn);
 					}
 			
-		}
-		else{
-			$_SESSION['status'] = "Password don't match.";
-			header("location:../form.php");
 			}  	
 
 

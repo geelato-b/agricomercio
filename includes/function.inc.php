@@ -61,6 +61,15 @@ function cidExists($conn, $usrname){
     mysqli_stmt_close($stmt);
  }
 
+function passMatch($psword, $cpsword) {
+    $result;
+    if($psword !== $cpsword) {
+        $result = true;
+    } else {
+        $result = false;
+    }
+    return $result;
+}
 
 function uidExists($conn, $username, $password ){
     $err;
