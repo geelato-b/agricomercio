@@ -2,6 +2,7 @@
 session_start();
 include_once ('includes/db_conn.php');
 include_once ('includes/function.inc.php');
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
