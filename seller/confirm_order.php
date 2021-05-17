@@ -64,8 +64,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     if(isset($_GET['process_order'])){
         $sql_upd = "UPDATE `orders`
                         SET status = 'C'
-                    WHERE order_status = 'P'
-                      AND user_id = ? ;";
+                    WHERE  user_id = ? ;";
         $stmt_upd = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt_upd, $sql_upd)){
         header("location: ?error=8"); //update failed
@@ -78,7 +77,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     else if(isset($_GET['confirm_order'])){
          $sql_order_list = "SELECT 
                            o.order_number
-                        ,o.order_status
+                        ,o.tracking_order_status
                         , SUM(o.item_qty) total_item_qty
                         , SUM(i.item_price * o.item_qty) total_net_amt
                         FROM orders o
@@ -86,7 +85,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         ON o.item_id = i.item_id
                         WHERE o.user_id = ? 
                         AND o.status = 'C'
-                        AND o.order_status = 'P'
+                        AND o.tracking_order_status = 'P'
                         AND o.order_number IS NOT NULL
                         GROUp BY o.order_number; ";
                         $stmt=mysqli_stmt_init($conn);
@@ -113,10 +112,10 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                 <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
                     <tr>
                         <td><?php echo $row['order_number']; ?></td>
-                        <td><?php echo $row['total_item_qty']; ?></td>
+                        <td><?php echo $row['total_item_qty'];  ?>pcs</td>
                         <td><?php echo $row['total_net_amt']; ?></td>
                         <td>
-                        <?php echo $row['order_status'] == 'P' ? 'Pending for Delivery' : 'Delivered' ;?>
+                        <?php echo $row['tracking_order_status'] == 'P' ? 'Pending for Delivery' : 'Delivered' ;?>
                         </td>
                     </tr>
                 <?php }?>
@@ -149,7 +148,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         ON o.item_id = i.item_id
                         WHERE o.user_id = ? 
                         AND o.status = 'P'
-                        AND o.order_status = 'P'; ";
+                        AND o.tracking_order_status = 'P'; ";
                         $stmt=mysqli_stmt_init($conn);
         
                 if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
