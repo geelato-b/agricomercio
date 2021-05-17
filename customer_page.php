@@ -228,6 +228,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     </table>
         </div>
         <div class="tab-pane fade" id="nav-complete" role="tabpanel" aria-labelledby="nav-complete-tab">
+
         <?php
         $sql_cart_list = "SELECT 
                          i.item_name
@@ -299,10 +300,9 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     <?php } ?>
     </tbody>
     </table>
-        
-        </div>
-        
-        </div>
+
+</div>
+</div>
 
 </section>
 
@@ -315,3 +315,4 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 
 </body>
 </html>
+
