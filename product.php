@@ -175,7 +175,8 @@ if (isset($_GET['searchkey'])){
                  , i.item_img
               FROM `items` i
               JOIN `category` c
-                ON i.cat_id = c.cat_id ;";
+                ON i.cat_id = c.cat_id 
+                AND i.item_status = 'A';";
     
         //initialize connection to the database.
     $stmt=mysqli_stmt_init($conn);
@@ -199,6 +200,7 @@ if (isset($_GET['searchkey'])){
              JOIN `category` c
                ON i.cat_id = c.cat_id
                WHERE i.item_name= ?
+               AND i.item_status = 'A'
                OR c.cat_desc= ?;";
     
                $stmt=mysqli_stmt_init($conn);
