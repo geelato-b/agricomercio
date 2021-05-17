@@ -1,6 +1,15 @@
 <?php 
 session_start();
 include_once ('../includes/db_conn.php');
+include_once  ('../includes/function.inc.php');
+$status_logged_in = null;
+if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
+    $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
+    
+    $USER_ID = $_SESSION['userid'];
+    $user_info = GetUserDetails($conn, $USER_ID );
+    $user = GetUserName($conn, $USER_ID );
+}
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +41,6 @@ include_once ('../includes/db_conn.php');
                 </button>
                 
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                    <a href="../sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
                     <a href="../logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
                 </ul>
         </div>
@@ -51,8 +59,9 @@ include_once ('../includes/db_conn.php');
     </div>
   </div>
 
-  <a href="admin.php"><i class="fas fa-home"></i> Dashboard</a>
+  <a href="index.php"><i class="fas fa-home"></i> Dashboard</a>
   <a href="user.php"><i class="fas fa-users"></i> User Management</a>
+  <a href="../logout.php"><i class="fas fa-angle-left"></i> logout</a>
 
   
 </div>
@@ -79,12 +88,9 @@ include_once ('../includes/db_conn.php');
       <div class="row" id="cards">
        <div class="box_cards">
          <h2>Generated Report</h2>
-            <div class="card4">
-            <a href="">Sales</a>
-            </div>
-
+          
             <div class="card5">
-            <a href="">Income</a>
+            <a href="generated_report.php">Income</a>
             </div>
         
        </div>

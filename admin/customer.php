@@ -26,18 +26,16 @@ if(isset($_GET['searchkey'])){
 
 <header id="header">
 
-<div class="right">
-    <div class="fas fa-bars" id="bars"></div>
+<section id= "search">
+        <div class = "container-fluid">
+            <form action="customer.php" method="GET" class="d-flex">
+                <input id="searchbar" name="searchkey" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+            </form>
 
-</div>
-<div class="left">
-    <form action="customer.php" method="GET" class="d-flex">
-        <input id="searchbar" name="searchkey" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      
+        </div>
+    </section>
 
-</div>
 </header>
 
 <!-- Side navigation -->
@@ -51,8 +49,9 @@ if(isset($_GET['searchkey'])){
     </div>
   </div>
 
-  <a href="admin.php"><i class="fas fa-home"></i> Dashboard</a>
+  <a href="index.php"><i class="fas fa-home"></i> Dashboard</a>
   <a href="user.php"><i class="fas fa-users"></i> User Management</a>
+  <a href="../logout.php"><i class="fas fa-angle-left"></i> logout</a>
 
   
   

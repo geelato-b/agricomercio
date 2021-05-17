@@ -26,18 +26,16 @@ if(isset($_GET['searchkey'])){
 
 <header id="header">
 
-<div class="right">
-    <div class="fas fa-bars" id="bars"></div>
-    
+<section id= "search">
+        <div class = "container-fluid">
+            <form action="seller.php" method="GET" class="d-flex">
+                <input id="searchbar" name="searchkey" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+            </form>
 
-</div>
-<div class="left">
-      <form action="seller.php" method="GET" class="d-flex">
-        <input id="searchbar" name="searchkey" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+        </div>
+    </section>
 
-</div>
 </header>
 
 <!-- Side navigation -->
@@ -51,8 +49,9 @@ if(isset($_GET['searchkey'])){
     </div>
   </div>
 
-  <a href="admin.php"><i class="fas fa-home"></i> Dashboard</a>
+  <a href="index.php"><i class="fas fa-home"></i> Dashboard</a>
   <a href="user.php"><i class="fas fa-users"></i> User Management</a>  
+  <a href="../logout.php"><i class="fas fa-angle-left"></i> logout</a>
 </div>
 
 
@@ -69,6 +68,7 @@ if(isset($_GET['searchkey'])){
               if($searchkey == ""){
               $sql =" SELECT 
               `user_info_id`,
+              `user_ref_num`,
               `user_fullname`, 
               `user_id`, 
               `gender`, 
@@ -92,6 +92,7 @@ if(isset($_GET['searchkey'])){
             else{
               $sql =" SELECT 
               `user_info_id`,
+              `user_ref_num`,
               `user_fullname`, 
               `user_id`, 
               `gender`, 
@@ -134,6 +135,7 @@ if(isset($_GET['searchkey'])){
                   echo "<table class='table'>";
                   echo "<thead>";
                   echo "<th> User Info Id </th>";
+                  echo "<th> User Reference Number </th>";
                   echo "<th> Fullname</th>";
                   echo "<th> Gender </th>";
                   echo "<th> House Number, Street, Brgy </th>";
@@ -144,6 +146,7 @@ if(isset($_GET['searchkey'])){
                   foreach($arr as $key => $val){
                   echo "<tr>";
                   echo "<td>" . $val ['user_info_id']         . "</td>";
+                  echo "<td>" . $val ['user_ref_num']         . "</td>";
                   echo "<td>" . $val ['user_fullname']   . "</td>";
                   echo "<td>" . $val ['gender']          .  " </td> ";
                   echo "<td>" . $val ['house_no_street_brgy'] .  " </td>";

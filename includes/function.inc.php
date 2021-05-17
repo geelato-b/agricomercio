@@ -104,7 +104,7 @@ $stmt=mysqli_stmt_init($conn);
 function GetUserDetails($conn, $userid ){
     $err;
     $sql="SELECT * FROM `user_info` 
-    WHERE  user_id = ?;
+    WHERE  user_ref_num = ?;
     ";
 
 $stmt=mysqli_stmt_init($conn);
@@ -132,9 +132,9 @@ $stmt=mysqli_stmt_init($conn);
 
 function GetUserName($conn, $userid ){
     $err;
-    $sql= "SELECT `user_id`, `user_name`, `status` FROM `users` 
-    WHERE  user_id = ?;
-    ";
+    $sql= "SELECT * FROM `users` 
+    WHERE  user_ref_num = ?;";
+
 
 $stmt=mysqli_stmt_init($conn);
 
@@ -215,6 +215,7 @@ function getCartSummary($conn, $user_id){
                           ON c.item_id = i.item_id
                        WHERE c.user_id = ? 
                           AND c.status = 'P'
+                          AND c.cart_status = 'C'
                     GROUP BY c.user_id; ";
                       $stmt=mysqli_stmt_init($conn);
     
@@ -232,5 +233,88 @@ function getCartSummary($conn, $user_id){
         return $arr;               //this is the return value
         mysqli_stmt_close($stmt);  //close the mysqli_statement
 }
+
+
+function getOrderSummary($conn ){
+    $sql_order_list = "SELECT
+                           sum(i.item_price * o.item_qty) total_price
+                           , sum(o.item_qty) total_qty
+                        FROM orders o
+                        JOIN items i
+                          ON o.item_id = i.item_id
+                       WHERE o.status = 'C'
+                          AND o.order_status = 'P';";
+                      $stmt=mysqli_stmt_init($conn);
+    
+                    if (!mysqli_stmt_prepare($stmt, $sql_order_list)){
+                        header("location: index.php?error=stmtfailed");
+                        exit();
+                    }
+        mysqli_stmt_execute($stmt);
+        $resultData = mysqli_stmt_get_result($stmt);
+        $arr = array();            //initialize an empty array
+        if($row = mysqli_fetch_assoc($resultData)){
+            array_push($arr,$row);            
+        }
+        return $arr;               //this is the return value
+        mysqli_stmt_close($stmt);  //close the mysqli_statement
+}
+
+function getCatList($conn){
+    $err;
+    $sql = "SELECT * FROM category";
+    
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: products.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+    $arr = array();
+    while($row = mysqli_fetch_assoc($resultData)){
+            array_push($arr,$row);
+    }
+    return $arr;
+    mysql_stmt_close($stmt);
+
+}
+
+function getItemListPerCat($conn,$cat_id){
+    $err;
+    $sql = "SELECT i.item_id
+                 , i.item_name
+                 , i.item_desc
+                 , i.cat_id
+                 , i.item_price
+                 , i.item_img
+                 ,ct.cat_desc
+             FROM items i
+             JOIN category ct
+               on (i.cat_id = ct.cat_id)
+            WHERE i.cat_id = ?
+              AND i.item_status = 'A';";
+    
+    $stmt = mysqli_stmt_init($conn);
+
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("location: product.php?error=stmtfailed");
+        exit();
+    }
+    mysqli_stmt_bind_param($stmt, "s" ,$cat_id); 
+    mysqli_stmt_execute($stmt);
+
+    $resultData = mysqli_stmt_get_result($stmt);
+    $arr = array();
+    while($row = mysqli_fetch_assoc($resultData)){
+            array_push($arr,$row);
+    }
+    return $arr;
+    mysql_stmt_close($stmt);
+
+}	
+
 
 

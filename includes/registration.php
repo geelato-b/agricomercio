@@ -2,7 +2,9 @@
 //let’s put security aside first just to shorten the explanation.
 //declare a new variable where we will store the POST variable values.
 session_start();
+
 include_once "function.inc.php";
+
 $usrname= $_POST['usrname'];
 $psword= $_POST['psword'];
 $cpsword= $_POST['cpsword'];
@@ -14,6 +16,10 @@ $hnsb =$_POST['hnsb'];
 $city =$_POST['city'];
 $prv =$_POST['prv'];
 $pc =$_POST['pc'];
+
+$status =$_POST['status'];
+$user_ref_number = random_int(1000, 99999999999) . rand(1000, 999999) . hex2bin($usrname);
+$res= NULL;
 
 
 
@@ -30,6 +36,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 if (!$conn) {
 die("Connection failed: " . mysqli_connect_error());
 }
+
 
 	
 		if(cidExists($conn, $usrname)!== false){
@@ -73,6 +80,6 @@ die("Connection failed: " . mysqli_connect_error());
 			}  	
 
 
-    
-    mysqli_close($conn);
+
+mysqli_close($conn);
 ?> 

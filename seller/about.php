@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once "includes/db_conn.php";
-include_once "includes/function.inc.php";   
+include_once "../includes/db_conn.php";
+include_once "../includes/function.inc.php";   
 $status_logged_in = null;
 if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     $status_logged_in = array('status' => true, 'usertype' => $_SESSION['usertype'] );
@@ -9,140 +9,78 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     $USER_ID = $_SESSION['userid'];
     $user_info = GetUserDetails($conn, $USER_ID );
     $user = GetUserName($conn, $USER_ID );
-}
  ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgriComercio</title>
-
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/fontawesome.css">
+   <title>Seller</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+   <link rel="stylesheet" href="bootstrap.css"> 
+   <link rel="stylesheet" href="style.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
 
 </head>
 <body>
-    
+<nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+  <a class="nav-link" href="index.php">
+        <input style="border:none;
+                      background:transparent;
+                      color:white;
+                     font-size:2rem;
+                      font-weight:bold;
+                      width:8rem;
+                      ext-decoration: none;" type="text" class="form-control" id="user_name" value = "<?php echo $user['user_name']; ?>"disabled >
+          <span class="sr-only">(current)</span>
+      </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-<header id="header">
-    <nav class="navbar navbar-expand-lg ">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="index.php">
-        <div class="right">
-        <img clas ="logo" src="img/logo2.png" alt="" width="100px" height="100px">
-                
-            </div>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span   class="navbar-toggler-icon"><i style= "color:black; " class="fas fa-bars"></i></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="product.php">Products</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="services.php">Services</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="About.php">About Us</a>
-            </li>
-            
-        </ul>
-
-        <div class="dropdown">
-            <a href="cart.php"><div class="fas fa-shopping-cart"></div>
-                <?php 
-                            $sql_cart_count = "SELECT COUNT(*) cartcount FROM `cart` WHERE status = 'P' AND user_id = ?;";
-                            $stmt=mysqli_stmt_init($conn);
-        
-                        if (!mysqli_stmt_prepare($stmt, $sql_cart_count)){
-                            header("location: index.php?error=stmtfailed");
-                            exit();
-                        }
-                            mysqli_stmt_bind_param($stmt, "s" ,$_SESSION['userid']);
-                            mysqli_stmt_execute($stmt);
-
-                            $resultData = mysqli_stmt_get_result($stmt);
-
-                            if($row = mysqli_fetch_assoc($resultData)){ ?>
-                                <span class="badge bg-danger"><?php echo $row['cartcount']; ?></span>
-                            <?php }
-                        
-                            ?>
-                
-                </a>
-                
-                <button class="dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-                <div class="fas fa-user"></div>
-                </button>
-                
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                
-                    <?php
-                    if(isset($status_logged_in)){
-                            switch($status_logged_in['usertype']){
-                                case 'Customer':
-                            ?>
-                            <a href="customer_page.php"><li><button class="dropdown-item" type="button">Profile</button></li></a>
-                            <a href="logout.php"><li><button class="dropdown-item" type="button">Log Out</button></li></a>
-                    <?php        break;
-                                case 'Admin': 
-                                header("location: admin/admin.php");
-                                    break;
-                                case 'Seller':
-                                header("location: seller/index.php");
-                                break;
-                            }
-                    }
-                    else{ ?>
-                        <a href="form.php"><li><button class="dropdown-item" type="button">Sign Up</button></li></a>
-                        <a href="sign_in.php"><li><button class="dropdown-item" type="button">Sign In</button></li></a>
-                    <?php }
-                    ?>
-                
-                </ul>
-            </div>
-        </div>
-        
-        </div>
-    </div>
-    </nav>
-</header>
-<body>
-<section id="home">
-       
-       <div class="slide">
-           <div class="row">
-               <div class="col">
-                   <div class="content-home ">
-                       
-                        <h1>What is AgriComercio?</h1>
-                        <br>
-                        <h2>AgriComercio is a E-commerce Website that focuses on selling Agri-Goods</h2>
-                        <br>
-                       
-               
-                            <a href="sign_in.php"><button class="btn-home">Sign In &#8594;</button></a>
-                   </div>
-               </div>
-               <div class="col">
-                   <img class="img_home" src="img/Ag1.png" alt="">
-               </div>
-           </div>
-       </div>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo02" >
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
    
+      <li class="nav-item active">
+        <a class="nav-link" href="userprofile.php">Profile <span class="sr-only">(current)</span></a>
+      </li>
       
-   </section>
-	
+            <li class="nav-item active">
+        <a class="nav-link" href="receiveorder.php">Orders</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="about.php">About</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="product.php">Items</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="../logout.php">Log Out</a>
+      </li>
+    </ul>
+    
+  </div>
+</nav>
+
+<!-- end of navbar -->
+
+<section id="home">
+     
+  <div class="slide">
+              <div class="row">
+                  <div class="col">
+                  
+                      <div class="content-home ">
+                          <h1>AgriComercio - Change The Way You Trade</h1>
+                          <h2>Right out of the Farm!</h2>
+                          <h2>Reap Fresh, Eat Fresh</h2>
+                      </div>
+                  </div>
+                  <div class="col">
+                      <img class="img_home" src="../img/Ag1.png" alt="">
+                  </div>
+              </div>
+          </div>
+
+</section>
 
 <section id="about">
     <div class="about-container">
@@ -193,7 +131,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
         <div class="about-slider">
             <div class="about-card item">
             <div class="image">
-                <img src="img/gelai.jpg"  class="card-img-top">
+                <img src="../img/gelai.jpg"  class="card-img-top">
                 </div>
                     <div class="content">
                     <h2>Angelica Mae Bonganay</h2>
@@ -215,7 +153,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
         <div class="about-slider">
             <div class="about-card item">
             <div class="image">
-                <img src="img/nat.jpg"  class="card-img-top">
+                <img src="../img/nat.jpg"  class="card-img-top">
                 </div>
                     <div class="content">
                         <h2>Natalie Buenconsejo</h2>
@@ -235,7 +173,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
         <div class="about-slider">
             <div class="about-card item">
             <div class="image">
-                <img src="img/tin.jpg"  class="card-img-top">
+                <img src="../img/tin.jpg"  class="card-img-top">
                 </div>
                     <div class="content">
                             <h2>Christine Joyce Precones</h2>
@@ -262,12 +200,9 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 </section>
 
 
-
-
-
    <section id="footer">
    <div class="footer-content">
-   <img clas ="logo" src="img/logo1.png" alt="" width="70px" height="70px">
+   <img clas ="logo" src="../img/logo1.png" alt="" width="70px" height="70px">
        <h3>AgriComercio</h3>
        <p>Change The Way You Trade</p>
        <ul class="socials">
@@ -289,3 +224,24 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 
 </body>
 </html>
+
+<?php    
+
+    }
+
+else{
+    header("location: sign_in.php");
+    
+}
+
+?>
+
+<script src="../js/bootstrap.min.js"></script>
+<script src="jquery.js"></script>
+<script src="popper.js"></script>
+<script src="bootstrap.js"></script>
+
+
+</body>
+</html>
+

@@ -2,6 +2,7 @@
 <?php 
 session_start();
 include_once ('../includes/db_conn.php');
+include_once ('../includes/function.inc.php');
 $searchkey="";
 if(isset($_GET['searchkey'])){
   $searchkey = htmlentities($_GET['searchkey']);
@@ -26,19 +27,16 @@ if(isset($_GET['searchkey'])){
 
 <header id="header">
 
-<div class="right">
-    <div class="fas fa-bars" id="bars"></div>
+<section id= "search">
+        <div class = "container-fluid">
+            <form action="user.php" method="GET" class="d-flex">
+                <input id="searchbar" name="searchkey" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-light" type="submit"><i class="fas fa-search"></i></button>
+            </form>
 
-</div>
-<div class="left">
-      <form action ="user.php" method="GET" class="d-flex" >
-        <input id="searchbar" name="searchkey" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-       
+        </div>
+    </section>
 
-</div>
 </header>
 
 <!-- Side navigation -->
@@ -52,8 +50,9 @@ if(isset($_GET['searchkey'])){
     </div>
   </div>
 
-  <a href="admin.php"><i class="fas fa-home"></i> Dashboard</a>
+  <a href="index.php"><i class="fas fa-home"></i> Dashboard</a>
   <a href="user.php"><i class="fas fa-users"></i> User Management</a> 
+  <a href="../logout.php"><i class="fas fa-angle-left"></i> logout</a>
 </div>
 
 
@@ -63,22 +62,17 @@ if(isset($_GET['searchkey'])){
           <div class="row" id="contentPanel">
                   <div class="col-12">
                   <?php
-                  //declare the SQL
-                  //Scenario: I wanted to show item_id, item_name,
-                  //item_short_code
-                  // category description, price
+
                   if($searchkey == ""){
-                  $sql = " SELECT `user_id`, 
+                  $sql = " SELECT `user_id`,
+                   `user_ref_num`, 
                   `user_type`, 
                   `user_name`, 
                   `password`, 
                   `status` 
                   FROM `users`
-                  WHERE 1;";
-                  //initialize MYSQL statement connection to the database.
-                  //$conn is a variable declared inside db_conn.
+                  WHERE status = 'Active';";
                   $stmt=mysqli_stmt_init($conn);
-                  //prepare the statement
                   if (!mysqli_stmt_prepare($stmt, $sql)){
                   echo "Statement Failed.";
                   exit();
@@ -87,12 +81,14 @@ if(isset($_GET['searchkey'])){
                   else{
                     $sql = "SELECT
                                   `user_id`, 
+                                  `user_ref_num`,
                                   `user_type`, 
                                   `user_name`, 
                                   `password`, 
                                   `status` 
                                   FROM `users`
-                                  WHERE user_name = ?
+                                  WHERE status = 'Active'
+                                  AND user_name = ?
                                   OR user_id = ?
                                   ;";
 
@@ -104,53 +100,48 @@ if(isset($_GET['searchkey'])){
 
                   mysqli_stmt_bind_param($stmt, "ss" , $searchkey , $searchkey);
                   }
-                  //it will execute the statement
+                 
                   mysqli_stmt_execute($stmt);
-                  //get the results of the executed statement and put it into a variable
                   $resultData = mysqli_stmt_get_result($stmt);
-                  //declare a container array.
                   $arr=array();
                   while($row = mysqli_fetch_assoc($resultData)){
-                  //we will do the transfer of data to another array to test
-                  //if there is a result.
                   array_push($arr,$row);
                   }
-
-                  // if the new array is not empty, display the tabular representation
-                  // as HTML
-
-
-
-
-                  
-
-
-                  
                   if(!empty($arr)){
                     echo "<table class='table'>";
                     echo "<thead>";
                     echo "<th>". "User Id" . "</th>";
+                    echo "<th>". "User Reference Number" . "</th>";
                     echo "<th> username</th>";
                     echo "<th> password </th>";
+                    echo "<th> status </th>";
                     
                     echo "</thead>";
                      
-                      foreach($arr as $key => $val){
+                      foreach($arr as $key => $row){
                       echo "<tr>";
                       
-                      echo "<td>" . $val ['user_id']         . "</td>";
-                      echo "<td>" . $val ['user_name']   . "</td>";
-                      echo "<td>" . $val ['password']          .  " </td> ";
-                      echo "<td>
-                    
-                      <a href='orderform.php?itemid=".$val['user_id']."'
-                      class='btn btn-primary'>blocked</a> </td>";
+                      echo "<td>" . $row ['user_id']         . "</td>";
+                      echo "<td>" . $row ['user_ref_num']         . "</td>";
+                      echo "<td>" . $row ['user_name']   . "</td>";
+                      echo "<td>" . $row ['password']          .  " </td> ";
+                     
+                      ?>
+                      <td>
+                      <form action="../includes/updateuserstatus.php" method="post">
+                            <input hidden type="text" name="user_id" value="<?php echo $row['user_id']; ?>">
+                            <input hidden type="text" name="user_name" value="<?php echo $row['user_name']; ?>">
+                            <input type="hidden" name="block_user" value="<?php echo $row['status'] == 'Active' ? 'Blocked' : 'Active' ; ?>">
+                            <button class="btn btn-success"> <?php echo $row['status'] == 'Active' ? 'Block' : 'Unblock' ; ?> </button>
+                            </a>
+                </form>
+                </td> 
+                    <?php
+                      ;
+
                       echo "</tr>";
                       }
                       echo "<tr >";
-
-                    ?>
-                      <?php
                       echo "</tr>";
                       echo "</table>";
                       }
@@ -162,26 +153,12 @@ if(isset($_GET['searchkey'])){
                       <div
                       class='text-center'><em>End of result</em>
                       </div>
-
-
-                  
-                                          
-                  
-                    
                   </div>
                   </div>
           </div>
-
-          
       </main>
-
-
-
-
-
     <script src="../js/bootstrap.bundle.js"></script>
     <script src="../js/jquery.js"></script> 
-    <script src="js/main.js"></script>
     
 </body>
 </html>
