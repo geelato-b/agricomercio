@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2021 at 11:22 AM
+-- Generation Time: May 14, 2021 at 07:21 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -42,14 +42,8 @@ CREATE TABLE `cart` (
 --
 
 INSERT INTO `cart` (`cart_id`, `item_id`, `user_id`, `item_qty`, `status`, `order_number`, `cart_status`) VALUES
-(4, 70, '48674467830811573', 1, 'C', '60925b9100a8a55529', 'C'),
-(5, 2, '48674467830811573', 5, 'C', '60925b9100a8a55529', 'C'),
-(7, 2, '48674467830811573', 1, 'C', '60925e000454231605', 'C'),
-(8, 3, '48674467830811573', 3, 'C', '60925e000454231605', 'C'),
-(9, 1, '82031234655775365', 7, 'C', '60925f8738c9314056', 'C'),
-(10, 3, '82031234655775365', 5, 'C', '60925f9e59f7a61968', 'C'),
-(11, 4, '82031234655775365', 7, 'C', '60925f9e59f7a61968', 'C'),
-(12, 7, '82031234655775365', 6, 'C', '60926334045b244849', 'C');
+(1, 77, '34870530951555017', 2, 'X', '609ca548222f974593', 'X'),
+(2, 75, '34870530951555017', 4, 'X', '609ca548222f974593', 'X');
 
 -- --------------------------------------------------------
 
@@ -146,7 +140,12 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (47, 'atis', 1, '1 kg per pack', 'NA', 50, '53', '2.png'),
 (70, 'Kalachuchi', 3, 'Mabaho', 'A', 200, '90302824675917870', ''),
 (71, 'Serpentina', 3, 'Mapait sobra', 'A', 5, '96580086144897462', ''),
-(72, 'Kalachuchi', 3, 'Mabaho', 'A', 123, '96580086144897462', '');
+(73, 'grapes', 1, '1kg per pack', 'A', 200, '7378077583225425', ''),
+(74, 'apples', 1, '1kg per pack', 'A', 100, '7378077583225425', ''),
+(75, 'kalamansi', 1, '1kg per pack', 'A', 50, '90302824675917870', ''),
+(77, 'onion', 4, '1kg per pack', 'A', 40, '90302824675917870', ''),
+(78, 'lemon', 1, 'per piece', 'A', 20, '96580086144897462', ''),
+(79, 'gumamela', 3, 'per pot', 'A', 150, '96580086144897462', '');
 
 -- --------------------------------------------------------
 
@@ -156,21 +155,22 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 
 CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
-  `cust_id` int(11) NOT NULL,
+  `order_number` varchar(64) NOT NULL,
   `item_id` int(11) NOT NULL,
-  `seller_id` int(11) NOT NULL,
+  `user_id` varchar(64) NOT NULL,
   `item_qty` int(255) NOT NULL,
-  `net_amt` int(255) NOT NULL
+  `net_amt` int(255) NOT NULL,
+  `status` varchar(1) NOT NULL DEFAULT 'P',
+  `order_status` varchar(1) NOT NULL DEFAULT 'P'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `cust_id`, `item_id`, `seller_id`, `item_qty`, `net_amt`) VALUES
-(1, 1, 2, 1, 2, 1170),
-(2, 2, 2, 2, 1, 585),
-(3, 3, 3, 3, 1, 95);
+INSERT INTO `orders` (`order_id`, `order_number`, `item_id`, `user_id`, `item_qty`, `net_amt`, `status`, `order_status`) VALUES
+(1, '609ca548222f974593', 77, '90302824675917870', 2, 80, 'C', 'P'),
+(2, '609ca548222f974593', 75, '90302824675917870', 4, 200, 'C', 'P');
 
 -- --------------------------------------------------------
 
@@ -209,7 +209,7 @@ CREATE TABLE `users` (
   `user_type` varchar(11) NOT NULL,
   `user_name` varchar(128) NOT NULL,
   `password` varchar(128) NOT NULL,
-  `status` varchar(11) NOT NULL
+  `status` varchar(11) NOT NULL DEFAULT 'Active'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -217,69 +217,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_ref_num`, `user_type`, `user_name`, `password`, `status`) VALUES
-(1, '', 'Seller', 'Joy', '1234', 'Active'),
-(2, '', 'Seller', 'Ron', '5623', 'Active'),
-(3, '', 'Seller', 'Lary', '9237', 'Active'),
-(4, '', 'Seller', 'May', '4567', 'Blocked'),
-(5, '', 'Seller', 'Sam', '3421', 'Active'),
-(6, '', 'Shipper', 'John', '9806', 'Active'),
-(7, '', 'Shipper', 'Wen', '3067', 'Active'),
-(8, '', 'Shipper', 'Dan', '7654', 'Active'),
-(9, '', 'Shipper', 'Pat', '8098', 'Blocked'),
-(10, '', 'Shipper', 'Jed', '9999', 'Blocked'),
-(11, '', 'Customer', 'Jen', '1111', 'Active'),
-(12, '', 'Customer', 'Brad', '2222', 'Active'),
-(13, '', 'Customer', 'Lara', '3333', 'Active'),
-(14, '', 'Customer', 'Sara', '4444', 'Active'),
-(15, '', 'Customer', 'Jack', '5555', 'Blocked'),
-(16, '', 'Admin', 'Admin', 'admin', ''),
-(17, '', 'Customer', 'Olivia', '8991', 'Active'),
-(18, '', 'Customer', 'Oliver', '3660', 'Active'),
-(19, '', 'Customer', 'Amelia', '5095', 'Active'),
-(20, '', 'Customer', 'George', '1558', 'Blocked'),
-(21, '', 'Customer', 'Isla', '4739', 'Active'),
-(22, '', 'Customer', 'Harry', '0405', 'Active'),
-(23, '', 'Customer', 'Ava', '9997', 'Active'),
-(24, '', 'Customer', 'Noah', '8584', 'Active'),
-(25, '', 'Customer', 'Emily', '1785', 'Blocked'),
-(26, '', 'Customer', 'Sophia', '6134', 'Active'),
-(27, '', 'Customer', 'Charlie', '3281', 'Active'),
-(28, '', 'Customer', 'Grace', '9232', 'Active'),
-(29, '', 'Customer', 'Leo', '6935', 'Active'),
-(30, '', 'Customer', 'Mia', '9729', 'Blocked'),
-(31, '', 'Customer', 'Jacob', '3279', 'Active'),
-(32, '', 'Customer', 'Poppy', '3522', 'Active'),
-(33, '', 'Customer', 'Freddie', '2931', 'Active'),
-(34, '', 'Customer', 'Ella', '1198', 'Active'),
-(35, '', 'Customer', 'Alfie', '2320', 'Active'),
-(36, '', 'Customer', 'Angelica', '1029', 'Active'),
-(37, '', 'Seller', 'Liam', '8363', 'Active'),
-(38, '', 'Seller', 'Elijah', '7077', 'Active'),
-(39, '', 'Seller', 'Benjamin', '2786', 'Active'),
-(40, '', 'Seller', 'Lucas', '9233', 'Active'),
-(41, '', 'Seller', 'Mason', '8320', 'Blocked'),
-(42, '', 'Seller', 'Ethan', '7447', 'Active'),
-(43, '', 'Seller', 'Alexander', '8052', 'Active'),
-(44, '', 'Seller', 'Abigail', '8283', 'Active'),
-(45, '', 'Seller', 'Adia', '2560', 'Active'),
-(46, '', 'Seller', 'Alyssa', '6124', 'Active'),
-(47, '', 'Seller', 'Dora', '7011', 'Active'),
-(48, '', 'Seller', 'Felicity', '1266', 'Active'),
-(49, '', 'Seller', 'Ivy', '3018', 'Blocked'),
-(50, '', 'Seller', 'Kylie', '8780', 'Active'),
-(51, '', 'Seller', 'Megan', '9750', 'Blocked'),
-(52, '', 'Seller', 'Rose', '1596', 'Active'),
-(53, '', 'Seller', 'Violet', '1612', 'Active'),
-(54, '', 'Seller', 'Roxanne', '4668', 'Active'),
-(55, '', 'Seller', 'Myla', '3472', 'Blocked'),
-(56, '', 'Seller', 'Taylor', '9649', 'Active'),
-(62, '', 'Seller', 'sellerpogi', '123123', 'Active'),
-(63, '55857563041157511', 'Seller', 'test123', '123123', 'Active'),
+(63, '55857563041157511', 'Admin', 'Admin', 'Admin', 'Active'),
 (64, '24877743968937062', 'Customer', 'pogi', '123123', 'Active'),
 (65, '90302824675917870', 'Seller', 'pogi2', '123123', 'Active'),
 (66, '48674467830811573', 'Customer', 'pogi3', '123123', 'Active'),
 (67, '82031234655775365', 'Customer', 'pogi4', '123123', 'Active'),
-(68, '96580086144897462', 'Seller', 'seller1', '123123', 'Active');
+(68, '96580086144897462', 'Seller', 'seller1', '123123', 'Active'),
+(69, '34870530951555017', 'Customer', 'iana', '12345', 'Active'),
+(86, '59897125964777576', 'Customer', 'kj12', 'kalixjace', 'Active'),
+(87, '8279429251800958', 'Customer', 'Elyse', 'elyse', 'Active'),
+(88, '57776226517833831', 'Customer', 'Elyse', 'elyse', 'Active');
 
 -- --------------------------------------------------------
 
@@ -306,61 +253,15 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_info_id`, `user_fullname`, `user_id`, `user_ref_num`, `gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) VALUES
-(1, 'Jen', 11, '', 'F', 2147483647, 'P-3 P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(2, 'Brad', 12, '', 'M', 2147483647, 'P-1 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(3, 'Lara', 13, '', 'F', 2147483647, 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
-(4, 'Sara', 14, '', 'F', 2147483647, 'P-2 Basud', 'Tabaco', 'Albay', 4511, 'Customer'),
-(5, 'Jack', 15, '', 'M', 2147483647, 'P-6 Panal', 'Tabaco', 'Albay', 4511, 'Customer'),
-(6, 'Olivia', 17, '', 'F', 2147483647, 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
-(7, 'Oliver', 18, '', 'M', 2147483647, 'P-3 San Isidro', 'Tabaco', 'Albay', 4511, 'Customer'),
-(8, 'Amelia', 19, '', 'F', 2147483647, 'P-3 San Roque', 'Tabaco', 'Albay', 4511, 'Customer'),
-(9, 'George', 20, '', 'M', 2147483647, 'P-6 Baranghawon', 'Tabaco', 'Albay', 4511, 'Customer'),
-(10, 'Isla', 21, '', 'F', 2147483647, 'P-1 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
-(11, 'Harry', 22, '', 'M', 2147483647, 'P-2 Ilaor', 'Oas', 'Albay', 4505, 'Customer'),
-(12, 'Ava', 23, '', 'F', 2147483647, 'P-3 Mayao', 'Oas', 'Albay', 4505, 'Customer'),
-(13, 'Noah', 24, '', 'M', 2147483647, 'P-3, Palapas', 'Ligao', 'Albay', 4504, 'Customer'),
-(14, 'Emily', 25, '', 'F', 2147483647, 'P-1 Tula-tula', 'Ligao', 'Albay', 4504, 'Customer'),
-(15, 'Sophia', 26, '', 'F', 2147483647, 'P-4 Malama', 'Ligao', 'Albay', 4504, 'Customer'),
-(16, 'Charlie', 27, '', 'M', 2147483647, 'P-1 Allang', 'Ligao', 'Albay', 4504, 'Customer'),
-(17, 'Grace', 28, '', 'F', 2147483647, 'P-5 Tandarura', 'Ligao', 'Albay', 4504, 'Customer'),
-(18, 'Leo', 29, '', 'M', 2147483647, 'P-6 Lanigay', 'Polangui', 'Albay', 4506, 'Customer'),
-(19, 'Mia', 30, '', 'F', 2147483647, 'P-3 Basud', 'Polangui', 'Albay', 4506, 'Customer'),
-(20, 'Jacob', 31, '', 'M', 2147483647, 'P-1, Sugcad', 'Polangui', 'Albay', 4506, 'Customer'),
-(21, 'Poppy', 32, '', 'F', 2147483647, 'P-2, Centro Occidental (Pob.)', 'Polangui', 'Albay', 4506, 'Customer'),
-(22, 'Freddie', 33, '', 'M', 2147483647, 'P-2, Agos', 'Polangui', 'Albay', 4506, 'Customer'),
-(23, 'Ella', 34, '', 'F', 2147483647, 'P-2, Alnay', 'Polangui', 'Albay', 4506, 'Customer'),
-(24, 'Alfie', 35, '', 'M', 2147483647, 'P-1 Apad', 'Polangui', 'Albay', 4506, 'Customer'),
-(25, 'Angelica', 36, '', 'F', 2147483647, 'P-3 Cepres', 'Polangui', 'Albay', 4506, 'Customer'),
-(32, 'Joy', 1, '', 'F', 2147483647, 'Purok 3, Paulba', 'Ligao', 'Albay', 4504, 'Seller'),
-(33, 'Ron', 2, '', 'M', 2147483647, 'Purok 1, Allang', 'Ligao', 'Albay', 4504, 'Seller'),
-(34, 'Lary', 3, '', 'M', 2147483647, 'Purok 2, Culliat', 'Ligao', 'Albay', 4504, 'Seller'),
-(35, 'May', 4, '', 'F', 2147483647, 'Purok 5', 'Ligao', 'Albay', 4504, 'Seller'),
-(36, 'Sam', 5, '', 'F', 2147483647, 'Purok 4, Bacong', 'Ligao', 'Albay', 4504, 'Seller'),
-(37, 'Liam', 37, '', 'M', 2147483647, 'Cabañgan', 'Legazpi', 'Albay', 4500, 'Seller'),
-(38, 'Elijah', 38, '', 'M', 2147483647, 'Oro Site – Magallanes St.', 'Legazpi', 'Albay', 4500, 'Seller'),
-(39, 'Benjamin', 39, '', 'M', 2147483647, 'Pinaric', 'Legazpi', 'Albay', 4500, 'Seller'),
-(40, 'Lucas', 40, '', 'M', 2147483647, 'Binanuahan (East)', 'Legazpi', 'Albay', 4500, 'Seller'),
-(41, 'Mason', 41, '', 'M', 2147483647, 'Bagumbayan', 'Legazpi', 'Albay', 4500, 'Seller'),
-(42, 'Ethan', 42, '', 'M', 2147483647, 'Maoyod', 'Legazpi', 'Albay', 4500, 'Seller'),
-(43, 'Alexander', 43, '', 'M', 2147483647, 'Bañag', 'Daraga', 'Albay', 4501, 'Seller'),
-(44, 'Abigail', 44, '', 'F', 2147483647, 'Anislag', 'Daraga', 'Albay', 4501, 'Seller'),
-(45, 'Adia', 45, '', 'F', 2147483647, 'Malabog', 'Daraga', 'Albay', 4501, 'Seller'),
-(46, 'Alyssa', 46, '', 'F', 2147483647, 'Villahermosa', 'Daraga', 'Albay', 4501, 'Seller'),
-(47, 'Dora', 47, '', 'F', 2147483647, 'Barangay 1', 'Camalig', 'Albay', 4502, 'Seller'),
-(48, 'Felicity', 48, '', 'F', 2147483647, 'Anoling', 'Camalig', 'Albay', 4502, 'Seller'),
-(49, 'Ivy', 49, '', 'F', 2147483647, 'Salvacion', 'Daraga', 'Albay', 4501, 'Seller'),
-(50, 'Kylie', 50, '', 'F', 2147483647, 'Em\'s Barrio', 'Legazpi', 'Albay', 4500, 'Seller'),
-(51, 'Megan', 51, '', 'F', 2147483647, 'Imperial Court', 'Legazpi', 'Albay', 4500, 'Seller'),
-(52, 'Rose', 52, '', 'F', 2147483647, 'Bantonan', 'Camalig', 'Albay', 4502, 'Seller'),
-(53, 'violet', 53, '', 'F', 2147483647, 'Batbat', 'Guinobatan', 'Albay', 4503, 'Seller'),
-(54, 'Roxanne', 54, '', 'F', 2147483647, 'Calzada', 'Guinobatan', 'Albay', 4503, 'Seller'),
-(55, 'Myla', 55, '', 'F', 2147483647, 'Mahaba', 'Ligao', 'Albay', 4504, 'Seller'),
-(56, 'Taylor', 56, '', 'F', 2147483647, 'Malobago', 'Guinobatan', 'Albay', 4503, 'Seller'),
 (69, 'testing', 0, '55857563041157511', 'M', 2147483647, 'Napo', 'Polangui', 'Albay', 4506, 'Seller'),
 (70, 'testing123', 0, '90302824675917870', 'M', 2147483647, 'Napo', 'Polangui', 'Albay', 4506, 'Seller'),
 (71, 'Reymar', 0, '48674467830811573', 'M', 2147483647, 'Napo', 'Polangui', 'Albay', 4506, 'Customer'),
 (72, 'test', 0, '82031234655775365', 'M', 2147483647, 'Napo', 'Polangui', 'Albay', 4506, 'Customer'),
-(73, 'seller1', 0, '96580086144897462', 'M', 2147483647, 'Napo', 'Polangui', 'Albay', 4506, 'Seller');
+(73, 'seller1', 0, '96580086144897462', 'M', 2147483647, 'Napo', 'Polangui', 'Albay', 4506, 'Seller'),
+(74, 'alliana', 0, '34870530951555017', 'F', 2147483647, 'zone 6, Panal', 'tabaco', 'albay', 4511, 'Customer'),
+(91, 'kalix jayce ramirez', 0, '59897125964777576', 'M', 2147483647, 'zone 6, Panal', 'tabaco', 'albay', 4511, 'Customer'),
+(92, 'Elyse Amora ', 0, '8279429251800958', 'F', 2147483647, 'zone 6, Panal', 'tabaco', 'albay', 4511, 'Customer'),
+(93, 'Elyse Amora ', 0, '57776226517833831', 'F', 2147483647, 'zone 6, Panal', 'tabaco', 'albay', 4511, 'Customer');
 
 --
 -- Indexes for dumped tables
@@ -416,7 +317,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `cart_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -428,13 +329,13 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `track_order`
@@ -446,13 +347,13 @@ ALTER TABLE `track_order`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
+  MODIFY `user_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
