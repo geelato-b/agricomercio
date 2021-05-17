@@ -97,22 +97,22 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 </section>
 
 
-<?php    
 
-    }
-
-else{
-    header("location: sign_in.php");
-    
-}
-
-?>
 
 <script src="../js/bootstrap.min.js"></script>
 <script src="../js/jquery.js"></script>
 <script src="../js/popper.js"></script>
 <script src="../js/bootstrap.js"></script>
+<?php    
 
+    }
+
+else{
+    header("location: ../sign_in.php");
+    
+}
+
+?>
 
 </body>
 </html>
