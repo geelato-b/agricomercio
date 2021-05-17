@@ -1,6 +1,5 @@
 <?php
-echo "This is a test change";
-echo "This is a test change again";
+
 if(isset($_POST['AddItem'])){
 include_once "db_conn.php";
 include_once "function.inc.php";

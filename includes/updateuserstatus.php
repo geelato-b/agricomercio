@@ -16,4 +16,4 @@ if(isset($_POST['user_id'])){
         mysqli_stmt_execute($stmt_upd);
         header("location: ../admin/user.php?updated");
         
-    }
+}

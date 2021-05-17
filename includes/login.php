@@ -28,8 +28,14 @@ if(isset($_POST['login'])){
        case 'Admin':
             $_SESSION['usertype'] = 'Admin';
             $_SESSION['userid'] = $user_info['user_ref_num'];
-            header("location: ../admin/admin.php");
-            break;        
+            header("location: ../admin/");
+            break; 
+      
+      case 'shipper':
+               $_SESSION['usertype'] = 'shipper';
+               $_SESSION['userid'] = $user_info['user_ref_num'];
+               header("location: ../shipper/");
+               break;      
      }
          
   }
