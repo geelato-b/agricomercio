@@ -50,9 +50,6 @@ if(isset($_GET['searchkey'])){
       <li class="nav-item active">
         <a class="nav-link active" href="userprofile.php">Profile</a>
       </li>
-      <!-- <li class="nav-item active">
-        <a class="nav-link active" href="orders.php">Orders</a>
-      </li> -->
        <li class="nav-item active">
         <a class="nav-link active" href="receiveorder.php">Orders</a>
       </li>
