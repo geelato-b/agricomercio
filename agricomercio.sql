@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2021 at 05:10 AM
+-- Generation Time: May 17, 2021 at 03:29 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -37,6 +37,20 @@ CREATE TABLE `cart` (
   `cart_status` varchar(1) NOT NULL DEFAULT 'P',
   `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `cart`
+--
+
+INSERT INTO `cart` (`cart_id`, `item_id`, `user_id`, `item_qty`, `status`, `order_number`, `cart_status`, `date`) VALUES
+(9, 6, '62810271613147332', 4, 'X', '60a1e3472484b26195', 'X', '2021-05-17'),
+(10, 8, '62810271613147332', 4, 'X', '60a1e3472484b26195', 'X', '2021-05-17'),
+(11, 3, '62810271613147332', 8, 'X', '60a204e1735d069751', 'X', '2021-05-17'),
+(12, 7, '62810271613147332', 3, 'X', '60a204e1735d069751', 'X', '2021-05-17'),
+(13, 5, '62810271613147332', 2, 'X', '60a204e1735d069751', 'X', '2021-05-17'),
+(14, 10, '62810271613147332', 3, 'X', '60a25dbd311d463331', 'X', '2021-05-17'),
+(15, 27, '62810271613147332', 4, 'X', '60a25dbd311d463331', 'X', '2021-05-17'),
+(16, 12, '62810271613147332', 4, 'X', '60a25dbd311d463331', 'X', '2021-05-17');
 
 -- --------------------------------------------------------
 
@@ -90,12 +104,12 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (4, 'Banana', 1, '1kg per Pack', 'A', 55, '88861690589673142', '10.jpg'),
 (5, 'Carrots', 2, '1kg per Pack', 'A', 60, '88861690589673142', 'carrot.png'),
 (6, 'Fruit Bundle', 1, 'Assorted', 'A', 250, '88861690589673142', '1.jpg'),
-(7, 'Lettuce', 2, '1kg per Pack', 'NA', 50, '88861690589673142', '2.jpg'),
+(7, 'Lettuce', 2, '1kg per Pack', 'A', 50, '88861690589673142', '2.jpg'),
 (8, 'Rice', 4, '50kg per Sack', 'A', 1800, '88861690589673142', '3.jpg'),
 (9, 'Sweet Potato', 4, '1kg per Pack', 'A', 50, '88861690589673142', '4.jpg'),
 (10, 'Pineapple', 1, '1kg per Pack', 'A', 50, '18465013967499956', '5.jpg'),
-(11, 'Spinach', 2, '1kg per Pack', 'NA', 50, '18465013967499956', '6.jpg'),
-(12, 'Coffee Beans', 4, '1kg per Pack', 'NA', 30, '18465013967499956', '7.jpg'),
+(11, 'Spinach', 2, '1kg per Pack', 'A', 50, '18465013967499956', '6.jpg'),
+(12, 'Coffee Beans', 4, '1kg per Pack', 'A', 30, '18465013967499956', '7.jpg'),
 (13, 'Coconut', 1, '1 whole per Pack', 'A', 35, '18465013967499956', '8.jpg'),
 (14, 'Alugbati', 2, '1 bundle per Pack', 'A', 10, '18465013967499956', '33.png'),
 (15, 'Ampalaya', 2, '1kg per Pack', 'A', 45, '18465013967499956', '34.png'),
@@ -103,7 +117,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (17, 'Balimbing', 1, '1kg per Pack', 'A', 25, '18465013967499956', '31.png'),
 (18, 'Calamansi', 1, '1kg per Pack', 'A', 40, '18465013967499956', '12.jpg'),
 (19, 'Chico', 1, '1kg per Pack', 'A', 25, '88861690589673142', '29.png'),
-(20, 'Durian', 1, '1kg per Pack', 'NA', 55, '88861690589673142', '15.jpg'),
+(20, 'Durian', 1, '1kg per Pack', 'A', 55, '88861690589673142', '15.jpg'),
 (21, 'Gabi', 4, '1kg per Pack', 'A', 20, '88861690589673142', '28.png'),
 (22, 'Guyabano', 1, '1kg per Pack', 'A', 35, '88861690589673142', '14.jpg'),
 (23, 'Singkamas', 4, '1kg per Pack', 'A', 45, '88861690589673142', '4.png'),
@@ -130,7 +144,9 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (44, 'rambutan', 1, '1 kg per pack', 'NA', 80, '30782437241215726', '8.png'),
 (45, 'santol', 1, '1 kg per pack', 'A', 50, '30782437241215726', '7.png'),
 (46, 'sayote', 2, '1 kg per pack', 'A', 50, '30782437241215726', '6.png'),
-(47, 'atis', 1, '1 kg per pack', 'NA', 50, '30782437241215726', '2.png');
+(47, 'atis', 1, '1 kg per pack', 'NA', 50, '30782437241215726', '2.png'),
+(81, 'lemon', 1, '1kg per pack', 'A', 100, '88861690589673142', 'lemon.jpg'),
+(82, 'apples', 1, '1kg per pack', 'A', 100, '18465013967499956', 'apples.jpg');
 
 -- --------------------------------------------------------
 
@@ -147,35 +163,23 @@ CREATE TABLE `orders` (
   `item_qty` int(255) NOT NULL,
   `net_amt` int(255) NOT NULL,
   `status` varchar(1) NOT NULL DEFAULT 'P',
-  `order_status` varchar(1) NOT NULL DEFAULT 'P',
-  `date` date NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `track_order`
---
-
-CREATE TABLE `track_order` (
-  `track_id` int(11) NOT NULL,
-  `order_id` int(11) NOT NULL,
-  `picked_up_by_shipper` varchar(128) NOT NULL,
-  `delivered` varchar(128) NOT NULL,
-  `paid` varchar(128) NOT NULL,
-  `user_ID_shipper` int(11) NOT NULL,
-  `user_id_courier` int(11) NOT NULL,
+  `tracking_order_status` varchar(1) NOT NULL DEFAULT 'P',
   `date` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `track_order`
+-- Dumping data for table `orders`
 --
 
-INSERT INTO `track_order` (`track_id`, `order_id`, `picked_up_by_shipper`, `delivered`, `paid`, `user_ID_shipper`, `user_id_courier`, `date`) VALUES
-(1, 1, 'Yes', 'No', 'No', 6, 6, '2021-05-17'),
-(2, 2, 'Yes', 'No', 'No', 7, 7, '2021-05-17'),
-(3, 3, 'Yes', 'Yes', 'Yes', 8, 8, '2021-05-17');
+INSERT INTO `orders` (`order_id`, `order_number`, `user_ref_num`, `item_id`, `user_id`, `item_qty`, `net_amt`, `status`, `tracking_order_status`, `date`) VALUES
+(3, '60a1e3472484b26195', '62810271613147332', 6, '88861690589673142', 4, 1000, 'C', 'C', '2021-05-17'),
+(4, '60a1e3472484b26195', '62810271613147332', 8, '88861690589673142', 4, 7200, 'C', 'C', '2021-05-17'),
+(5, '60a204e1735d069751', '62810271613147332', 3, '88861690589673142', 8, 760, 'C', 'C', '2021-05-17'),
+(6, '60a204e1735d069751', '62810271613147332', 7, '88861690589673142', 3, 150, 'C', 'C', '2021-05-17'),
+(7, '60a204e1735d069751', '62810271613147332', 5, '88861690589673142', 2, 120, 'C', 'C', '2021-05-17'),
+(8, '60a25dbd311d463331', '62810271613147332', 10, '18465013967499956', 3, 150, 'C', 'C', '2021-05-17'),
+(9, '60a25dbd311d463331', '62810271613147332', 27, '18465013967499956', 4, 240, 'C', 'C', '2021-05-17'),
+(10, '60a25dbd311d463331', '62810271613147332', 12, '18465013967499956', 4, 120, 'C', 'C', '2021-05-17');
 
 -- --------------------------------------------------------
 
@@ -200,7 +204,10 @@ INSERT INTO `users` (`user_id`, `user_ref_num`, `user_type`, `user_name`, `passw
 (91, '62810271613147332', 'Customer', 'Hanabi', '0000', 'Active'),
 (92, '88861690589673142', 'Seller', 'Angela', '0123', 'Active'),
 (93, '18465013967499956', 'Seller', 'Nana', '1234', 'Active'),
-(94, '30782437241215726', 'Seller', 'Zilong', '2345', 'Active');
+(94, '30782437241215726', 'Seller', 'Zilong', '2345', 'Active'),
+(95, '92867449643784798', 'Admin', 'admin', 'admin', 'Active'),
+(96, '47022120562236447', 'shipper', 'shipper', 'shipper', 'Active'),
+(97, '86963997591915336', 'Customer', 'Moon', 'moon123', 'Active');
 
 -- --------------------------------------------------------
 
@@ -213,7 +220,7 @@ CREATE TABLE `user_info` (
   `user_fullname` varchar(128) NOT NULL,
   `user_ref_num` varchar(64) NOT NULL,
   `gender` varchar(20) NOT NULL,
-  `contact_details` int(20) NOT NULL,
+  `contact_details` varchar(20) NOT NULL,
   `house_no_street_brgy` varchar(128) NOT NULL,
   `city` varchar(128) NOT NULL,
   `province` varchar(128) NOT NULL,
@@ -226,10 +233,13 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_info_id`, `user_fullname`, `user_ref_num`, `gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) VALUES
-(96, 'Christine Joyce Precones', '62810271613147332', 'F', 2147483647, '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Customer'),
-(97, 'Angelica Mae Bonganay', '88861690589673142', 'F', 2147483647, '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
-(98, 'Natalie Buenconsejo', '18465013967499956', 'F', 2147483647, '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
-(99, 'Lu Jing', '30782437241215726', 'M', 2147483647, '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Seller');
+(96, 'Christine Joyce Precones', '62810271613147332', 'F', '2147483647', '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Customer'),
+(97, 'Angelica Mae Bonganay', '88861690589673142', 'F', '2147483647', '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
+(98, 'Natalie Buenconsejo', '18465013967499956', 'F', '2147483647', '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
+(99, 'Lu Jing', '30782437241215726', 'M', '2147483647', '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Seller'),
+(100, 'Admin', '92867449643784798', 'F', '2147483647', 'zone 6, Panal', 'tabaco', 'albay', 4511, 'Admin'),
+(101, 'shipper', '47022120562236447', 'M', '2147483647', 'zone 6, Panal', 'tabaco', 'albay', 4511, 'shipper'),
+(102, 'Luna Valeria', '86963997591915336', 'F', '09053369487', 'Zone-6, Panal', 'Tabaco', 'ALBAY', 4511, 'Customer');
 
 --
 -- Indexes for dumped tables
@@ -260,12 +270,6 @@ ALTER TABLE `orders`
   ADD PRIMARY KEY (`order_id`);
 
 --
--- Indexes for table `track_order`
---
-ALTER TABLE `track_order`
-  ADD PRIMARY KEY (`track_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -285,7 +289,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `cart_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -297,31 +301,25 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `track_order`
---
-ALTER TABLE `track_order`
-  MODIFY `track_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=98;
 
 --
 -- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
-  MODIFY `user_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `user_info_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
