@@ -9,7 +9,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
     $USER_ID = $_SESSION['userid'];
     $user_info = GetUserDetails($conn, $USER_ID );
     $user = GetUserName($conn, $USER_ID );
-}
+
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -182,7 +182,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
 
 
 <?php    
-
+}
 
 ?>
 
