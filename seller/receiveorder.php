@@ -76,7 +76,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
   <?php
   $sql_order_list = "SELECT 
                            o.order_number
-                        ,o.order_status
+                        ,o.tracking_order_status
                         , SUM(o.item_qty) total_item_qty
                         , SUM(i.item_price * o.item_qty) total_net_amt
                         FROM orders o
@@ -84,7 +84,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         ON o.item_id = i.item_id
                         WHERE o.user_id = ? 
                         AND o.status = 'C'
-                        AND o.order_status = 'C'
+                        AND o.tracking_order_status = 'C'
                         AND o.order_number IS NOT NULL
                         GROUp BY o.order_number; ";
                         $stmt=mysqli_stmt_init($conn);
@@ -114,7 +114,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         <td><?php echo $row['total_item_qty']; ?></td>
                         <td><?php echo $row['total_net_amt']; ?></td>
                         <td>
-                        <?php echo $row['order_status'] == 'P' ? 'Pending for Delivery' : 'Delivered' ;?>
+                        <?php echo $row['tracking_order_status'] == 'P' ? 'Pending for Delivery' : 'Delivered' ;?>
                         </td>
                     </tr>
                 <?php }?>
@@ -149,8 +149,10 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                                 ,c.cart_id
                                 ,c.item_qty
                                 ,i.user_id
+                                ,c.user_id
                                 ,c.status
                                 ,c.cart_status
+                                ,c.date
                                     FROM `items` i
                                     JOIN `cart` c
                                     ON i.item_id = c.item_id
@@ -196,11 +198,13 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                                         <br>
                                         <label style = "color:red;" for="">Total Price : </label>
                                        Php <?php echo number_format($row['net_amt'],2); ?> 
+                                      Date: <?php echo $row['date']; ?> 
                                      </em>
                                 </div>
                                 <div class="card-footer">
                                 <form action="../includes/order.php" method= "post">
-                                    <input hidden type="text" name="order_number"  value = "<?php echo $row['order_number']; ?>">     
+                                    <input hidden type="text" name="order_number"  value = "<?php echo $row['order_number']; ?>">  
+                                    <input hidden  type="text" name="user_ref_num"  value = "<?php echo $row['user_id']; ?>">        
                                     <input hidden type="text" name="user_id"  value = "<?php echo $_SESSION['userid']; ?>">
                                     <input hidden type="text" name="item_id"  value = "<?php echo $row['item_id'] ?>">
                                     <input hidden type="number" name="item_qty" value = "<?php echo $row['item_qty']; ?>" >
