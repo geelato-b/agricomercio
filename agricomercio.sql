@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2021 at 03:29 PM
+-- Generation Time: May 18, 2021 at 04:21 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -35,14 +35,14 @@ CREATE TABLE `cart` (
   `status` varchar(1) NOT NULL DEFAULT 'P',
   `order_number` varchar(64) NOT NULL,
   `cart_status` varchar(1) NOT NULL DEFAULT 'P',
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `date_ordered` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cart`
 --
 
-INSERT INTO `cart` (`cart_id`, `item_id`, `user_id`, `item_qty`, `status`, `order_number`, `cart_status`, `date`) VALUES
+INSERT INTO `cart` (`cart_id`, `item_id`, `user_id`, `item_qty`, `status`, `order_number`, `cart_status`, `date_ordered`) VALUES
 (9, 6, '62810271613147332', 4, 'X', '60a1e3472484b26195', 'X', '2021-05-17'),
 (10, 8, '62810271613147332', 4, 'X', '60a1e3472484b26195', 'X', '2021-05-17'),
 (11, 3, '62810271613147332', 8, 'X', '60a204e1735d069751', 'X', '2021-05-17'),
@@ -98,8 +98,8 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status`, `item_price`, `user_id`, `item_img`) VALUES
-(1, 'Plantmate', 5, 'Fertilizer for plants', 'A', 585, '88861690589673142', '35.png'),
-(2, 'Potatoes', 4, '1kg per Pack', 'A', 180, '88861690589673142', '23.png'),
+(1, 'Plantmate', 5, 'Fertilizer for plants', 'A', 550, '88861690589673142', '35.png'),
+(2, 'Potatoes', 4, '1kg per Pack', 'A', 100, '88861690589673142', '23.png'),
 (3, 'Tomatoes', 1, '1kg per Pack', 'A', 95, '88861690589673142', '9.jpg'),
 (4, 'Banana', 1, '1kg per Pack', 'A', 55, '88861690589673142', '10.jpg'),
 (5, 'Carrots', 2, '1kg per Pack', 'A', 60, '88861690589673142', 'carrot.png'),
@@ -121,7 +121,7 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (21, 'Gabi', 4, '1kg per Pack', 'A', 20, '88861690589673142', '28.png'),
 (22, 'Guyabano', 1, '1kg per Pack', 'A', 35, '88861690589673142', '14.jpg'),
 (23, 'Singkamas', 4, '1kg per Pack', 'A', 45, '88861690589673142', '4.png'),
-(24, 'Garlic', 4, '1kg per Pack', 'A', 30, '88861690589673142', '24.png'),
+(24, 'Garlic', 4, '1kg per Pack', 'A', 20, '88861690589673142', '24.png'),
 (25, 'Onions', 4, '1kg per Pack', 'A', 35, '88861690589673142', '25.png'),
 (26, 'Cauli Flower', 2, '1kg per Pack', 'A', 25, '18465013967499956', '22.png'),
 (27, 'Sili', 2, '1kg per Pack', 'A', 60, '18465013967499956', '21.png'),
@@ -145,8 +145,8 @@ INSERT INTO `items` (`item_id`, `item_name`, `cat_id`, `item_desc`, `item_status
 (45, 'santol', 1, '1 kg per pack', 'A', 50, '30782437241215726', '7.png'),
 (46, 'sayote', 2, '1 kg per pack', 'A', 50, '30782437241215726', '6.png'),
 (47, 'atis', 1, '1 kg per pack', 'NA', 50, '30782437241215726', '2.png'),
-(81, 'lemon', 1, '1kg per pack', 'A', 100, '88861690589673142', 'lemon.jpg'),
-(82, 'apples', 1, '1kg per pack', 'A', 100, '18465013967499956', 'apples.jpg');
+(82, 'apples', 1, '1kg per pack', 'A', 100, '18465013967499956', 'apples.jpg'),
+(83, 'lemon', 1, '1kg per pack', 'NA', 90, '88861690589673142', 'lemon.jpg');
 
 -- --------------------------------------------------------
 
@@ -164,14 +164,14 @@ CREATE TABLE `orders` (
   `net_amt` int(255) NOT NULL,
   `status` varchar(1) NOT NULL DEFAULT 'P',
   `tracking_order_status` varchar(1) NOT NULL DEFAULT 'P',
-  `date` date NOT NULL DEFAULT current_timestamp()
+  `date_ordered` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
 --
 
-INSERT INTO `orders` (`order_id`, `order_number`, `user_ref_num`, `item_id`, `user_id`, `item_qty`, `net_amt`, `status`, `tracking_order_status`, `date`) VALUES
+INSERT INTO `orders` (`order_id`, `order_number`, `user_ref_num`, `item_id`, `user_id`, `item_qty`, `net_amt`, `status`, `tracking_order_status`, `date_ordered`) VALUES
 (3, '60a1e3472484b26195', '62810271613147332', 6, '88861690589673142', 4, 1000, 'C', 'C', '2021-05-17'),
 (4, '60a1e3472484b26195', '62810271613147332', 8, '88861690589673142', 4, 7200, 'C', 'C', '2021-05-17'),
 (5, '60a204e1735d069751', '62810271613147332', 3, '88861690589673142', 8, 760, 'C', 'C', '2021-05-17'),
@@ -301,7 +301,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `items`
 --
 ALTER TABLE `items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `orders`
