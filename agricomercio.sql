@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2021 at 04:21 AM
+-- Generation Time: May 18, 2021 at 09:09 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -201,8 +201,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `user_ref_num`, `user_type`, `user_name`, `password`, `status`) VALUES
-(91, '62810271613147332', 'Customer', 'Hanabi', '0000', 'Active'),
-(92, '88861690589673142', 'Seller', 'Angela', '0123', 'Active'),
+(91, '62810271613147332', 'Customer', 'Hanabi', '1111', 'Active'),
+(92, '88861690589673142', 'Seller', 'Angela', '1122', 'Active'),
 (93, '18465013967499956', 'Seller', 'Nana', '1234', 'Active'),
 (94, '30782437241215726', 'Seller', 'Zilong', '2345', 'Active'),
 (95, '92867449643784798', 'Admin', 'admin', 'admin', 'Active'),
@@ -233,13 +233,13 @@ CREATE TABLE `user_info` (
 --
 
 INSERT INTO `user_info` (`user_info_id`, `user_fullname`, `user_ref_num`, `gender`, `contact_details`, `house_no_street_brgy`, `city`, `province`, `postal_code`, `user_type`) VALUES
-(96, 'Christine Joyce Precones', '62810271613147332', 'F', '2147483647', '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Customer'),
-(97, 'Angelica Mae Bonganay', '88861690589673142', 'F', '2147483647', '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
-(98, 'Natalie Buenconsejo', '18465013967499956', 'F', '2147483647', '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
-(99, 'Lu Jing', '30782437241215726', 'M', '2147483647', '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Seller'),
-(100, 'Admin', '92867449643784798', 'F', '2147483647', 'zone 6, Panal', 'tabaco', 'albay', 4511, 'Admin'),
-(101, 'shipper', '47022120562236447', 'M', '2147483647', 'zone 6, Panal', 'tabaco', 'albay', 4511, 'shipper'),
-(102, 'Luna Valeria', '86963997591915336', 'F', '09053369487', 'Zone-6, Panal', 'Tabaco', 'ALBAY', 4511, 'Customer');
+(96, 'Christine Joyce Precones', '62810271613147332', 'F', '09262849211', '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Customer'),
+(97, 'Angelica Mae Bonganay', '88861690589673142', 'F', '09262849222', '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
+(98, 'Natalie Buenconsejo', '18465013967499956', 'F', '09262849223', '308, Purok 3', 'Tabaco City', 'ALBAY', 4511, 'Seller'),
+(99, 'Lu Jing', '30782437241215726', 'M', '09262849224', '308, Purok 3', 'Ligao City', 'ALBAY', 4504, 'Seller'),
+(100, 'Admin', '92867449643784798', 'F', '09262849225', 'zone 6, Panal', 'Tabaco City', 'ALBAY', 4511, 'Admin'),
+(101, 'shipper', '47022120562236447', 'M', '09262849226', 'zone 6, Panal', 'Tabaco City', 'ALBAY', 4511, 'shipper'),
+(102, 'Luna Valeria', '86963997591915336', 'F', '09053369487', 'Zone-6, Panal', 'Tabaco City', 'ALBAY', 4511, 'Customer');
 
 --
 -- Indexes for dumped tables
