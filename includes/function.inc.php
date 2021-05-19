@@ -311,12 +311,426 @@ function checkImage($img_file, $target_dir, $targetimagename){
     if ($img_size === false || $file_size >500000) {
         $stat['fileSizeOk'] = "image size is not acceptable";
     }
-    if (file_exists($target_dir."/".$targetimagename)) {
-        $stat['fileExists'] = "file Exists. Change the Item Name.";
-    }
-
+   
     return $stat;
 }
 
+function setisEmpty(){
+    $bool_empty = false;
+    $args = func_get_args();
+      for($i = 0; $i < func_num_args(); $i++){
+         if($args[$i] == "" ){
+             $bool_empty = true;
+             break;
+         }     
+      }
+     return $bool_empty;
+ }
+ 
+ function nf2($amt){
+     return "Php ". number_format($amt,2);
+ }
+ function pcpcs($amt){
+     return ($amt > 1 ? ' pcs' : 'pc');
+ }
+ function showMenu($conn, $cat = null, $searchkey = null){
+   if($searchkey === null){
+        if($cat === null) {
+             //declare the SQL
+            $sql = "SELECT i.item_id
+                      , i.minimum_qty
+                      , i.item_name
+                      , i.item_short_code
+                      , c.cat_desc
+                      , i.item_price
+                      , i.item_img
+                   FROM `items` i
+                   JOIN `category` c
+                     ON i.cat_id = c.cat_id ;";
+         
+         $stmt=mysqli_stmt_init($conn);
+         if (!mysqli_stmt_prepare($stmt, $sql)){
+            return false;
+            exit();
+          }
+       }
+       else
+       {  //check if $cat has value
+             $sql = "SELECT i.item_id
+                      , i.minimum_qty
+                      , i.item_name
+                      , i.item_short_code
+                      , c.cat_desc
+                      , i.item_price
+                      , i.item_img
+                   FROM `items` i
+                   JOIN `category` c
+                     ON i.cat_id = c.cat_id 
+                 WHERE c.cat_id = ?;";
+         
+         $stmt=mysqli_stmt_init($conn);
+         if (!mysqli_stmt_prepare($stmt, $sql)){
+            return false;
+            exit();
+          }
+         mysqli_stmt_bind_param($stmt, "s" , $cat);
+       }
+   }
+   else{ //check if searchkey variable is not NULL
+         $sql = "SELECT i.item_id
+                      , i.minimum_qty
+                      , i.item_name
+                      , i.item_short_code
+                      , c.cat_desc
+                      , i.item_price
+                      , i.item_img
+                   FROM `items` i
+                   JOIN `category` c
+                     ON i.cat_id = c.cat_id
+                  WHERE i.item_name LIKE ?
+                     OR i.item_short_code = ?
+                     OR c.cat_desc like ?
+                     OR i.item_price = ?;";
+         $stmt=mysqli_stmt_init($conn);
+          if (!mysqli_stmt_prepare($stmt, $sql)){
+             echo "Something went wrong.";
+             exit();
+          }
+         $itemname="%{$searchkey}%"; 
+         mysqli_stmt_bind_param($stmt, "ssss" , $itemname, $searchkey, $itemname, $searchkey);
+         
+     }
+          mysqli_stmt_execute($stmt);
+     
+        $resultData = mysqli_stmt_get_result($stmt);
+     if(!empty($resultData)){
+         $arr = array();
+         while($row = mysqli_fetch_assoc($resultData)){
+             array_push($arr,$row);
+         }
+         return $arr;
+     }
+     else{
+         return false;
+     }
+         
+ }
+
+
+function getSalesPerfCat($conn, $cat_id = null, $date = null){
+    if($date == null && $cat_id != null){
+         $sql="SELECT c.date_ordered
+                   , sum(i.item_price * c.item_qty ) total_net_sale
+                   , count(c.item_id) total_item_ordered
+                from `cart` c
+                join `items` i
+                  on (c.item_id = i.item_id)
+               WHERE i.cat_id = ?
+                 AND c.cart_status = 'X'
+                 AND c.status IN ('C','X')
+                 GROUP BY c.date_ordered 
+                 ORDER BY c.date_ordered DESC
+                 LIMIT 30;
+        ";
+        $params = array();
+        array_push($params, $cat_id);
+        
+        return query($conn, $sql, $params );
+    } 
+    else if($date != null && $cat_id != null) {
+            $sql="SELECT  c.date_ordered 
+                   , sum(i.item_price * c.item_qty ) total_net_sale
+                   , count(c.item_id) total_item_ordered
+                from `cart` c
+                join `items` i
+                  on (c.item_id = i.item_id)
+               WHERE i.cat_id = ?
+                 AND c.date_ordered = ?
+                 AND c.cart_status = 'X'
+                 AND c.status IN ('C','X')
+                 GROUP BY c.date_ordered 
+                 ORDER BY c.date_ordered DESC
+                 LIMIT 30;
+        ";
+        $params = array();
+        array_push($params, $cat_id, $date);
+        
+        return query($conn, $sql, $params );
+    }
+    else{
+         $sql="SELECT ct.cat_desc
+                   , c.date_ordered 
+                   , sum(i.item_price * c.item_qty ) total_net_sale
+                   , count(c.item_id) total_item_ordered
+                from `cart` c
+                join `items` i
+                  on (c.item_id = i.item_id)
+                join `category` ct
+                  on (i.cat_id = ct.cat_id)
+               WHERE c.date_ordered > CURRENT_DATE - 31
+                 AND c.cart_status = 'X'
+                 AND c.status IN ('C','X')
+                 GROUP BY c.date_ordered , ct.cat_desc
+                 ORDER BY c.date_ordered DESC
+                 LIMIT 30;
+        ";
+        
+        return query($conn, $sql);
+    }
+       
+        
+    }
+    
+    function getSalesPerfItem($conn, $item_id = NULL, $date = array()){
+        
+        if($item_id == NULL){
+            $sql="SELECT c.date_ordered
+                        , ct.cat_desc
+                        , i.item_name
+                        , sum(i.item_price * c.item_qty ) total_net_sale
+                        , count(c.item_id) total_item_ordered
+                        from `cart` c
+                        join `items` i
+                        on (c.item_id = i.item_id)
+                        JOIN `category` ct
+                          ON (i.cat_id = ct.cat_id)
+                        WHERE i.item_id = ?
+                        AND c.cart_status = 'X'
+                        AND c.status IN ('C','X')
+                        GROUP BY i.item_name, c.date_ordered, ct.cat_desc
+                       ORDER BY c.date_ordered DESC, i.cat_id ASC, i.item_name ASC
+                       ;";
+           $params = array();
+           array_push($params, $item_id);
+        }
+        else{
+     
+            $datefilter=null;
+            $params = array();
+            switch(count($date)){
+                case 1: 
+                    $datefilter=" AND c.date_ordered = ? ";
+                    array_push($params, $item_id, $date[0]);
+                    break;
+                case 2: 
+                    $datefilter=" AND c.date_ordered between ? AND ? ";
+                    array_push($params, $item_id, $date[0], $date[1]);
+                    break;
+                case 0: break;
+                default: 
+                    $datefilter=" AND c.date_ordered IN ( ";
+                    $x=1;
+                    foreach($date as $d){ 
+                       if($x === 1){
+                          $datefilter .= "?";    
+                       }else{
+                           $datefilter .= ",?";
+                       }
+                       array_push($params,$item_id,$d);
+                    $x++;
+                    }
+                    $datefilter.= ") ";
+                    break;
+            }
+           
+            $sql="SELECT c.date_ordered
+                        , i.item_name
+                        , ct.cat_desc
+                        , sum(i.item_price * c.item_qty ) total_net_sale
+                        , count(c.item_id) total_item_ordered
+                        from `cart` c
+                        join `items` i
+                        on (c.item_id = i.item_id)
+                        JOIN `category` ct
+                          ON (i.cat_id = ct.cat_id)
+                        WHERE i.item_id = ?
+                        {$datefilter}
+                        AND c.cart_status = 'X'
+                        AND c.status IN ('C','X')
+                        GROUP BY c.date_ordered, i.item_name , ct.cat_desc
+                        ORDER BY c.date_ordered DESC, i.cat_id ASC, i.item_name ASC
+                        ;";
+        }
+        
+        return query($conn, $sql, $params);
+    }
+
+
+
+    function getCategories($conn){
+        $sql = "SELECT * FROM `category`";
+        $stmt=mysqli_stmt_init($conn);
+        
+        if (!mysqli_stmt_prepare($stmt, $sql)){
+            return false;
+            exit;
+        }
+            mysqli_stmt_execute($stmt);
+            $resultData = mysqli_stmt_get_result($stmt);
+            $resArr = array();
+          if(!empty($resultData)){
+            while($row = mysqli_fetch_assoc($resultData)){
+                array_push($resArr, $row);
+            }
+            return $resArr;
+          }
+            else{
+                return false;
+          }
+            mysql_stmt_close($stmt);
+    }
+    
+function displayItemInfo($conn, $value = "", $category = array()){
+    if(sizeof($category) > 0){
+        $catStr = "0";
+        foreach($category as $cat){
+            $catStr .= "," . $cat;
+        }
+        $sql="SELECT * from items WHERE cat_id in ( {$catStr} ) AND item_name like ? ;";
+    }else{
+        $sql="SELECT * from items WHERE item_name like ? ;";
+    }
+    
+    $stmt=mysqli_stmt_init($conn);
+    if (!mysqli_stmt_prepare($stmt, $sql)){
+        header("location:index.php?error=stmtfailed");
+        exit();
+    }
+    $value = "%{$value}%" ;
+        mysqli_stmt_bind_param($stmt, "s" , $value);
+        mysqli_stmt_execute($stmt);
+        $resultData = mysqli_stmt_get_result($stmt);
+        $arr = array();
+        while($row = mysqli_fetch_assoc($resultData)){
+            array_push($arr,$row);            
+        }
+        return $arr;
+        mysqli_stmt_close($stmt); 
+}
+
+function getOrderList($conn, $status = null, $userid = NULL, $date_ordered = null){
+if($userid === null){
+    if($status !== null){
+          $sql_cart_list = "SELECT c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.last_update_date
+                           , c.total_amt_to_pay
+                           , sum(c.item_qty) total_item_qty
+                        FROM cart c
+                           , items i
+                       WHERE c.item_id = i.item_id
+                          AND c.status IN (?)
+                          AND c.confirm = 'Y'
+                          group by c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.total_amt_to_pay
+                           , c.last_update_date
+                        ORDER BY c.date_ordered; ";
+     $stmt=mysqli_stmt_init($conn);
+    
+                    if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
+                        return false;
+                        exit();
+                    }
+                        mysqli_stmt_bind_param($stmt, "s" ,$status);
+    }
+    else{
+      $sql_cart_list = "SELECT c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.total_amt_to_pay
+                           , sum(c.item_qty) total_item_qty
+                        FROM cart c
+                           , items i
+                       WHERE c.item_id = i.item_id
+                          AND c.status IN ('C','X')
+                          AND c.confirm = 'Y'
+                          group by c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.total_amt_to_pay
+                        ORDER BY c.date_ordered ASC; ";
+     $stmt=mysqli_stmt_init($conn);
+                    if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
+                        return false;
+                        exit();
+                    }
+    }
+              
+    
+}
+    else{
+    if($status === null){
+      $sql_cart_list = "SELECT c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.total_amt_to_pay
+                           , sum(c.item_qty) total_item_qty
+                        FROM cart c
+                           , items i
+                       WHERE c.item_id = i.item_id
+                          AND c.user_id = ? 
+                          AND c.status IN ('C','X')
+                          AND c.confirm = 'Y'
+                          group by c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.total_amt_to_pay
+                        ORDER BY c.date_ordered; ";
+     $stmt=mysqli_stmt_init($conn);
+    
+                    if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
+                        return false;
+                        exit();
+                    }
+                        mysqli_stmt_bind_param($stmt, "s" ,$userid);
+    }
+    else
+    {
+      $sql_cart_list = "SELECT c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.total_amt_to_pay
+                           , sum(c.item_qty) total_item_qty
+                        FROM cart c
+                           , items i
+                       WHERE c.item_id = i.item_id
+                          AND c.user_id = ? 
+                          AND c.status IN ( ? )
+                          AND c.confir = 'Y'
+                          group by c.order_ref_num
+                           , c.status
+                           , c.date_ordered
+                           , c.total_amt_to_pay
+                        ORDER BY c.date_ordered; ";
+     $stmt=mysqli_stmt_init($conn);
+    
+                    if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
+                        return false;
+                        exit();
+                    }
+                        mysqli_stmt_bind_param($stmt, "ss" ,$userid,$status);
+    }
+}
+
+  
+                     
+                        mysqli_stmt_execute($stmt);
+
+                        $resultData = mysqli_stmt_get_result($stmt);
+    if(!empty($resultData)){
+        $arr = array();
+        while($row = mysqli_fetch_assoc($resultData)){
+            array_push($arr,$row);
+        }
+        return $arr;
+    }
+    else{
+        return false;
+    }
+    
+}
 
 

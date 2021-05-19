@@ -8,6 +8,7 @@ if(isset($_POST['item_id'])){
         $item_qty = htmlentities($_POST['item_qty']);
         $net_amt = htmlentities($_POST['net_amt']);
         $order_number = htmlentities($_POST['order_number']);
+        
        
         $sql_ins = "INSERT INTO `orders`(`user_id`, `item_id`, `item_qty`, `net_amt`, `order_number`, `user_ref_num`) 
         VALUES (?,?,?,?,?,?)";

@@ -56,11 +56,7 @@ include_once "function.inc.php";
     while($row = mysqli_fetch_assoc($chk_result)){
         array_push($arr,$row);
     }
-    if(!empty($arr)){
-        header("location: ../seller/product.php?error=1&itemname={$itemname}"); //item exist
-        exit();
-    }
-    else{
+    
         $sql_ins = "INSERT INTO `items`
                   (`item_name`,`cat_id`, `item_desc`, `item_status`, `item_price`, `user_id`, `item_img` ) 
                    VALUES (?,?,?,?,?,?,?);";
@@ -86,5 +82,5 @@ include_once "function.inc.php";
         header("location:  ../seller/product.php?.php?error=0&Item Added &itemname={$itemname}"); //successful
         exit();
 
-    }
+    
 }
