@@ -92,6 +92,10 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
             <div class="card5">
             <a href="generated_report.php">Income</a>
             </div>
+
+            <div class="card5">
+            <a href="Sale_Dashboard.php">Sale</a>
+            </div>
         
        </div>
 </div>
