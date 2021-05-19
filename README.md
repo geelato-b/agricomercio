@@ -17,7 +17,7 @@
   * Agricomercio offers information, consultation and marketing services.
   * Agricomercio has a shipper that delivers orders. The shipper can view the items that needs to deliver and its details. It is also where the shipper can confirm and view the     list of delivered items. 
   * Agricomercio's admin dashboard can view the list of all the users (sellers and customers) details. It can also block a user.
-  * Agricomercio generates report of the income per seller and the items sold per category. 
+  * Agricomercio's admin generates report of the income per seller and the items sold per category. 
 
 If the user is a seller:
   * The user must sign up/ sign in.
