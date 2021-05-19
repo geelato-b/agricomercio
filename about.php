@@ -244,7 +244,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                             <h2>Christine Joyce Precones</h2>
                             <br> 
                             <h3>Data Handler</h3>
-                            <h3>Editor</h3>
+                            <h3>Documentator</h3>
                             
                             <div>
                             <ul class="social">
