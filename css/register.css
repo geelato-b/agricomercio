@@ -1,0 +1,139 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all .2s linear;
+    font-family: 'Exo 2', sans-serif ;
+   
+}
+
+body{
+    position: relative;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(#99ffcc,#ccffe6);
+  
+}
+
+.container{
+    max-width: 500px;
+    width: 80%;
+    background: #fff;
+    padding: 25px 30px;
+    border-radius: 5px;
+    height: 100%;
+    margin-top: -2rem;
+
+}
+
+.container .title{
+    font-size: 20px;
+    font-weight: bolder;
+    position: relative;
+    margin-bottom: 1rem;
+   
+    
+}
+
+
+form .user-details{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
+}
+
+form .user-details .input-box{
+    width: calc(100% / 2 - 20px);
+    margin-bottom: 20px;
+
+}
+.user-details .input-box .details {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.user-details .input-box input{
+    height: 20px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid lightpink;
+    padding: 10px;
+    font-size: 12px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+
+}
+
+.user-details .input-box .form-control{
+    height: 20px;
+    width: 200%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid lightpink;
+    padding: 5px;
+    font-size: 12px;
+    border-bottom-width: 2px;
+    transition: all 0.3s ease;
+    margin-bottom: 10px;
+}
+
+
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+ border-color: palevioletred;
+}
+
+
+form .gender-deatils .gender-title{
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: -2rem;
+}
+
+.usertype{
+    margin-top: .2rem;
+}
+
+.usertype .usertype-details{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.button input{
+    margin-top: 1rem;
+    height: 30px;
+    width: 100%;
+    outline: none;
+    border-radius: 5px;
+    border: 1px solid white;
+    font-size: 18px;
+    background: linear-gradient(#99ffcc,#ccffe6);
+    transition: all 0.3s ease;
+
+}
+
+.button input:hover{
+    background: lightgreen;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bolder;
+}
+
+.sign_in a{
+ font-size: 14px;
+ color: #999;
+ text-decoration: none;
+}
+
+
+
+
+
+
