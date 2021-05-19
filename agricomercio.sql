@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2021 at 09:09 AM
+-- Generation Time: May 19, 2021 at 01:21 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -37,20 +37,6 @@ CREATE TABLE `cart` (
   `cart_status` varchar(1) NOT NULL DEFAULT 'P',
   `date_ordered` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `cart`
---
-
-INSERT INTO `cart` (`cart_id`, `item_id`, `user_id`, `item_qty`, `status`, `order_number`, `cart_status`, `date_ordered`) VALUES
-(9, 6, '62810271613147332', 4, 'X', '60a1e3472484b26195', 'X', '2021-05-17'),
-(10, 8, '62810271613147332', 4, 'X', '60a1e3472484b26195', 'X', '2021-05-17'),
-(11, 3, '62810271613147332', 8, 'X', '60a204e1735d069751', 'X', '2021-05-17'),
-(12, 7, '62810271613147332', 3, 'X', '60a204e1735d069751', 'X', '2021-05-17'),
-(13, 5, '62810271613147332', 2, 'X', '60a204e1735d069751', 'X', '2021-05-17'),
-(14, 10, '62810271613147332', 3, 'X', '60a25dbd311d463331', 'X', '2021-05-17'),
-(15, 27, '62810271613147332', 4, 'X', '60a25dbd311d463331', 'X', '2021-05-17'),
-(16, 12, '62810271613147332', 4, 'X', '60a25dbd311d463331', 'X', '2021-05-17');
 
 -- --------------------------------------------------------
 
@@ -167,20 +153,6 @@ CREATE TABLE `orders` (
   `date_ordered` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `order_number`, `user_ref_num`, `item_id`, `user_id`, `item_qty`, `net_amt`, `status`, `tracking_order_status`, `date_ordered`) VALUES
-(3, '60a1e3472484b26195', '62810271613147332', 6, '88861690589673142', 4, 1000, 'C', 'C', '2021-05-17'),
-(4, '60a1e3472484b26195', '62810271613147332', 8, '88861690589673142', 4, 7200, 'C', 'C', '2021-05-17'),
-(5, '60a204e1735d069751', '62810271613147332', 3, '88861690589673142', 8, 760, 'C', 'C', '2021-05-17'),
-(6, '60a204e1735d069751', '62810271613147332', 7, '88861690589673142', 3, 150, 'C', 'C', '2021-05-17'),
-(7, '60a204e1735d069751', '62810271613147332', 5, '88861690589673142', 2, 120, 'C', 'C', '2021-05-17'),
-(8, '60a25dbd311d463331', '62810271613147332', 10, '18465013967499956', 3, 150, 'C', 'C', '2021-05-17'),
-(9, '60a25dbd311d463331', '62810271613147332', 27, '18465013967499956', 4, 240, 'C', 'C', '2021-05-17'),
-(10, '60a25dbd311d463331', '62810271613147332', 12, '18465013967499956', 4, 120, 'C', 'C', '2021-05-17');
-
 -- --------------------------------------------------------
 
 --
@@ -289,7 +261,7 @@ ALTER TABLE `user_info`
 -- AUTO_INCREMENT for table `cart`
 --
 ALTER TABLE `cart`
-  MODIFY `cart_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `cart_id` int(128) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `category`
@@ -307,7 +279,7 @@ ALTER TABLE `items`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`
