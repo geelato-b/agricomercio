@@ -77,6 +77,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
   $sql_order_list = "SELECT 
                            o.order_number
                         ,o.tracking_order_status
+                        ,o.date_ordered
                         , SUM(o.item_qty) total_item_qty
                         , SUM(i.item_price * o.item_qty) total_net_amt
                         FROM orders o
@@ -106,6 +107,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         <th>Total Item Qty</th>
                         <th>Total Net Amt</th>
                         <th>Status</th>
+                        <th>Date</th>
                         
                     </thead>
                 <?php while($row = mysqli_fetch_assoc($resultData)){ ?>
@@ -116,6 +118,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         <td>
                         <?php echo $row['tracking_order_status'] == 'P' ? 'Pending for Delivery' : 'Delivered' ;?>
                         </td>
+                        <td><?php echo $row['date_ordered']; ?></td>
                     </tr>
                 <?php }?>
 
@@ -152,7 +155,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                                 ,c.user_id
                                 ,c.status
                                 ,c.cart_status
-                                ,c.date
+                                ,c.date_ordered
                                     FROM `items` i
                                     JOIN `cart` c
                                     ON i.item_id = c.item_id
@@ -198,12 +201,15 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                                         <br>
                                         <label style = "color:red;" for="">Total Price : </label>
                                        Php <?php echo number_format($row['net_amt'],2); ?> 
-                                      Date: <?php echo $row['date']; ?> 
+                                       <br>
+                                      Date: <?php echo $row['date_ordered']; ?> 
+                                      
+                                      <p style="color:darkgreen;" class="lead"><?php echo $row['order_number']; ?></p>
                                      </em>
                                 </div>
                                 <div class="card-footer">
                                 <form action="../includes/order.php" method= "post">
-                                    <input hidden type="text" name="order_number"  value = "<?php echo $row['order_number']; ?>">  
+                                    <input hidden type="text" name="order_number"  value = "<?php echo $row['order_number']; ?>"> 
                                     <input hidden  type="text" name="user_ref_num"  value = "<?php echo $row['user_id']; ?>">        
                                     <input hidden type="text" name="user_id"  value = "<?php echo $_SESSION['userid']; ?>">
                                     <input hidden type="text" name="item_id"  value = "<?php echo $row['item_id'] ?>">
