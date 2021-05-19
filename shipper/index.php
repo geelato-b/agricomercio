@@ -83,7 +83,6 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         , o.tracking_order_status
                         , o.item_qty
                         , o.user_id
-                        , o.shipper_status
                         , (i.item_price * o.item_qty) subtotal_price
                         , uf.user_fullname
                         , uf.house_no_street_brgy
@@ -97,8 +96,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                         JOIN user_info uf
                         ON o.user_ref_num = uf.user_ref_num
                         WHERE o.status = 'C'
-                        AND o.tracking_order_status= 'P'
-                        AND o.shipper_status= 'N'; ";
+                        AND o.tracking_order_status= 'P'; ";
                         $stmt=mysqli_stmt_init($conn);
         
                 if (!mysqli_stmt_prepare($stmt, $sql_cart_list)){
