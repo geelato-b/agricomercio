@@ -54,11 +54,11 @@ Prepared by:
 
 Leader: 
 
-  Angelica Mae Bonganay -> Developer, and Overseer
+  Angelica Mae Bonganay -> Developer, Tester and Overseer
 
 Members:
 
-  Natalie Buenconsejo -> Developer and Tester
+  Natalie Buenconsejo -> Developer
 
   Christine Joyce Precones -> Data Handler and Documentator
 
