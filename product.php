@@ -173,11 +173,15 @@ if (isset($_GET['searchkey'])){
                  , c.cat_desc
                  , i.item_price
                  , i.item_img
-              FROM `items` i
-              JOIN `category` c
+                 ,u.status
+                FROM `items` i
+                JOIN `category` c
                 ON i.cat_id = c.cat_id 
-                AND i.item_status = 'A';";
-    
+                JOIN `users` u
+                ON i.user_id = u.user_ref_num
+                WHERE i.item_status = 'A'
+                AND u.status = 'Active';";
+
         //initialize connection to the database.
     $stmt=mysqli_stmt_init($conn);
         //prepare the statement
@@ -199,8 +203,11 @@ if (isset($_GET['searchkey'])){
              FROM `items` i
              JOIN `category` c
                ON i.cat_id = c.cat_id
+               JOIN `users` u
+                ON i.user_id = u.user_ref_num
                WHERE i.item_name= ?
                AND i.item_status = 'A'
+               AND u.status = 'Active'
                OR c.cat_desc= ?;";
     
                $stmt=mysqli_stmt_init($conn);
