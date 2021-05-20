@@ -217,9 +217,13 @@ if(isset($_GET['searchkey'])){
             ,i.item_status
          FROM `items` i
          JOIN `category` c
-           ON i.cat_id = c.cat_id
-           WHERE i.item_name= ?
-           OR c.cat_desc= ?;";
+        ON i.cat_id = c.cat_id
+          JOIN `users` u
+          ON i.user_id = u.user_ref_num
+            WHERE i.item_name= ?
+            AND i.item_status = 'A'
+               AND u.status = 'Active'
+              OR c.cat_desc= ?;";
 
            $stmt=mysqli_stmt_init($conn);
            if (!mysqli_stmt_prepare($stmt, $sql)) {
@@ -260,6 +264,7 @@ if(isset($_GET['searchkey'])){
                 <div class="card-footer">
                     <form action="../includes/updateitemstatus.php" method="post">
                             <input hidden type="text" name="item_id" value="<?php echo $row['item_id']; ?>">
+                            <label for="">Price: </label>
                             <input type="number"  name="item_price"  value="<?php echo $row['item_price']; ?>">
                             <input type="Hidden" name="new_item_status" value="<?php echo $row['item_status'] == 'A' ? 'NA' : 'A' ; ?>">
                             <p class="lead"><?php echo $row['item_status'] == 'A' ? 'Available' : 'Not Available' ; ?></p>
