@@ -136,8 +136,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                     <div class="content">
                     <h2>Angelica Mae Bonganay</h2>
                     <br>
-                    <h5>Developer</h5>
-                    <h5>Error Handler</h5>
+                    <h5>Writer</h5>
                     <div>
                             <ul class="social">
                             <li><a href=""><i class="fab fa-facebook-square"></i></a></li>
@@ -159,8 +158,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                     <div class="content">
                         <h2>Natalie Buenconsejo</h2>
                         <br>
-                        <h5>Developer</h5>
-                        <h5>Error Handler</h5>
+                        <h5>Writer</h5>
                         <div>
                             <ul class="social">
                             <li><a href=""><i class="fab fa-facebook-square"></i></a></li>
@@ -180,8 +178,7 @@ if(isset($_SESSION['usertype']) && isset($_SESSION['userid']) ){
                     <div class="content">
                             <h2>Christine Joyce Precones</h2>
                             <br> 
-                            <h5>Data Handler</h5>
-                            <h5>Documentator</h5>
+                            <h5>Writer</h5>
                             
                             <div>
                             <ul class="social">
