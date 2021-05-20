@@ -75,7 +75,8 @@ function uidExists($conn, $username, $password ){
     $err;
     $sql="SELECT * FROM `users` 
     WHERE  `user_name` = ?
-    AND `password`= ?;
+    AND `password`= ?
+    AND `status`= 'Active';
     ";
 
 $stmt=mysqli_stmt_init($conn);
